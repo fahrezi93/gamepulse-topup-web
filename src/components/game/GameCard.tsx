@@ -62,13 +62,15 @@ export default function GameCard({ game, minPrice }: GameCardProps) {
             </div>
           </div>
 
-          {/* Popular Badge */}
-          <div className="absolute top-4 right-4">
-            <div className="bg-gradient-to-r from-yellow-400 to-orange-500 px-2 py-1 rounded-full flex items-center space-x-1 shadow-lg">
-              <FireIcon className="w-3 h-3 text-white" />
-              <span className="text-white text-xs font-bold">HOT</span>
+          {/* Popular Badge - Only for popular games */}
+          {game.isPopular && (
+            <div className="absolute top-4 right-4">
+              <div className="bg-gradient-to-r from-yellow-400 to-orange-500 px-2 py-1 rounded-full flex items-center space-x-1 shadow-lg">
+                <FireIcon className="w-3 h-3 text-white" />
+                <span className="text-white text-xs font-bold">HOT</span>
+              </div>
             </div>
-          </div>
+          )}
 
           {/* Hover Play Button */}
           <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black/20">

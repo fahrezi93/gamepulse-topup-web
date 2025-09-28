@@ -12,6 +12,13 @@ export async function POST(request: NextRequest) {
       )
     }
 
+    // Check if user is admin from adminUser table
+    const adminUser = await prisma.adminUser.findFirst({
+      where: { email }
+    })
+
+    const userRole = adminUser ? 'admin' : 'USER'
+
     // Check if user already exists
     let user = await prisma.user.findUnique({
       where: { email }
@@ -24,7 +31,7 @@ export async function POST(request: NextRequest) {
           id: uid, // Use Firebase UID as user ID
           email,
           name: name || email.split('@')[0],
-          role: 'USER',
+          role: userRole,
           // No password for Firebase users
         }
       })
@@ -34,7 +41,7 @@ export async function POST(request: NextRequest) {
         where: { email },
         data: {
           name: name || user.name,
-          // Update other fields if needed
+          role: userRole, // Update role based on adminUser table
         }
       })
     }

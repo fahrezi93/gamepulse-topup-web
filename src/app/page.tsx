@@ -1,13 +1,14 @@
-import { prisma } from '@/lib/prisma'
 import GameCard from '@/components/game/GameCard'
 import HeroSection from '@/components/home/HeroSection'
 import FeaturesSection from '@/components/home/FeaturesSection'
+import { prisma } from '@/lib/prisma'
 
 export default async function Home() {
-  // Ambil data games dari database
-  const games = await prisma.game.findMany({
+  // Ambil games populer untuk ditampilkan di beranda
+  const popularGames = await prisma.game.findMany({
     where: {
-      isActive: true
+      isActive: true,
+      isPopular: true // Hanya game yang ditandai sebagai populer
     },
     include: {
       denominations: {
@@ -17,17 +18,17 @@ export default async function Home() {
         orderBy: {
           price: 'asc'
         },
-        take: 1 // Ambil denominasi termurah untuk ditampilkan
+        take: 1
       }
     },
     orderBy: {
       name: 'asc'
-    }
+    },
+    take: 5 // Tampilkan 5 game populer (ML, FF, Genshin, Roblox, Valorant)
   })
 
   return (
     <div className="min-h-screen">
-      {/* Hero Section */}
       <HeroSection />
 
       {/* Features Section */}
@@ -52,8 +53,8 @@ export default async function Home() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-            {games.map((game) => (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-8">
+            {popularGames.map((game) => (
               <GameCard 
                 key={game.id} 
                 game={game}
@@ -62,7 +63,7 @@ export default async function Home() {
             ))}
           </div>
 
-          {games.length === 0 && (
+          {popularGames.length === 0 && (
             <div className="text-center py-12">
               <div className="bg-gray-800/50 backdrop-blur-sm border border-gray-700 rounded-2xl p-12">
                 <div className="text-6xl mb-4">🎮</div>

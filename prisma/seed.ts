@@ -20,6 +20,7 @@ async function main() {
         description: 'Top up Diamond Mobile Legends dengan mudah dan cepat!',
         imageUrl: '/images/games/mobile-legends.jpg',
         category: 'MOBA',
+        isPopular: true,
         denominations: {
           create: [
             { name: '86 Diamond', amount: 86, price: 20000 },
@@ -62,6 +63,7 @@ async function main() {
         description: 'Top up Diamond Free Fire untuk mendapatkan karakter dan senjata terbaik!',
         imageUrl: '/images/games/free-fire.jpg',
         category: 'Battle Royale',
+        isPopular: true,
         denominations: {
           create: [
             { name: '70 Diamond', amount: 70, price: 10000 },
@@ -82,6 +84,7 @@ async function main() {
         description: 'Top up Genesis Crystal untuk mendapatkan karakter dan senjata 5 bintang!',
         imageUrl: '/images/games/genshin-impact.jpg',
         category: 'RPG',
+        isPopular: true,
         denominations: {
           create: [
             { name: '60 Genesis Crystal', amount: 60, price: 16000 },
@@ -102,6 +105,7 @@ async function main() {
         description: 'Top up VP (Valorant Points) untuk mendapatkan skin senjata eksklusif!',
         imageUrl: '/images/games/valorant.jpg',
         category: 'FPS',
+        isPopular: true,
         denominations: {
           create: [
             { name: '420 VP', amount: 420, price: 45000 },
@@ -222,6 +226,7 @@ async function main() {
         description: 'Top up Robux untuk membeli item, gamepass, dan aksesoris di Roblox!',
         imageUrl: '/images/games/roblox.jpg',
         category: 'Sandbox',
+        isPopular: true,
         denominations: {
           create: [
             { name: '80 Robux', amount: 80, price: 15000 },

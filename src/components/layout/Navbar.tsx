@@ -3,12 +3,14 @@
 import Link from 'next/link'
 import { useState } from 'react'
 import { useAuth } from '@/contexts/AuthContext'
+import { useAdminRole } from '@/hooks/useAdminRole'
 import { Bars3Icon, XMarkIcon, UserCircleIcon, ArrowRightOnRectangleIcon, SparklesIcon } from '@heroicons/react/24/outline'
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isProfileOpen, setIsProfileOpen] = useState(false)
   const { user, loading, logout } = useAuth()
+  const { isAdmin, loading: adminLoading } = useAdminRole()
   const navigation = [
     { name: 'Beranda', href: '/' },
     { name: 'Semua Game', href: '/games' },
@@ -59,7 +61,17 @@ export default function Navbar() {
             {loading ? (
               <div className="w-8 h-8 bg-gray-700 rounded-full animate-pulse ml-4"></div>
             ) : user ? (
-              <div className="relative ml-4">
+              <div className="relative ml-4 flex items-center space-x-3">
+                {/* Admin Button - Only for admin users */}
+                {isAdmin && !adminLoading && (
+                  <Link
+                    href="/admin"
+                    className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 shadow-lg hover:shadow-purple-500/25"
+                  >
+                    Admin
+                  </Link>
+                )}
+                
                 <button
                   onClick={() => setIsProfileOpen(!isProfileOpen)}
                   className="flex items-center space-x-2 bg-gray-800 hover:bg-gray-700 px-3 py-2 rounded-lg transition-all duration-200"
@@ -151,13 +163,66 @@ export default function Navbar() {
                   {item.name}
                 </Link>
               ))}
-              <Link
-                href="/admin"
-                className="bg-gradient-to-r from-purple-600 to-pink-600 text-white block px-3 py-2 text-base font-medium rounded-lg mt-2 transition-all duration-200"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Admin
-              </Link>
+              
+              {/* Admin Link - Only for admin users */}
+              {isAdmin && !adminLoading && (
+                <Link
+                  href="/admin"
+                  className="bg-gradient-to-r from-purple-600 to-pink-600 text-white block px-3 py-2 text-base font-medium rounded-lg mt-2 transition-all duration-200"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Admin
+                </Link>
+              )}
+              
+              {/* Auth Section for Mobile */}
+              {user ? (
+                <div className="border-t border-gray-700 mt-4 pt-4">
+                  <div className="flex items-center px-3 py-2 mb-2">
+                    <div className="w-8 h-8 bg-gradient-to-br from-cyan-400 to-purple-500 rounded-full flex items-center justify-center mr-3">
+                      <span className="text-white text-sm font-bold">
+                        {user.displayName?.charAt(0) || user.email?.charAt(0)}
+                      </span>
+                    </div>
+                    <span className="text-gray-300 text-sm font-medium">
+                      {user.displayName || user.email?.split('@')[0] || 'User'}
+                    </span>
+                  </div>
+                  <Link
+                    href="/profile"
+                    className="text-gray-300 hover:text-white hover:bg-gray-800 block px-3 py-2 rounded-lg text-base font-medium transition-colors duration-200"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    Profile
+                  </Link>
+                  <button
+                    onClick={() => {
+                      handleSignOut()
+                      setIsMenuOpen(false)
+                    }}
+                    className="text-gray-300 hover:text-white hover:bg-gray-800 block px-3 py-2 rounded-lg text-base font-medium transition-colors duration-200 w-full text-left"
+                  >
+                    Keluar
+                  </button>
+                </div>
+              ) : (
+                <div className="border-t border-gray-700 mt-4 pt-4 space-y-2">
+                  <Link
+                    href="/auth/signin"
+                    className="text-gray-300 hover:text-white hover:bg-gray-800 block px-3 py-2 rounded-lg text-base font-medium transition-colors duration-200"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    Masuk
+                  </Link>
+                  <Link
+                    href="/auth/signup"
+                    className="bg-gradient-to-r from-cyan-500 to-purple-600 text-white block px-3 py-2 text-base font-medium rounded-lg transition-all duration-200"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    Daftar
+                  </Link>
+                </div>
+              )}
             </div>
           </div>
         )}

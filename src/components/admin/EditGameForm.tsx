@@ -3,26 +3,44 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { PlusIcon, TrashIcon } from '@heroicons/react/24/outline'
+import { Game, Denomination } from '@prisma/client'
 
-interface Denomination {
+interface GameWithDenominations extends Game {
+  denominations: Denomination[]
+}
+
+interface EditGameFormProps {
+  game: GameWithDenominations
+}
+
+interface DenominationData {
+  id?: string
   name: string
   amount: number
   price: number
+  isNew?: boolean
 }
 
-export default function GameForm() {
+export default function EditGameForm({ game }: EditGameFormProps) {
   const router = useRouter()
   const [isLoading, setIsLoading] = useState(false)
   const [gameData, setGameData] = useState({
-    name: '',
-    slug: '',
-    description: '',
-    imageUrl: '',
-    category: ''
+    name: game.name,
+    slug: game.slug,
+    description: game.description || '',
+    imageUrl: game.imageUrl || '',
+    category: game.category,
+    isPopular: game.isPopular
   })
-  const [denominations, setDenominations] = useState<Denomination[]>([
-    { name: '', amount: 0, price: 0 }
-  ])
+  
+  const [denominations, setDenominations] = useState<DenominationData[]>(
+    game.denominations.map(d => ({
+      id: d.id,
+      name: d.name,
+      amount: d.amount,
+      price: d.price
+    }))
+  )
 
   const generateSlug = (name: string) => {
     return name
@@ -33,15 +51,15 @@ export default function GameForm() {
       .trim()
   }
 
-  const handleGameDataChange = (field: string, value: string) => {
+  const handleGameDataChange = (field: string, value: string | boolean) => {
     setGameData(prev => ({
       ...prev,
       [field]: value,
-      ...(field === 'name' && { slug: generateSlug(value) })
+      ...(field === 'name' && typeof value === 'string' && { slug: generateSlug(value) })
     }))
   }
 
-  const handleDenominationChange = (index: number, field: keyof Denomination, value: string | number) => {
+  const handleDenominationChange = (index: number, field: keyof DenominationData, value: string | number) => {
     const newDenominations = [...denominations]
     newDenominations[index] = {
       ...newDenominations[index],
@@ -51,7 +69,7 @@ export default function GameForm() {
   }
 
   const addDenomination = () => {
-    setDenominations([...denominations, { name: '', amount: 0, price: 0 }])
+    setDenominations([...denominations, { name: '', amount: 0, price: 0, isNew: true }])
   }
 
   const removeDenomination = (index: number) => {
@@ -65,8 +83,8 @@ export default function GameForm() {
     setIsLoading(true)
 
     try {
-      const response = await fetch('/api/admin/games', {
-        method: 'POST',
+      const response = await fetch(`/api/admin/games/${game.id}`, {
+        method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
         },
@@ -80,11 +98,11 @@ export default function GameForm() {
         router.push('/admin/games')
       } else {
         const error = await response.json()
-        alert(error.error || 'Gagal membuat game')
+        alert(error.error || 'Gagal mengupdate game')
       }
     } catch (error) {
-      console.error('Error creating game:', error)
-      alert('Terjadi kesalahan saat membuat game')
+      console.error('Error updating game:', error)
+      alert('Terjadi kesalahan saat mengupdate game')
     } finally {
       setIsLoading(false)
     }
@@ -176,6 +194,21 @@ export default function GameForm() {
             placeholder="Deskripsi singkat tentang game..."
           />
         </div>
+
+        <div className="mt-6">
+          <div className="flex items-center">
+            <input
+              type="checkbox"
+              id="isPopular"
+              checked={gameData.isPopular}
+              onChange={(e) => handleGameDataChange('isPopular', e.target.checked)}
+              className="w-4 h-4 text-cyan-600 bg-gray-700 border-gray-600 rounded focus:ring-cyan-500 focus:ring-2"
+            />
+            <label htmlFor="isPopular" className="ml-2 text-sm font-medium text-gray-300">
+              Game Populer (Tampilkan di beranda)
+            </label>
+          </div>
+        </div>
       </div>
 
       {/* Denominations */}
@@ -194,14 +227,14 @@ export default function GameForm() {
 
         <div className="space-y-4">
           {denominations.map((denomination, index) => (
-            <div key={index} className="grid grid-cols-1 md:grid-cols-4 gap-4 p-4 border border-gray-200 rounded-lg">
+            <div key={index} className="grid grid-cols-1 md:grid-cols-4 gap-4 p-4 border border-gray-600 rounded-xl bg-gray-700/30">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label className="block text-sm font-medium text-gray-300 mb-1">
                   Nama Paket
                 </label>
                 <input
                   type="text"
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  className="w-full px-3 py-2 bg-gray-600/50 border border-gray-500 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 transition-all duration-200"
                   value={denomination.name}
                   onChange={(e) => handleDenominationChange(index, 'name', e.target.value)}
                   placeholder="100 Diamond"
@@ -209,13 +242,13 @@ export default function GameForm() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label className="block text-sm font-medium text-gray-300 mb-1">
                   Jumlah
                 </label>
                 <input
                   type="number"
                   min="1"
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  className="w-full px-3 py-2 bg-gray-600/50 border border-gray-500 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 transition-all duration-200"
                   value={denomination.amount || ''}
                   onChange={(e) => handleDenominationChange(index, 'amount', parseInt(e.target.value) || 0)}
                   placeholder="100"
@@ -223,14 +256,14 @@ export default function GameForm() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label className="block text-sm font-medium text-gray-300 mb-1">
                   Harga (Rp)
                 </label>
                 <input
                   type="number"
                   min="1000"
                   step="1000"
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  className="w-full px-3 py-2 bg-gray-600/50 border border-gray-500 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 transition-all duration-200"
                   value={denomination.price || ''}
                   onChange={(e) => handleDenominationChange(index, 'price', parseInt(e.target.value) || 0)}
                   placeholder="20000"
@@ -242,9 +275,10 @@ export default function GameForm() {
                   type="button"
                   onClick={() => removeDenomination(index)}
                   disabled={denominations.length === 1}
-                  className="w-full bg-red-100 text-red-700 px-3 py-2 rounded-lg text-sm font-medium hover:bg-red-200 disabled:bg-gray-100 disabled:text-gray-400 disabled:cursor-not-allowed transition-colors"
+                  className="w-full bg-red-500/20 text-red-400 border border-red-500/30 px-3 py-2 rounded-lg text-sm font-medium hover:bg-red-500/30 disabled:bg-gray-600/20 disabled:text-gray-500 disabled:border-gray-600/30 disabled:cursor-not-allowed transition-all duration-200 flex items-center justify-center space-x-1"
                 >
-                  Hapus
+                  <TrashIcon className="w-4 h-4" />
+                  <span>Hapus</span>
                 </button>
               </div>
             </div>
@@ -257,16 +291,16 @@ export default function GameForm() {
         <button
           type="button"
           onClick={() => router.back()}
-          className="px-6 py-3 border border-gray-300 text-gray-700 rounded-lg font-medium hover:bg-gray-50 transition-colors"
+          className="px-6 py-3 border border-gray-600 text-gray-300 rounded-xl font-medium hover:bg-gray-700/50 transition-all duration-200"
         >
           Batal
         </button>
         <button
           type="submit"
           disabled={isLoading}
-          className="px-6 py-3 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors"
+          className="px-6 py-3 bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-cyan-600 hover:to-purple-700 text-white rounded-xl font-medium disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 shadow-lg hover:shadow-cyan-500/25"
         >
-          {isLoading ? 'Menyimpan...' : 'Simpan Game'}
+          {isLoading ? 'Menyimpan...' : 'Update Game'}
         </button>
       </div>
     </form>

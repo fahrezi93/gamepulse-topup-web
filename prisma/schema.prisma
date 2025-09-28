@@ -7,22 +7,21 @@ generator client {
 
 datasource db {
   provider = "sqlite"
-  url      = "file:./dev.db"
+  url      = env("DATABASE_URL")
 }
 
 // Model untuk Game
 model Game {
   id            String         @id @default(cuid())
-  name          String         @unique
+  name          String
   slug          String         @unique
   description   String?
-  imageUrl      String
+  imageUrl      String?
   category      String
   isActive      Boolean        @default(true)
+  isPopular     Boolean        @default(false)
   createdAt     DateTime       @default(now())
   updatedAt     DateTime       @updatedAt
-  
-  // Relasi
   denominations Denomination[]
   transactions  Transaction[]
   
