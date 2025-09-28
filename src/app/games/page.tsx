@@ -1,10 +1,8 @@
 import { prisma } from '@/lib/prisma'
 import GameCard from '@/components/game/GameCard'
-import HeroSection from '@/components/home/HeroSection'
-import FeaturesSection from '@/components/home/FeaturesSection'
+import GameFilter from '@/components/game/GameFilter'
 
-export default async function Home() {
-  // Ambil data games dari database
+export default async function GamesPage() {
   const games = await prisma.game.findMany({
     where: {
       isActive: true
@@ -17,7 +15,7 @@ export default async function Home() {
         orderBy: {
           price: 'asc'
         },
-        take: 1 // Ambil denominasi termurah untuk ditampilkan
+        take: 1
       }
     },
     orderBy: {
@@ -25,34 +23,41 @@ export default async function Home() {
     }
   })
 
+  const categories = [...new Set(games.map(game => game.category))]
+
   return (
     <div className="min-h-screen">
-      {/* Hero Section */}
-      <HeroSection />
-
-      {/* Features Section */}
-      <FeaturesSection />
-
-      {/* Games Section */}
-      <section id="games" className="py-20 relative">
-        {/* Background Elements */}
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-gray-800/10 to-transparent"></div>
+      {/* Header */}
+      <section className="relative py-20">
+        <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-purple-900/20 to-cyan-900/20">
+          <div className="absolute inset-0 opacity-40">
+            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-purple-500/5 to-transparent animate-pulse"></div>
+          </div>
+        </div>
         
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-black mb-6">
+          <div className="text-center">
+            <h1 className="text-5xl md:text-6xl font-black mb-6">
               <span className="bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
-                Game
+                Semua Game
               </span>
-              <span className="text-white"> Populer</span>
-            </h2>
+            </h1>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
-              Pilih game favoritmu dan lakukan top up dengan mudah dan cepat. 
-              Semua game tersedia dengan harga terjangkau dan proses otomatis.
+              Temukan semua game favoritmu dalam satu tempat. Dari MOBA hingga Battle Royale, 
+              semua tersedia dengan harga terjangkau dan proses yang cepat.
             </p>
           </div>
+        </div>
+      </section>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+      {/* Games Section */}
+      <section className="py-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Filter */}
+          <GameFilter categories={categories} />
+          
+          {/* Games Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 mt-12">
             {games.map((game) => (
               <GameCard 
                 key={game.id} 
@@ -79,4 +84,9 @@ export default async function Home() {
       </section>
     </div>
   )
+}
+
+export const metadata = {
+  title: 'Semua Game - GamePulse',
+  description: 'Temukan semua game favoritmu untuk top up dengan harga terjangkau dan proses cepat di GamePulse.'
 }
