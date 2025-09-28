@@ -35,6 +35,7 @@ yarn-error.log*
 
 # Firebase Admin SDK
 *firebase-adminsdk*.json
+game-pulse-web-firebase-adminsdk-fbsvc-889709e41a.json
 
 # vercel
 .vercel
