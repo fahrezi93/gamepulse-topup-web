@@ -1,7 +1,7 @@
 'use client'
 
-import { useSession } from 'next-auth/react'
-import { useState, useEffect } from 'react'
+import { useAuth } from '@/contexts/AuthContext'
+import { useState, useEffect, useCallback } from 'react'
 import { redirect } from 'next/navigation'
 import { 
   MagnifyingGlassIcon,
@@ -31,13 +31,48 @@ interface Transaction {
 }
 
 export default function TransactionsPage() {
-  const { data: session, status } = useSession()
+  const { user, loading } = useAuth()
   const [transactions, setTransactions] = useState<Transaction[]>([])
   const [isLoading, setIsLoading] = useState(true)
   const [searchTerm, setSearchTerm] = useState('')
   const [statusFilter, setStatusFilter] = useState('all')
 
-  if (status === 'loading') {
+  // Define fetchTransactions with useCallback to avoid dependency issues
+  const fetchTransactions = useCallback(async () => {
+    try {
+      if (!user) return
+
+      // Get Firebase token
+      const token = await user.getIdToken()
+      
+      const response = await fetch('/api/profile/transactions', {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      })
+      const data = await response.json()
+
+      if (response.ok) {
+        setTransactions(data.transactions)
+      } else {
+        console.error('Failed to fetch transactions:', data.error)
+      }
+    } catch (error) {
+      console.error('Error fetching transactions:', error)
+    } finally {
+      setIsLoading(false)
+    }
+  }, [user])
+
+  // All hooks must be called before any conditional returns
+  useEffect(() => {
+    if (user) {
+      fetchTransactions()
+    }
+  }, [user, fetchTransactions])
+
+  // Conditional returns after all hooks
+  if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-cyan-500"></div>
@@ -45,27 +80,8 @@ export default function TransactionsPage() {
     )
   }
 
-  if (status === 'unauthenticated') {
+  if (!user) {
     redirect('/auth/signin')
-  }
-
-  useEffect(() => {
-    fetchTransactions()
-  }, [])
-
-  const fetchTransactions = async () => {
-    try {
-      const response = await fetch('/api/profile/transactions')
-      const data = await response.json()
-      
-      if (response.ok) {
-        setTransactions(data.transactions)
-      }
-    } catch (error) {
-      console.error('Error fetching transactions:', error)
-    } finally {
-      setIsLoading(false)
-    }
   }
 
   const formatPrice = (price: number) => {

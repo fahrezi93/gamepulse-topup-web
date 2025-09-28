@@ -1,50 +1,54 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { getServerSession } from 'next-auth'
-import { authOptions } from '@/lib/auth'
+import { adminAuth } from '@/lib/firebase-admin'
 import { prisma } from '@/lib/prisma'
 
 export async function PUT(request: NextRequest) {
   try {
-    const session = await getServerSession(authOptions)
-    
-    if (!session?.user?.id) {
-      return NextResponse.json(
-        { error: 'Unauthorized' },
-        { status: 401 }
-      )
-    }
+    const { name, uid } = await request.json()
 
-    const { name } = await request.json()
-
-    if (!name || name.trim().length < 2) {
+    if (!uid) {
       return NextResponse.json(
-        { error: 'Nama minimal 2 karakter' },
+        { error: 'UID is required' },
         { status: 400 }
       )
     }
 
-    // Update user profile
+    if (!name || name.trim().length === 0) {
+      return NextResponse.json(
+        { error: 'Name is required' },
+        { status: 400 }
+      )
+    }
+
+    // Verify Firebase user
+    try {
+      await adminAuth.getUser(uid)
+    } catch (error) {
+      return NextResponse.json(
+        { error: 'Invalid user' },
+        { status: 401 }
+      )
+    }
+
+    // Update user in database
     const updatedUser = await prisma.user.update({
-      where: { id: session.user.id },
-      data: { name: name.trim() },
-      select: {
-        id: true,
-        name: true,
-        email: true,
-        role: true
-      }
+      where: { id: uid },
+      data: { name: name.trim() }
     })
 
     return NextResponse.json({
       success: true,
-      user: updatedUser,
-      message: 'Profile berhasil diperbarui'
+      user: {
+        id: updatedUser.id,
+        name: updatedUser.name,
+        email: updatedUser.email
+      }
     })
 
   } catch (error) {
     console.error('Profile update error:', error)
     return NextResponse.json(
-      { error: 'Terjadi kesalahan saat memperbarui profile' },
+      { error: 'Internal server error' },
       { status: 500 }
     )
   }

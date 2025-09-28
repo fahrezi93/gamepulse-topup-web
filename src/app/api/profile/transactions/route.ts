@@ -1,22 +1,27 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { getServerSession } from 'next-auth'
-import { authOptions } from '@/lib/auth'
+import { adminAuth } from '@/lib/firebase-admin'
 import { prisma } from '@/lib/prisma'
 
 export async function GET(request: NextRequest) {
   try {
-    const session = await getServerSession(authOptions)
-    
-    if (!session?.user?.id) {
+    // Get Firebase token from Authorization header
+    const authHeader = request.headers.get('Authorization')
+    if (!authHeader?.startsWith('Bearer ')) {
       return NextResponse.json(
-        { error: 'Unauthorized' },
+        { error: 'Unauthorized - No token provided' },
         { status: 401 }
       )
     }
 
+    const token = authHeader.split('Bearer ')[1]
+    
+    // Verify Firebase token
+    const decodedToken = await adminAuth.verifyIdToken(token)
+    const uid = decodedToken.uid
+
     const transactions = await prisma.transaction.findMany({
       where: {
-        userId: session.user.id
+        userId: uid
       },
       include: {
         game: {

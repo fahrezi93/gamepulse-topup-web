@@ -2,14 +2,13 @@
 
 import Link from 'next/link'
 import { useState } from 'react'
-import { useSession, signOut } from 'next-auth/react'
-import { Bars3Icon, XMarkIcon, SparklesIcon, UserCircleIcon, ArrowRightOnRectangleIcon } from '@heroicons/react/24/outline'
+import { useAuth } from '@/contexts/AuthContext'
+import { Bars3Icon, XMarkIcon, UserCircleIcon, ArrowRightOnRectangleIcon, SparklesIcon } from '@heroicons/react/24/outline'
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isProfileOpen, setIsProfileOpen] = useState(false)
-  const { data: session, status } = useSession()
-
+  const { user, loading, logout } = useAuth()
   const navigation = [
     { name: 'Beranda', href: '/' },
     { name: 'Semua Game', href: '/games' },
@@ -18,7 +17,7 @@ export default function Navbar() {
   ]
 
   const handleSignOut = () => {
-    signOut({ callbackUrl: '/' })
+    logout()
   }
 
   return (
@@ -57,29 +56,21 @@ export default function Navbar() {
             ))}
             
             {/* Auth Section */}
-            {status === 'loading' ? (
+            {loading ? (
               <div className="w-8 h-8 bg-gray-700 rounded-full animate-pulse ml-4"></div>
-            ) : session ? (
+            ) : user ? (
               <div className="relative ml-4">
-                {session.user.role === 'admin' && (
-                  <Link
-                    href="/admin"
-                    className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 shadow-lg hover:shadow-purple-500/25 mr-2"
-                  >
-                    Admin
-                  </Link>
-                )}
                 <button
                   onClick={() => setIsProfileOpen(!isProfileOpen)}
                   className="flex items-center space-x-2 bg-gray-800 hover:bg-gray-700 px-3 py-2 rounded-lg transition-all duration-200"
                 >
                   <div className="w-8 h-8 bg-gradient-to-br from-cyan-400 to-purple-500 rounded-full flex items-center justify-center">
                     <span className="text-white text-sm font-bold">
-                      {session.user.name?.charAt(0) || session.user.email?.charAt(0)}
+                      {user.displayName?.charAt(0) || user.email?.charAt(0)}
                     </span>
                   </div>
                   <span className="text-gray-300 text-sm font-medium">
-                    {session.user.name || 'User'}
+                    {user.displayName || user.email?.split('@')[0] || 'User'}
                   </span>
                 </button>
                 

@@ -1,8 +1,9 @@
 'use client'
 
-import { useSession } from 'next-auth/react'
-import { useState } from 'react'
+import { useAuth } from '@/contexts/AuthContext'
+import { useState, useEffect } from 'react'
 import { redirect } from 'next/navigation'
+import { updateProfile } from 'firebase/auth'
 import { 
   UserCircleIcon, 
   PencilIcon, 
@@ -12,16 +13,25 @@ import {
 } from '@heroicons/react/24/outline'
 
 export default function ProfilePage() {
-  const { data: session, status, update } = useSession()
+  const { user, loading } = useAuth()
   const [isEditing, setIsEditing] = useState(false)
   const [formData, setFormData] = useState({
-    name: session?.user?.name || '',
-    email: session?.user?.email || ''
+    name: '',
+    email: ''
   })
   const [isLoading, setIsLoading] = useState(false)
   const [message, setMessage] = useState('')
 
-  if (status === 'loading') {
+  useEffect(() => {
+    if (user) {
+      setFormData({
+        name: user.displayName || '',
+        email: user.email || ''
+      })
+    }
+  }, [user])
+
+  if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-cyan-500"></div>
@@ -29,7 +39,7 @@ export default function ProfilePage() {
     )
   }
 
-  if (status === 'unauthenticated') {
+  if (!user) {
     redirect('/auth/signin')
   }
 
@@ -39,24 +49,35 @@ export default function ProfilePage() {
     setMessage('')
 
     try {
+      // Update Firebase profile
+      if (user && formData.name !== user.displayName) {
+        await updateProfile(user, {
+          displayName: formData.name
+        })
+      }
+
+      // Update database
       const response = await fetch('/api/profile/update', {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          name: formData.name,
+          uid: user?.uid
+        }),
       })
 
       const data = await response.json()
 
       if (response.ok) {
-        await update({ name: formData.name })
         setMessage('Profile berhasil diperbarui!')
         setIsEditing(false)
       } else {
         setMessage(data.error || 'Terjadi kesalahan')
       }
     } catch (error) {
+      console.error('Update profile error:', error)
       setMessage('Terjadi kesalahan saat memperbarui profile')
     } finally {
       setIsLoading(false)
@@ -71,7 +92,7 @@ export default function ProfilePage() {
           <div className="flex justify-center mb-6">
             <div className="w-24 h-24 bg-gradient-to-br from-cyan-400 to-purple-500 rounded-full flex items-center justify-center shadow-2xl">
               <span className="text-white text-3xl font-bold">
-                {session?.user?.name?.charAt(0) || session?.user?.email?.charAt(0)}
+                {user?.displayName?.charAt(0) || user?.email?.charAt(0)}
               </span>
             </div>
           </div>
@@ -155,7 +176,7 @@ export default function ProfilePage() {
                     <div>
                       <p className="text-sm text-gray-400">Nama Lengkap</p>
                       <p className="text-white font-medium">
-                        {session?.user?.name || 'Belum diatur'}
+                        {user?.displayName || 'Belum diatur'}
                       </p>
                     </div>
                   </div>
@@ -164,7 +185,7 @@ export default function ProfilePage() {
                     <EnvelopeIcon className="w-8 h-8 text-cyan-400" />
                     <div>
                       <p className="text-sm text-gray-400">Email</p>
-                      <p className="text-white font-medium">{session?.user?.email}</p>
+                      <p className="text-white font-medium">{user?.email}</p>
                     </div>
                   </div>
 
@@ -172,7 +193,7 @@ export default function ProfilePage() {
                     <ShieldCheckIcon className="w-8 h-8 text-cyan-400" />
                     <div>
                       <p className="text-sm text-gray-400">Role</p>
-                      <p className="text-white font-medium capitalize">{session?.user?.role}</p>
+                      <p className="text-white font-medium capitalize">User</p>
                     </div>
                   </div>
                 </div>

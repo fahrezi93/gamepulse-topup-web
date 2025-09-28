@@ -27,7 +27,11 @@ export default function GameCard({ game, minPrice }: GameCardProps) {
       'FPS': 'from-red-500 to-pink-600',
       'Strategy': 'from-indigo-500 to-purple-600',
       'Racing': 'from-yellow-500 to-orange-600',
-      'Sports': 'from-cyan-500 to-blue-600'
+      'Sports': 'from-cyan-500 to-blue-600',
+      'Sandbox': 'from-amber-500 to-yellow-600',
+      'Party': 'from-pink-500 to-rose-600',
+      'Action RPG': 'from-violet-500 to-purple-600',
+      'MMORPG': 'from-teal-500 to-cyan-600'
     }
     return gradients[category as keyof typeof gradients] || 'from-gray-500 to-gray-600'
   }

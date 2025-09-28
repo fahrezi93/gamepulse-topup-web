@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { AuthProvider } from "@/contexts/AuthContext";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
-import SessionProvider from "@/components/providers/SessionProvider";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -24,7 +24,7 @@ export default function RootLayout({
   return (
     <html lang="id" className="scroll-smooth">
       <body className={`${inter.variable} font-sans antialiased bg-gray-900 text-white`}>
-        <SessionProvider>
+        <AuthProvider>
           <div className="min-h-screen flex flex-col bg-gradient-to-br from-gray-900 via-gray-800 to-black">
             <Navbar />
             <main className="flex-1">
@@ -32,7 +32,7 @@ export default function RootLayout({
             </main>
             <Footer />
           </div>
-        </SessionProvider>
+        </AuthProvider>
       </body>
     </html>
   );
