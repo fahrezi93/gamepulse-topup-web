@@ -35,19 +35,21 @@ export default async function Home() {
       <FeaturesSection />
 
       {/* Games Section */}
-      <section id="games" className="py-20 relative">
+      <section id="games" className="py-20 relative" style={{ backgroundColor: '#0D1117' }}>
         {/* Background Elements */}
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-gray-800/10 to-transparent"></div>
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute inset-0" style={{ backgroundColor: 'rgba(52, 211, 153, 0.1)' }}></div>
+        </div>
         
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-black mb-6">
-              <span className="bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
+            <h2 className="text-4xl md:text-5xl font-black mb-6" style={{ fontFamily: 'Playfair Display, serif' }}>
+              <span style={{ color: '#34D399' }}>
                 Game
               </span>
-              <span className="text-white"> Populer</span>
+              <span style={{ color: '#F0F6FC' }}> Populer</span>
             </h2>
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-xl max-w-3xl mx-auto leading-relaxed" style={{ color: '#8B949E', fontFamily: 'Manrope, sans-serif' }}>
               Pilih game favoritmu dan lakukan top up dengan mudah dan cepat. 
               Semua game tersedia dengan harga terjangkau dan proses otomatis.
             </p>
@@ -65,12 +67,12 @@ export default async function Home() {
 
           {popularGames.length === 0 && (
             <div className="text-center py-12">
-              <div className="bg-gray-800/50 backdrop-blur-sm border border-gray-700 rounded-2xl p-12">
+              <div className="backdrop-blur-sm border rounded-2xl p-12" style={{ backgroundColor: '#161B22', borderColor: '#34D399' }}>
                 <div className="text-6xl mb-4">🎮</div>
-                <p className="text-gray-300 text-xl mb-4">
+                <p className="text-xl mb-4" style={{ color: '#F0F6FC', fontFamily: 'Manrope, sans-serif' }}>
                   Belum ada game yang tersedia saat ini.
                 </p>
-                <p className="text-gray-400">
+                <p style={{ color: '#8B949E', fontFamily: 'Manrope, sans-serif' }}>
                   Kami sedang menambahkan lebih banyak game untuk kamu!
                 </p>
               </div>

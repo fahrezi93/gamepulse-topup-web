@@ -75,25 +75,25 @@ export default function TermsPage() {
   ]
 
   return (
-    <div className="min-h-screen py-12">
+    <div className="min-h-screen py-12" style={{ backgroundColor: '#0D1117' }}>
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-12">
           <div className="flex justify-center mb-6">
-            <div className="w-16 h-16 bg-gradient-to-br from-cyan-400 via-purple-500 to-pink-500 rounded-2xl flex items-center justify-center shadow-2xl">
-              <SparklesIcon className="w-8 h-8 text-white" />
+            <div className="w-16 h-16 rounded-2xl flex items-center justify-center shadow-2xl" style={{ backgroundColor: '#7C3AED' }}>
+              <SparklesIcon className="w-8 h-8" style={{ color: '#F0F6FC' }} />
             </div>
           </div>
           
-          <h1 className="text-4xl md:text-5xl font-black mb-6">
-            <span className="bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
+          <h1 className="text-4xl md:text-5xl font-black mb-6" style={{ fontFamily: 'Playfair Display, serif' }}>
+            <span style={{ color: '#7C3AED' }}>
               Syarat & Ketentuan
             </span>
           </h1>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-xl max-w-3xl mx-auto leading-relaxed" style={{ color: '#8B949E', fontFamily: 'Manrope, sans-serif' }}>
             Mohon baca dengan seksama syarat dan ketentuan penggunaan layanan GamePulse
           </p>
-          <div className="mt-4 text-sm text-gray-400">
+          <div className="mt-4 text-sm" style={{ color: '#8B949E', fontFamily: 'Manrope, sans-serif' }}>
             Terakhir diperbarui: {new Date().toLocaleDateString('id-ID', { 
               day: 'numeric', 
               month: 'long', 
@@ -103,10 +103,10 @@ export default function TermsPage() {
         </div>
 
         {/* Content */}
-        <div className="bg-gray-800/50 backdrop-blur-sm border border-gray-700 rounded-2xl p-8">
+        <div className="backdrop-blur-sm border rounded-2xl p-8" style={{ backgroundColor: '#161B22', borderColor: '#7C3AED' }}>
           <div className="prose prose-invert max-w-none">
-            <div className="mb-8 p-6 bg-cyan-500/10 border border-cyan-500/20 rounded-xl">
-              <p className="text-cyan-300 leading-relaxed">
+            <div className="mb-8 p-6 border rounded-xl" style={{ backgroundColor: 'rgba(124, 58, 237, 0.1)', borderColor: 'rgba(124, 58, 237, 0.2)' }}>
+              <p className="leading-relaxed" style={{ color: '#7C3AED', fontFamily: 'Manrope, sans-serif' }}>
                 <strong>Penting:</strong> Dengan menggunakan layanan GamePulse, Anda dianggap telah membaca, 
                 memahami, dan menyetujui seluruh syarat dan ketentuan yang tercantum di bawah ini.
               </p>
@@ -114,12 +114,12 @@ export default function TermsPage() {
 
             <div className="space-y-8">
               {sections.map((section, index) => (
-                <div key={index} className="border-b border-gray-700 pb-8 last:border-b-0">
-                  <h2 className="text-2xl font-bold text-white mb-4">{section.title}</h2>
+                <div key={index} className="border-b pb-8 last:border-b-0" style={{ borderColor: '#7C3AED' }}>
+                  <h2 className="text-2xl font-bold mb-4" style={{ color: '#F0F6FC', fontFamily: 'Playfair Display, serif' }}>{section.title}</h2>
                   <ul className="space-y-3">
                     {section.content.map((item, itemIndex) => (
-                      <li key={itemIndex} className="text-gray-300 leading-relaxed flex items-start">
-                        <span className="text-cyan-400 mr-3 mt-2">•</span>
+                      <li key={itemIndex} className="leading-relaxed flex items-start" style={{ color: '#8B949E', fontFamily: 'Manrope, sans-serif' }}>
+                        <span className="mr-3 mt-2" style={{ color: '#7C3AED' }}>•</span>
                         <span>{item}</span>
                       </li>
                     ))}

@@ -34,28 +34,28 @@ export default function HelpPage() {
   ]
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen" style={{ backgroundColor: '#0D1117' }}>
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Header */}
         <div className="text-center mb-12">
-          <QuestionMarkCircleIcon className="w-16 h-16 text-blue-600 mx-auto mb-4" />
-          <h1 className="text-3xl font-bold text-gray-900 mb-4">Pusat Bantuan</h1>
-          <p className="text-lg text-gray-600">
+          <QuestionMarkCircleIcon className="w-16 h-16 mx-auto mb-4" style={{ color: '#7C3AED' }} />
+          <h1 className="text-3xl font-bold mb-4" style={{ color: '#F0F6FC', fontFamily: 'Playfair Display, serif' }}>Pusat Bantuan</h1>
+          <p className="text-lg" style={{ color: '#8B949E', fontFamily: 'Manrope, sans-serif' }}>
             Temukan jawaban untuk pertanyaan yang sering diajukan
           </p>
         </div>
 
         {/* FAQ Section */}
-        <div className="bg-white rounded-xl shadow-sm border border-gray-100 mb-8">
-          <div className="p-6 border-b border-gray-100">
-            <h2 className="text-xl font-bold text-gray-900">Frequently Asked Questions (FAQ)</h2>
+        <div className="rounded-xl shadow-sm border mb-8" style={{ backgroundColor: '#161B22', borderColor: '#7C3AED' }}>
+          <div className="p-6 border-b" style={{ borderColor: '#7C3AED' }}>
+            <h2 className="text-xl font-bold" style={{ color: '#F0F6FC', fontFamily: 'Playfair Display, serif' }}>Frequently Asked Questions (FAQ)</h2>
           </div>
           
-          <div className="divide-y divide-gray-100">
+          <div className="divide-y" style={{ borderColor: '#7C3AED' }}>
             {faqs.map((faq, index) => (
-              <div key={index} className="p-6">
-                <h3 className="font-semibold text-gray-900 mb-2">{faq.question}</h3>
-                <p className="text-gray-600 leading-relaxed">{faq.answer}</p>
+              <div key={index} className="p-6" style={{ borderColor: '#7C3AED' }}>
+                <h3 className="font-semibold mb-2" style={{ color: '#F0F6FC', fontFamily: 'Playfair Display, serif' }}>{faq.question}</h3>
+                <p className="leading-relaxed" style={{ color: '#8B949E', fontFamily: 'Manrope, sans-serif' }}>{faq.answer}</p>
               </div>
             ))}
           </div>
@@ -63,42 +63,44 @@ export default function HelpPage() {
 
         {/* Contact Section */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="bg-white rounded-xl shadow-sm p-6 text-center border border-gray-100">
-            <ChatBubbleLeftRightIcon className="w-12 h-12 text-blue-600 mx-auto mb-4" />
-            <h3 className="font-semibold text-gray-900 mb-2">Live Chat</h3>
-            <p className="text-gray-600 text-sm mb-4">
+          <div className="rounded-xl shadow-sm p-6 text-center border" style={{ backgroundColor: '#161B22', borderColor: '#7C3AED' }}>
+            <ChatBubbleLeftRightIcon className="w-12 h-12 mx-auto mb-4" style={{ color: '#7C3AED' }} />
+            <h3 className="font-semibold mb-2" style={{ color: '#F0F6FC', fontFamily: 'Playfair Display, serif' }}>Live Chat</h3>
+            <p className="text-sm mb-4" style={{ color: '#8B949E', fontFamily: 'Manrope, sans-serif' }}>
               Chat langsung dengan customer service kami
             </p>
-            <button className="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-700 transition-colors">
+            <button className="px-4 py-2 rounded-lg text-sm font-medium transition-colors" style={{ backgroundColor: '#7C3AED', color: '#F0F6FC', fontFamily: 'Manrope, sans-serif' }}>
               Mulai Chat
             </button>
           </div>
 
-          <div className="bg-white rounded-xl shadow-sm p-6 text-center border border-gray-100">
-            <PhoneIcon className="w-12 h-12 text-green-600 mx-auto mb-4" />
-            <h3 className="font-semibold text-gray-900 mb-2">WhatsApp</h3>
-            <p className="text-gray-600 text-sm mb-4">
+          <div className="rounded-xl shadow-sm p-6 text-center border" style={{ backgroundColor: '#161B22', borderColor: '#34D399' }}>
+            <PhoneIcon className="w-12 h-12 mx-auto mb-4" style={{ color: '#34D399' }} />
+            <h3 className="font-semibold mb-2" style={{ color: '#F0F6FC', fontFamily: 'Playfair Display, serif' }}>WhatsApp</h3>
+            <p className="text-sm mb-4" style={{ color: '#8B949E', fontFamily: 'Manrope, sans-serif' }}>
               Hubungi kami melalui WhatsApp
             </p>
             <a
               href="https://wa.me/6281234567890"
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-green-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-green-700 transition-colors inline-block"
+              className="px-4 py-2 rounded-lg text-sm font-medium transition-colors inline-block"
+              style={{ backgroundColor: '#34D399', color: '#F0F6FC', fontFamily: 'Manrope, sans-serif' }}
             >
               Chat WhatsApp
             </a>
           </div>
 
-          <div className="bg-white rounded-xl shadow-sm p-6 text-center border border-gray-100">
-            <EnvelopeIcon className="w-12 h-12 text-purple-600 mx-auto mb-4" />
-            <h3 className="font-semibold text-gray-900 mb-2">Email</h3>
-            <p className="text-gray-600 text-sm mb-4">
+          <div className="rounded-xl shadow-sm p-6 text-center border" style={{ backgroundColor: '#161B22', borderColor: '#7C3AED' }}>
+            <EnvelopeIcon className="w-12 h-12 mx-auto mb-4" style={{ color: '#7C3AED' }} />
+            <h3 className="font-semibold mb-2" style={{ color: '#F0F6FC', fontFamily: 'Playfair Display, serif' }}>Email</h3>
+            <p className="text-sm mb-4" style={{ color: '#8B949E', fontFamily: 'Manrope, sans-serif' }}>
               Kirim email untuk pertanyaan detail
             </p>
             <a
               href="mailto:support@gamepulse.com"
-              className="bg-purple-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-purple-700 transition-colors inline-block"
+              className="px-4 py-2 rounded-lg text-sm font-medium transition-colors inline-block"
+              style={{ backgroundColor: '#7C3AED', color: '#F0F6FC', fontFamily: 'Manrope, sans-serif' }}
             >
               Kirim Email
             </a>
@@ -106,18 +108,18 @@ export default function HelpPage() {
         </div>
 
         {/* Operating Hours */}
-        <div className="bg-blue-50 border border-blue-200 rounded-xl p-6 mt-8">
-          <h3 className="font-semibold text-blue-900 mb-4">⏰ Jam Operasional Customer Service</h3>
+        <div className="border rounded-xl p-6 mt-8" style={{ backgroundColor: 'rgba(52, 211, 153, 0.1)', borderColor: '#34D399' }}>
+          <h3 className="font-semibold mb-4" style={{ color: '#34D399', fontFamily: 'Playfair Display, serif' }}>⏰ Jam Operasional Customer Service</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
             <div>
-              <p className="text-blue-800"><strong>Senin - Jumat:</strong> 08:00 - 22:00 WIB</p>
-              <p className="text-blue-800"><strong>Sabtu - Minggu:</strong> 09:00 - 21:00 WIB</p>
+              <p style={{ color: '#F0F6FC', fontFamily: 'Manrope, sans-serif' }}><strong>Senin - Jumat:</strong> 08:00 - 22:00 WIB</p>
+              <p style={{ color: '#F0F6FC', fontFamily: 'Manrope, sans-serif' }}><strong>Sabtu - Minggu:</strong> 09:00 - 21:00 WIB</p>
             </div>
             <div>
-              <p className="text-blue-700">
+              <p style={{ color: '#8B949E', fontFamily: 'Manrope, sans-serif' }}>
                 <strong>Sistem Top Up:</strong> Otomatis 24/7
               </p>
-              <p className="text-blue-700">
+              <p style={{ color: '#8B949E', fontFamily: 'Manrope, sans-serif' }}>
                 <strong>Response Time:</strong> Maksimal 15 menit
               </p>
             </div>

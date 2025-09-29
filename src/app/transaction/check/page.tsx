@@ -60,45 +60,58 @@ export default function CheckTransactionPage() {
 
   const getStatusBadge = (status: string) => {
     const statusConfig = {
-      PENDING: { color: 'bg-yellow-100 text-yellow-800', text: 'Menunggu Pembayaran' },
-      PROCESSING: { color: 'bg-blue-100 text-blue-800', text: 'Sedang Diproses' },
-      COMPLETED: { color: 'bg-green-100 text-green-800', text: 'Berhasil' },
-      FAILED: { color: 'bg-red-100 text-red-800', text: 'Gagal' },
-      CANCELLED: { color: 'bg-gray-100 text-gray-800', text: 'Dibatalkan' }
+      PENDING: { bgColor: '#7C3AED', textColor: '#F0F6FC', text: 'Menunggu Pembayaran' },
+      PROCESSING: { bgColor: '#34D399', textColor: '#F0F6FC', text: 'Sedang Diproses' },
+      COMPLETED: { bgColor: '#34D399', textColor: '#F0F6FC', text: 'Berhasil' },
+      FAILED: { bgColor: '#7C3AED', textColor: '#F0F6FC', text: 'Gagal' },
+      CANCELLED: { bgColor: '#8B949E', textColor: '#F0F6FC', text: 'Dibatalkan' }
     }
 
     const config = statusConfig[status as keyof typeof statusConfig] || statusConfig.PENDING
 
     return (
-      <span className={`px-3 py-1 rounded-full text-sm font-medium ${config.color}`}>
+      <span 
+        className="px-3 py-1 rounded-full text-sm font-medium"
+        style={{ 
+          backgroundColor: config.bgColor, 
+          color: config.textColor,
+          fontFamily: 'Manrope, sans-serif'
+        }}
+      >
         {config.text}
       </span>
     )
   }
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen" style={{ backgroundColor: '#0D1117' }}>
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Header */}
         <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-black mb-6">
-            <span className="bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
+          <h1 className="text-4xl md:text-5xl font-black mb-6" style={{ fontFamily: 'Playfair Display, serif' }}>
+            <span style={{ color: '#7C3AED' }}>
               Cek Status Transaksi
             </span>
           </h1>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-xl max-w-3xl mx-auto leading-relaxed" style={{ color: '#8B949E', fontFamily: 'Manrope, sans-serif' }}>
             Masukkan ID transaksi untuk melihat status pembayaran dan detail pesanan
           </p>
         </div>
 
         {/* Search Form */}
-        <div className="bg-gray-800/50 backdrop-blur-sm border border-gray-700 rounded-2xl p-8 mb-8">
+        <div className="backdrop-blur-sm border rounded-2xl p-8 mb-8" style={{ backgroundColor: '#161B22', borderColor: '#7C3AED' }}>
           <form onSubmit={handleSearch} className="flex flex-col sm:flex-row gap-4">
             <div className="flex-1">
               <input
                 type="text"
                 placeholder="Masukkan ID Transaksi (contoh: clm...)"
-                className="w-full px-4 py-3 bg-gray-700/50 border border-gray-600 rounded-xl text-white placeholder-gray-400 focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 transition-all duration-200"
+                className="w-full px-4 py-3 border rounded-xl transition-all duration-200"
+                style={{ 
+                  backgroundColor: '#0D1117', 
+                  borderColor: '#7C3AED', 
+                  color: '#F0F6FC',
+                  fontFamily: 'Manrope, sans-serif'
+                }}
                 value={transactionId}
                 onChange={(e) => setTransactionId(e.target.value)}
               />
@@ -106,7 +119,12 @@ export default function CheckTransactionPage() {
             <button
               type="submit"
               disabled={isLoading}
-              className="bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-cyan-600 hover:to-purple-700 text-white px-8 py-3 rounded-xl font-medium transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center shadow-lg hover:shadow-cyan-500/25"
+              className="px-8 py-3 rounded-xl font-medium transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center shadow-lg"
+              style={{ 
+                backgroundColor: '#7C3AED', 
+                color: '#F0F6FC',
+                fontFamily: 'Manrope, sans-serif'
+              }}
             >
               {isLoading ? (
                 'Mencari...'
@@ -122,17 +140,17 @@ export default function CheckTransactionPage() {
 
         {/* Error Message */}
         {error && (
-          <div className="bg-red-500/10 border border-red-500/20 rounded-xl p-4 mb-8">
-            <p className="text-red-400">{error}</p>
+          <div className="border rounded-xl p-4 mb-8" style={{ backgroundColor: 'rgba(124, 58, 237, 0.1)', borderColor: '#7C3AED' }}>
+            <p style={{ color: '#7C3AED', fontFamily: 'Manrope, sans-serif' }}>{error}</p>
           </div>
         )}
 
         {/* Transaction Details */}
         {transaction && (
-          <div className="bg-gray-800/50 backdrop-blur-sm border border-gray-700 rounded-2xl shadow-lg">
-            <div className="p-8 border-b border-gray-700">
+          <div className="backdrop-blur-sm border rounded-2xl shadow-lg" style={{ backgroundColor: '#161B22', borderColor: '#7C3AED' }}>
+            <div className="p-8 border-b" style={{ borderColor: '#7C3AED' }}>
               <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-                <h2 className="text-2xl font-bold text-white">Detail Transaksi</h2>
+                <h2 className="text-2xl font-bold" style={{ color: '#F0F6FC', fontFamily: 'Playfair Display, serif' }}>Detail Transaksi</h2>
                 {getStatusBadge(transaction.status)}
               </div>
             </div>
@@ -141,76 +159,76 @@ export default function CheckTransactionPage() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div className="space-y-6">
                   <div>
-                    <label className="block text-sm font-medium text-gray-400 mb-2">ID Transaksi</label>
-                    <p className="font-mono text-sm bg-gray-700/50 border border-gray-600 p-3 rounded-xl text-white">{transaction.id}</p>
+                    <label className="block text-sm font-medium mb-2" style={{ color: '#8B949E', fontFamily: 'Manrope, sans-serif' }}>ID Transaksi</label>
+                    <p className="font-mono text-sm border p-3 rounded-xl" style={{ backgroundColor: '#0D1117', borderColor: '#7C3AED', color: '#F0F6FC' }}>{transaction.id}</p>
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-400 mb-2">Game</label>
-                    <p className="font-medium text-white text-lg">{transaction.game.name}</p>
+                    <label className="block text-sm font-medium mb-2" style={{ color: '#8B949E', fontFamily: 'Manrope, sans-serif' }}>Game</label>
+                    <p className="font-medium text-lg" style={{ color: '#F0F6FC', fontFamily: 'Playfair Display, serif' }}>{transaction.game.name}</p>
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-400 mb-2">User ID Game</label>
-                    <p className="font-medium text-white">{transaction.gameUserId}</p>
+                    <label className="block text-sm font-medium mb-2" style={{ color: '#8B949E', fontFamily: 'Manrope, sans-serif' }}>User ID Game</label>
+                    <p className="font-medium" style={{ color: '#F0F6FC', fontFamily: 'Manrope, sans-serif' }}>{transaction.gameUserId}</p>
                   </div>
 
                   {transaction.playerName && (
                     <div>
-                      <label className="block text-sm font-medium text-gray-400 mb-2">Nama Player</label>
-                      <p className="font-medium text-white">{transaction.playerName}</p>
+                      <label className="block text-sm font-medium mb-2" style={{ color: '#8B949E', fontFamily: 'Manrope, sans-serif' }}>Nama Player</label>
+                      <p className="font-medium" style={{ color: '#F0F6FC', fontFamily: 'Manrope, sans-serif' }}>{transaction.playerName}</p>
                     </div>
                   )}
                 </div>
 
                 <div className="space-y-6">
                   <div>
-                    <label className="block text-sm font-medium text-gray-400 mb-2">Item</label>
-                    <p className="font-medium text-white text-lg">{transaction.denomination.name}</p>
+                    <label className="block text-sm font-medium mb-2" style={{ color: '#8B949E', fontFamily: 'Manrope, sans-serif' }}>Item</label>
+                    <p className="font-medium text-lg" style={{ color: '#F0F6FC', fontFamily: 'Playfair Display, serif' }}>{transaction.denomination.name}</p>
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-400 mb-2">Metode Pembayaran</label>
-                    <p className="font-medium text-white uppercase">{transaction.paymentMethod}</p>
+                    <label className="block text-sm font-medium mb-2" style={{ color: '#8B949E', fontFamily: 'Manrope, sans-serif' }}>Metode Pembayaran</label>
+                    <p className="font-medium uppercase" style={{ color: '#F0F6FC', fontFamily: 'Manrope, sans-serif' }}>{transaction.paymentMethod}</p>
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-400 mb-2">Total Harga</label>
-                    <p className="font-bold text-2xl bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">{formatPrice(transaction.totalPrice)}</p>
+                    <label className="block text-sm font-medium mb-2" style={{ color: '#8B949E', fontFamily: 'Manrope, sans-serif' }}>Total Harga</label>
+                    <p className="font-bold text-2xl" style={{ color: '#7C3AED', fontFamily: 'Manrope, sans-serif' }}>{formatPrice(transaction.totalPrice)}</p>
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-400 mb-2">Tanggal Transaksi</label>
-                    <p className="font-medium text-white">{formatDate(transaction.createdAt)}</p>
+                    <label className="block text-sm font-medium mb-2" style={{ color: '#8B949E', fontFamily: 'Manrope, sans-serif' }}>Tanggal Transaksi</label>
+                    <p className="font-medium" style={{ color: '#F0F6FC', fontFamily: 'Manrope, sans-serif' }}>{formatDate(transaction.createdAt)}</p>
                   </div>
                 </div>
               </div>
 
               {/* Status Information */}
-              <div className="mt-8 p-6 bg-gray-700/30 border border-gray-600 rounded-xl">
-                <h3 className="font-medium text-white mb-4">Informasi Status</h3>
+              <div className="mt-8 p-6 border rounded-xl" style={{ backgroundColor: '#0D1117', borderColor: '#7C3AED' }}>
+                <h3 className="font-medium mb-4" style={{ color: '#F0F6FC', fontFamily: 'Playfair Display, serif' }}>Informasi Status</h3>
                 {transaction.status === 'PENDING' && (
-                  <p className="text-sm text-gray-300 leading-relaxed">
+                  <p className="text-sm leading-relaxed" style={{ color: '#8B949E', fontFamily: 'Manrope, sans-serif' }}>
                     Transaksi menunggu pembayaran. Silakan lanjutkan pembayaran untuk menyelesaikan pesanan.
                   </p>
                 )}
                 {transaction.status === 'PROCESSING' && (
-                  <p className="text-sm text-gray-300 leading-relaxed">
+                  <p className="text-sm leading-relaxed" style={{ color: '#8B949E', fontFamily: 'Manrope, sans-serif' }}>
                     Pembayaran sedang diproses. Mohon tunggu beberapa saat.
                   </p>
                 )}
                 {transaction.status === 'COMPLETED' && (
-                  <p className="text-sm text-green-400 leading-relaxed">
+                  <p className="text-sm leading-relaxed" style={{ color: '#34D399', fontFamily: 'Manrope, sans-serif' }}>
                     ✅ Pembayaran berhasil! Item sudah dikirim ke akun game Anda.
                   </p>
                 )}
                 {transaction.status === 'FAILED' && (
-                  <p className="text-sm text-red-400 leading-relaxed">
+                  <p className="text-sm leading-relaxed" style={{ color: '#7C3AED', fontFamily: 'Manrope, sans-serif' }}>
                     ❌ Pembayaran gagal. Silakan hubungi customer service untuk bantuan.
                   </p>
                 )}
                 {transaction.status === 'CANCELLED' && (
-                  <p className="text-sm text-gray-300 leading-relaxed">
+                  <p className="text-sm leading-relaxed" style={{ color: '#8B949E', fontFamily: 'Manrope, sans-serif' }}>
                     Transaksi dibatalkan oleh pengguna.
                   </p>
                 )}
@@ -221,7 +239,12 @@ export default function CheckTransactionPage() {
                 <div className="mt-8">
                   <a
                     href={`/topup/confirm/${transaction.id}`}
-                    className="bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-cyan-600 hover:to-purple-700 text-white px-8 py-4 rounded-xl font-bold text-lg transition-all duration-300 inline-block shadow-lg hover:shadow-cyan-500/25"
+                    className="px-8 py-4 rounded-xl font-bold text-lg transition-all duration-300 inline-block shadow-lg"
+                    style={{ 
+                      backgroundColor: '#7C3AED', 
+                      color: '#F0F6FC',
+                      fontFamily: 'Manrope, sans-serif'
+                    }}
                   >
                     Lanjutkan Pembayaran
                   </a>

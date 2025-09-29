@@ -74,13 +74,13 @@ export default function PaymentConfirmation({ transaction }: PaymentConfirmation
   const getStatusIcon = () => {
     switch (paymentStatus) {
       case 'completed':
-        return <CheckCircleIcon className="w-16 h-16 text-green-500" />
+        return <CheckCircleIcon className="w-16 h-16" style={{ color: '#34D399' }} />
       case 'failed':
-        return <XCircleIcon className="w-16 h-16 text-red-500" />
+        return <XCircleIcon className="w-16 h-16" style={{ color: '#7C3AED' }} />
       case 'processing':
-        return <ClockIcon className="w-16 h-16 text-blue-500 animate-spin" />
+        return <ClockIcon className="w-16 h-16 animate-spin" style={{ color: '#34D399' }} />
       default:
-        return <CreditCardIcon className="w-16 h-16 text-gray-400" />
+        return <CreditCardIcon className="w-16 h-16" style={{ color: '#8B949E' }} />
     }
   }
 
@@ -90,25 +90,25 @@ export default function PaymentConfirmation({ transaction }: PaymentConfirmation
         return {
           title: 'Pembayaran Berhasil! 🎉',
           message: 'Top up berhasil diproses. Item akan segera masuk ke akun game Anda dalam 1-5 menit.',
-          color: 'text-green-600'
+          color: '#34D399'
         }
       case 'failed':
         return {
           title: 'Pembayaran Gagal 😞',
           message: 'Terjadi kesalahan saat memproses pembayaran. Silakan coba lagi atau hubungi customer service.',
-          color: 'text-red-600'
+          color: '#7C3AED'
         }
       case 'processing':
         return {
           title: 'Memproses Pembayaran...',
           message: 'Mohon tunggu, kami sedang memproses pembayaran Anda.',
-          color: 'text-blue-600'
+          color: '#34D399'
         }
       default:
         return {
           title: 'Konfirmasi Pembayaran',
           message: 'Periksa kembali detail pesanan Anda sebelum melakukan pembayaran.',
-          color: 'text-gray-600'
+          color: '#8B949E'
         }
     }
   }
@@ -118,58 +118,58 @@ export default function PaymentConfirmation({ transaction }: PaymentConfirmation
   return (
     <div className="max-w-2xl mx-auto">
       {/* Status Section */}
-      <div className="bg-white rounded-xl shadow-sm p-8 text-center mb-6 border border-gray-100">
+      <div className="rounded-xl shadow-sm p-8 text-center mb-6 border" style={{ backgroundColor: '#161B22', borderColor: statusInfo.color }}>
         <div className="flex justify-center mb-4">
           {getStatusIcon()}
         </div>
-        <h1 className={`text-2xl font-bold mb-2 ${statusInfo.color}`}>
+        <h1 className="text-2xl font-bold mb-2" style={{ color: statusInfo.color, fontFamily: 'Playfair Display, serif' }}>
           {statusInfo.title}
         </h1>
-        <p className="text-gray-600">
+        <p style={{ color: '#8B949E', fontFamily: 'Manrope, sans-serif' }}>
           {statusInfo.message}
         </p>
       </div>
 
       {/* Transaction Details */}
-      <div className="bg-white rounded-xl shadow-sm p-6 mb-6 border border-gray-100">
-        <h2 className="text-xl font-bold text-gray-900 mb-4">Detail Transaksi</h2>
+      <div className="rounded-xl shadow-sm p-6 mb-6 border" style={{ backgroundColor: '#161B22', borderColor: '#7C3AED' }}>
+        <h2 className="text-xl font-bold mb-4" style={{ color: '#F0F6FC', fontFamily: 'Playfair Display, serif' }}>Detail Transaksi</h2>
         
         <div className="space-y-3">
-          <div className="flex justify-between py-2 border-b border-gray-100">
-            <span className="text-gray-600">ID Transaksi:</span>
-            <span className="font-mono text-sm">{transaction.id}</span>
+          <div className="flex justify-between py-2 border-b" style={{ borderColor: '#7C3AED' }}>
+            <span style={{ color: '#8B949E', fontFamily: 'Manrope, sans-serif' }}>ID Transaksi:</span>
+            <span className="font-mono text-sm" style={{ color: '#F0F6FC' }}>{transaction.id}</span>
           </div>
           
-          <div className="flex justify-between py-2 border-b border-gray-100">
-            <span className="text-gray-600">Game:</span>
-            <span className="font-medium">{transaction.game.name}</span>
+          <div className="flex justify-between py-2 border-b" style={{ borderColor: '#7C3AED' }}>
+            <span style={{ color: '#8B949E', fontFamily: 'Manrope, sans-serif' }}>Game:</span>
+            <span className="font-medium" style={{ color: '#F0F6FC', fontFamily: 'Manrope, sans-serif' }}>{transaction.game.name}</span>
           </div>
           
-          <div className="flex justify-between py-2 border-b border-gray-100">
-            <span className="text-gray-600">User ID:</span>
-            <span className="font-medium">{transaction.gameUserId}</span>
+          <div className="flex justify-between py-2 border-b" style={{ borderColor: '#7C3AED' }}>
+            <span style={{ color: '#8B949E', fontFamily: 'Manrope, sans-serif' }}>User ID:</span>
+            <span className="font-medium" style={{ color: '#F0F6FC', fontFamily: 'Manrope, sans-serif' }}>{transaction.gameUserId}</span>
           </div>
           
           {transaction.playerName && (
-            <div className="flex justify-between py-2 border-b border-gray-100">
-              <span className="text-gray-600">Nama Player:</span>
-              <span className="font-medium">{transaction.playerName}</span>
+            <div className="flex justify-between py-2 border-b" style={{ borderColor: '#7C3AED' }}>
+              <span style={{ color: '#8B949E', fontFamily: 'Manrope, sans-serif' }}>Nama Player:</span>
+              <span className="font-medium" style={{ color: '#F0F6FC', fontFamily: 'Manrope, sans-serif' }}>{transaction.playerName}</span>
             </div>
           )}
           
-          <div className="flex justify-between py-2 border-b border-gray-100">
-            <span className="text-gray-600">Item:</span>
-            <span className="font-medium">{transaction.denomination.name}</span>
+          <div className="flex justify-between py-2 border-b" style={{ borderColor: '#7C3AED' }}>
+            <span style={{ color: '#8B949E', fontFamily: 'Manrope, sans-serif' }}>Item:</span>
+            <span className="font-medium" style={{ color: '#F0F6FC', fontFamily: 'Manrope, sans-serif' }}>{transaction.denomination.name}</span>
           </div>
           
-          <div className="flex justify-between py-2 border-b border-gray-100">
-            <span className="text-gray-600">Metode Pembayaran:</span>
-            <span className="font-medium uppercase">{transaction.paymentMethod}</span>
+          <div className="flex justify-between py-2 border-b" style={{ borderColor: '#7C3AED' }}>
+            <span style={{ color: '#8B949E', fontFamily: 'Manrope, sans-serif' }}>Metode Pembayaran:</span>
+            <span className="font-medium uppercase" style={{ color: '#F0F6FC', fontFamily: 'Manrope, sans-serif' }}>{transaction.paymentMethod}</span>
           </div>
           
-          <div className="flex justify-between py-3 bg-gray-50 px-4 rounded-lg">
-            <span className="font-semibold">Total Pembayaran:</span>
-            <span className="font-bold text-xl text-blue-600">
+          <div className="flex justify-between py-3 px-4 rounded-lg" style={{ backgroundColor: '#0D1117' }}>
+            <span className="font-semibold" style={{ color: '#F0F6FC', fontFamily: 'Manrope, sans-serif' }}>Total Pembayaran:</span>
+            <span className="font-bold text-xl" style={{ color: '#34D399', fontFamily: 'Manrope, sans-serif' }}>
               {formatPrice(transaction.totalPrice)}
             </span>
           </div>
@@ -183,7 +183,12 @@ export default function PaymentConfirmation({ transaction }: PaymentConfirmation
             <button
               onClick={handlePayment}
               disabled={isProcessing}
-              className="flex-1 bg-blue-600 text-white py-3 px-6 rounded-lg font-medium hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors"
+              className="flex-1 py-3 px-6 rounded-lg font-medium disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+              style={{ 
+                backgroundColor: '#7C3AED', 
+                color: '#F0F6FC',
+                fontFamily: 'Manrope, sans-serif'
+              }}
             >
               {isProcessing ? 'Memproses...' : 'Bayar Sekarang'}
             </button>
@@ -191,7 +196,13 @@ export default function PaymentConfirmation({ transaction }: PaymentConfirmation
             <button
               onClick={handleCancel}
               disabled={isProcessing}
-              className="flex-1 bg-gray-200 text-gray-800 py-3 px-6 rounded-lg font-medium hover:bg-gray-300 disabled:bg-gray-100 disabled:cursor-not-allowed transition-colors"
+              className="flex-1 border py-3 px-6 rounded-lg font-medium disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+              style={{ 
+                borderColor: '#8B949E', 
+                color: '#8B949E',
+                backgroundColor: 'transparent',
+                fontFamily: 'Manrope, sans-serif'
+              }}
             >
               Batalkan
             </button>
@@ -201,7 +212,12 @@ export default function PaymentConfirmation({ transaction }: PaymentConfirmation
         {paymentStatus === 'completed' && (
           <button
             onClick={() => router.push('/')}
-            className="w-full bg-green-600 text-white py-3 px-6 rounded-lg font-medium hover:bg-green-700 transition-colors"
+            className="w-full py-3 px-6 rounded-lg font-medium transition-colors"
+            style={{ 
+              backgroundColor: '#34D399', 
+              color: '#F0F6FC',
+              fontFamily: 'Manrope, sans-serif'
+            }}
           >
             Kembali ke Beranda
           </button>
@@ -211,14 +227,25 @@ export default function PaymentConfirmation({ transaction }: PaymentConfirmation
           <div className="flex flex-col sm:flex-row gap-4">
             <button
               onClick={() => setPaymentStatus('pending')}
-              className="flex-1 bg-blue-600 text-white py-3 px-6 rounded-lg font-medium hover:bg-blue-700 transition-colors"
+              className="flex-1 py-3 px-6 rounded-lg font-medium transition-colors"
+              style={{ 
+                backgroundColor: '#7C3AED', 
+                color: '#F0F6FC',
+                fontFamily: 'Manrope, sans-serif'
+              }}
             >
               Coba Lagi
             </button>
             
             <button
               onClick={() => router.push('/')}
-              className="flex-1 bg-gray-200 text-gray-800 py-3 px-6 rounded-lg font-medium hover:bg-gray-300 transition-colors"
+              className="flex-1 border py-3 px-6 rounded-lg font-medium transition-colors"
+              style={{ 
+                borderColor: '#8B949E', 
+                color: '#8B949E',
+                backgroundColor: 'transparent',
+                fontFamily: 'Manrope, sans-serif'
+              }}
             >
               Kembali ke Beranda
             </button>

@@ -24,16 +24,22 @@ export default function GameFilter({
 }: GameFilterProps) {
 
   return (
-    <div className="bg-gray-800/50 backdrop-blur-sm border border-gray-700 rounded-2xl p-6">
+    <div className="backdrop-blur-sm border rounded-2xl p-6" style={{ backgroundColor: '#161B22', borderColor: '#7C3AED' }}>
       <div className="flex flex-col lg:flex-row gap-6">
         {/* Search */}
         <div className="flex-1">
           <div className="relative">
-            <MagnifyingGlassIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+            <MagnifyingGlassIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5" style={{ color: '#8B949E' }} />
             <input
               type="text"
               placeholder="Cari game favoritmu..."
-              className="w-full pl-10 pr-4 py-3 bg-gray-700/50 border border-gray-600 rounded-xl text-white placeholder-gray-400 focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 transition-all duration-200"
+              className="w-full pl-10 pr-4 py-3 border rounded-xl transition-all duration-200"
+              style={{ 
+                backgroundColor: '#0D1117', 
+                borderColor: '#7C3AED', 
+                color: '#F0F6FC',
+                fontFamily: 'Manrope, sans-serif'
+              }}
               value={searchTerm}
               onChange={(e) => onSearchChange(e.target.value)}
             />
@@ -43,7 +49,13 @@ export default function GameFilter({
         {/* Category Filter */}
         <div className="lg:w-64">
           <select
-            className="w-full px-4 py-3 bg-gray-700/50 border border-gray-600 rounded-xl text-white focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 transition-all duration-200"
+            className="w-full px-4 py-3 border rounded-xl transition-all duration-200"
+            style={{ 
+              backgroundColor: '#0D1117', 
+              borderColor: '#7C3AED', 
+              color: '#F0F6FC',
+              fontFamily: 'Manrope, sans-serif'
+            }}
             value={selectedCategory}
             onChange={(e) => onCategoryChange(e.target.value)}
           >
@@ -59,7 +71,13 @@ export default function GameFilter({
         {/* Sort */}
         <div className="lg:w-48">
           <select
-            className="w-full px-4 py-3 bg-gray-700/50 border border-gray-600 rounded-xl text-white focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 transition-all duration-200"
+            className="w-full px-4 py-3 border rounded-xl transition-all duration-200"
+            style={{ 
+              backgroundColor: '#0D1117', 
+              borderColor: '#7C3AED', 
+              color: '#F0F6FC',
+              fontFamily: 'Manrope, sans-serif'
+            }}
             value={sortBy}
             onChange={(e) => onSortChange(e.target.value)}
           >
@@ -72,7 +90,8 @@ export default function GameFilter({
         </div>
 
         {/* Filter Button */}
-        <button className="lg:w-auto w-full bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-cyan-600 hover:to-purple-700 text-white px-6 py-3 rounded-xl font-medium transition-all duration-300 flex items-center justify-center space-x-2">
+        <button className="lg:w-auto w-full px-6 py-3 rounded-xl font-medium transition-all duration-300 flex items-center justify-center space-x-2" 
+                style={{ backgroundColor: '#34D399', color: '#F0F6FC', fontFamily: 'Manrope, sans-serif' }}>
           <FunnelIcon className="w-5 h-5" />
           <span>Filter</span>
         </button>
@@ -82,22 +101,30 @@ export default function GameFilter({
       {(selectedCategory !== 'all' || searchTerm) && (
         <div className="mt-4 flex flex-wrap gap-2">
           {selectedCategory !== 'all' && (
-            <div className="bg-cyan-500/20 border border-cyan-500/30 text-cyan-300 px-3 py-1 rounded-full text-sm flex items-center space-x-2">
+            <div className="border px-3 py-1 rounded-full text-sm flex items-center space-x-2" 
+                 style={{ backgroundColor: 'rgba(124, 58, 237, 0.2)', borderColor: 'rgba(124, 58, 237, 0.3)', color: '#7C3AED', fontFamily: 'Manrope, sans-serif' }}>
               <span>{selectedCategory}</span>
               <button
                 onClick={() => onCategoryChange('all')}
-                className="hover:text-white transition-colors"
+                className="transition-colors"
+                style={{ color: '#7C3AED' }}
+                onMouseEnter={(e) => e.currentTarget.style.color = '#F0F6FC'}
+                onMouseLeave={(e) => e.currentTarget.style.color = '#7C3AED'}
               >
                 ×
               </button>
             </div>
           )}
           {searchTerm && (
-            <div className="bg-purple-500/20 border border-purple-500/30 text-purple-300 px-3 py-1 rounded-full text-sm flex items-center space-x-2">
+            <div className="border px-3 py-1 rounded-full text-sm flex items-center space-x-2" 
+                 style={{ backgroundColor: 'rgba(52, 211, 153, 0.2)', borderColor: 'rgba(52, 211, 153, 0.3)', color: '#34D399', fontFamily: 'Manrope, sans-serif' }}>
               <span>"{searchTerm}"</span>
               <button
                 onClick={() => onSearchChange('')}
-                className="hover:text-white transition-colors"
+                className="transition-colors"
+                style={{ color: '#34D399' }}
+                onMouseEnter={(e) => e.currentTarget.style.color = '#F0F6FC'}
+                onMouseLeave={(e) => e.currentTarget.style.color = '#34D399'}
               >
                 ×
               </button>

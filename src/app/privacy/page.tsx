@@ -78,25 +78,25 @@ export default function PrivacyPage() {
   ]
 
   return (
-    <div className="min-h-screen py-12">
+    <div className="min-h-screen py-12" style={{ backgroundColor: '#0D1117' }}>
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-12">
           <div className="flex justify-center mb-6">
-            <div className="w-16 h-16 bg-gradient-to-br from-green-400 via-blue-500 to-purple-600 rounded-2xl flex items-center justify-center shadow-2xl">
-              <ShieldCheckIcon className="w-8 h-8 text-white" />
+            <div className="w-16 h-16 rounded-2xl flex items-center justify-center shadow-2xl" style={{ backgroundColor: '#34D399' }}>
+              <ShieldCheckIcon className="w-8 h-8" style={{ color: '#F0F6FC' }} />
             </div>
           </div>
           
-          <h1 className="text-4xl md:text-5xl font-black mb-6">
-            <span className="bg-gradient-to-r from-green-400 to-blue-500 bg-clip-text text-transparent">
+          <h1 className="text-4xl md:text-5xl font-black mb-6" style={{ fontFamily: 'Playfair Display, serif' }}>
+            <span style={{ color: '#34D399' }}>
               Kebijakan Privasi
             </span>
           </h1>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-xl max-w-3xl mx-auto leading-relaxed" style={{ color: '#8B949E', fontFamily: 'Manrope, sans-serif' }}>
             Kami berkomitmen melindungi privasi dan keamanan data pribadi Anda
           </p>
-          <div className="mt-4 text-sm text-gray-400">
+          <div className="mt-4 text-sm" style={{ color: '#8B949E', fontFamily: 'Manrope, sans-serif' }}>
             Terakhir diperbarui: {new Date().toLocaleDateString('id-ID', { 
               day: 'numeric', 
               month: 'long', 
@@ -106,10 +106,10 @@ export default function PrivacyPage() {
         </div>
 
         {/* Content */}
-        <div className="bg-gray-800/50 backdrop-blur-sm border border-gray-700 rounded-2xl p-8">
+        <div className="backdrop-blur-sm border rounded-2xl p-8" style={{ backgroundColor: '#161B22', borderColor: '#34D399' }}>
           <div className="prose prose-invert max-w-none">
-            <div className="mb-8 p-6 bg-green-500/10 border border-green-500/20 rounded-xl">
-              <p className="text-green-300 leading-relaxed">
+            <div className="mb-8 p-6 border rounded-xl" style={{ backgroundColor: 'rgba(52, 211, 153, 0.1)', borderColor: 'rgba(52, 211, 153, 0.2)' }}>
+              <p className="leading-relaxed" style={{ color: '#34D399', fontFamily: 'Manrope, sans-serif' }}>
                 <strong>Komitmen Kami:</strong> GamePulse menghormati privasi Anda dan berkomitmen untuk 
                 melindungi informasi pribadi yang Anda berikan kepada kami. Kebijakan ini menjelaskan 
                 bagaimana kami mengumpulkan, menggunakan, dan melindungi data Anda.
@@ -118,12 +118,12 @@ export default function PrivacyPage() {
 
             <div className="space-y-8">
               {sections.map((section, index) => (
-                <div key={index} className="border-b border-gray-700 pb-8 last:border-b-0">
-                  <h2 className="text-2xl font-bold text-white mb-4">{section.title}</h2>
+                <div key={index} className="border-b pb-8 last:border-b-0" style={{ borderColor: '#34D399' }}>
+                  <h2 className="text-2xl font-bold mb-4" style={{ color: '#F0F6FC', fontFamily: 'Playfair Display, serif' }}>{section.title}</h2>
                   <ul className="space-y-3">
                     {section.content.map((item, itemIndex) => (
-                      <li key={itemIndex} className="text-gray-300 leading-relaxed flex items-start">
-                        <span className="text-green-400 mr-3 mt-2">•</span>
+                      <li key={itemIndex} className="leading-relaxed flex items-start" style={{ color: '#8B949E', fontFamily: 'Manrope, sans-serif' }}>
+                        <span className="mr-3 mt-2" style={{ color: '#34D399' }}>•</span>
                         <span>{item}</span>
                       </li>
                     ))}

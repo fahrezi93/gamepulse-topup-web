@@ -19,37 +19,26 @@ export default function GameCard({ game, minPrice }: GameCardProps) {
     }).format(price)
   }
 
-  const getCategoryGradient = (category: string) => {
-    const gradients = {
-      'MOBA': 'from-blue-500 to-purple-600',
-      'Battle Royale': 'from-orange-500 to-red-600',
-      'RPG': 'from-green-500 to-emerald-600',
-      'FPS': 'from-red-500 to-pink-600',
-      'Strategy': 'from-indigo-500 to-purple-600',
-      'Racing': 'from-yellow-500 to-orange-600',
-      'Sports': 'from-cyan-500 to-blue-600',
-      'Sandbox': 'from-amber-500 to-yellow-600',
-      'Party': 'from-pink-500 to-rose-600',
-      'Action RPG': 'from-violet-500 to-purple-600',
-      'MMORPG': 'from-teal-500 to-cyan-600'
-    }
-    return gradients[category as keyof typeof gradients] || 'from-gray-500 to-gray-600'
+  const getCategoryColor = (category: string) => {
+    // Alternating between purple and green based on category
+    const purpleCategories = ['MOBA', 'RPG', 'Strategy', 'Sports', 'Party', 'MMORPG']
+    return purpleCategories.includes(category) ? '#7C3AED' : '#34D399'
   }
 
   return (
     <Link href={`/game/${game.slug}`} className="group">
-      <div className="relative bg-gray-800/50 backdrop-blur-sm border border-gray-700 rounded-2xl overflow-hidden hover:bg-gray-800/70 transition-all duration-300 hover:scale-105 transform hover:border-gray-600 hover:shadow-2xl hover:shadow-purple-500/10">
+      <div className="relative backdrop-blur-sm border rounded-2xl overflow-hidden transition-all duration-300 hover:scale-105 transform shadow-xl" style={{ backgroundColor: '#161B22', borderColor: getCategoryColor(game.category) }}>
         {/* Game Image/Icon */}
-        <div className="relative h-48 bg-gradient-to-br from-gray-800 to-gray-900 overflow-hidden">
+        <div className="relative h-48 overflow-hidden" style={{ backgroundColor: '#0D1117' }}>
           {/* Background Pattern */}
           <div className="absolute inset-0 opacity-10">
-            <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/20 via-purple-500/20 to-pink-500/20"></div>
+            <div className="absolute inset-0" style={{ backgroundColor: getCategoryColor(game.category) }}></div>
           </div>
           
           {/* Game Icon */}
           <div className="absolute inset-0 flex items-center justify-center">
-            <div className={`w-20 h-20 bg-gradient-to-br ${getCategoryGradient(game.category)} rounded-2xl flex items-center justify-center shadow-2xl group-hover:scale-110 transition-transform duration-300`}>
-              <span className="text-white font-black text-2xl">
+            <div className="w-20 h-20 rounded-2xl flex items-center justify-center shadow-2xl group-hover:scale-110 transition-transform duration-300" style={{ backgroundColor: getCategoryColor(game.category) }}>
+              <span className="font-black text-2xl" style={{ color: '#F0F6FC' }}>
                 {game.name.charAt(0)}
               </span>
             </div>
@@ -57,7 +46,7 @@ export default function GameCard({ game, minPrice }: GameCardProps) {
           
           {/* Category Badge */}
           <div className="absolute top-4 left-4">
-            <div className={`bg-gradient-to-r ${getCategoryGradient(game.category)} px-3 py-1 rounded-full text-white text-xs font-bold shadow-lg`}>
+            <div className="px-3 py-1 rounded-full text-xs font-bold shadow-lg" style={{ backgroundColor: getCategoryColor(game.category), color: '#F0F6FC', fontFamily: 'Manrope, sans-serif' }}>
               {game.category}
             </div>
           </div>
@@ -65,49 +54,49 @@ export default function GameCard({ game, minPrice }: GameCardProps) {
           {/* Popular Badge - Only for popular games */}
           {game.isPopular && (
             <div className="absolute top-4 right-4">
-              <div className="bg-gradient-to-r from-yellow-400 to-orange-500 px-2 py-1 rounded-full flex items-center space-x-1 shadow-lg">
-                <FireIcon className="w-3 h-3 text-white" />
-                <span className="text-white text-xs font-bold">HOT</span>
+              <div className="px-2 py-1 rounded-full flex items-center space-x-1 shadow-lg" style={{ backgroundColor: '#34D399' }}>
+                <FireIcon className="w-3 h-3" style={{ color: '#F0F6FC' }} />
+                <span className="text-xs font-bold" style={{ color: '#F0F6FC', fontFamily: 'Manrope, sans-serif' }}>HOT</span>
               </div>
             </div>
           )}
 
           {/* Hover Play Button */}
-          <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black/20">
-            <div className="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center">
-              <PlayIcon className="w-8 h-8 text-white ml-1" />
+          <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300" style={{ backgroundColor: 'rgba(0, 0, 0, 0.2)' }}>
+            <div className="w-16 h-16 backdrop-blur-sm rounded-full flex items-center justify-center" style={{ backgroundColor: 'rgba(255, 255, 255, 0.2)' }}>
+              <PlayIcon className="w-8 h-8 ml-1" style={{ color: '#F0F6FC' }} />
             </div>
           </div>
         </div>
 
         {/* Game Info */}
         <div className="p-6">
-          <h3 className="font-bold text-xl text-white mb-3 group-hover:text-cyan-400 transition-colors duration-300">
+          <h3 className="font-bold text-xl mb-3 transition-colors duration-300" style={{ color: '#F0F6FC', fontFamily: 'Playfair Display, serif' }}>
             {game.name}
           </h3>
           
           {game.description && (
-            <p className="text-gray-400 text-sm mb-4 line-clamp-2 leading-relaxed">
+            <p className="text-sm mb-4 line-clamp-2 leading-relaxed" style={{ color: '#8B949E', fontFamily: 'Manrope, sans-serif' }}>
               {game.description}
             </p>
           )}
 
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-xs text-gray-500 mb-1">Mulai dari</p>
-              <p className="font-bold text-lg bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
+              <p className="text-xs mb-1" style={{ color: '#8B949E', fontFamily: 'Manrope, sans-serif' }}>Mulai dari</p>
+              <p className="font-bold text-lg" style={{ color: getCategoryColor(game.category), fontFamily: 'Manrope, sans-serif' }}>
                 {minPrice > 0 ? formatPrice(minPrice) : 'Hubungi CS'}
               </p>
             </div>
             
-            <div className="bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-cyan-600 hover:to-purple-700 text-white px-4 py-2 rounded-xl text-sm font-bold transition-all duration-300 shadow-lg hover:shadow-cyan-500/25">
+            <div className="px-4 py-2 rounded-xl text-sm font-bold transition-all duration-300 shadow-lg" style={{ backgroundColor: getCategoryColor(game.category), color: '#F0F6FC', fontFamily: 'Manrope, sans-serif' }}>
               Top Up
             </div>
           </div>
         </div>
 
         {/* Glow Effect */}
-        <div className={`absolute inset-0 rounded-2xl bg-gradient-to-r ${getCategoryGradient(game.category)} opacity-0 group-hover:opacity-10 transition-opacity duration-300 -z-10 blur-xl`}></div>
+        <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-10 transition-opacity duration-300 -z-10 blur-xl" style={{ backgroundColor: getCategoryColor(game.category) }}></div>
       </div>
     </Link>
   )

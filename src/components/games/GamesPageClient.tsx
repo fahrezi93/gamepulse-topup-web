@@ -102,30 +102,30 @@ export default function GamesPageClient() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-cyan-500"></div>
+      <div className="min-h-screen flex items-center justify-center" style={{ backgroundColor: '#0D1117' }}>
+        <div className="animate-spin rounded-full h-32 w-32 border-b-2" style={{ borderColor: '#7C3AED' }}></div>
       </div>
     )
   }
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen" style={{ backgroundColor: '#0D1117' }}>
       {/* Header */}
       <section className="relative py-20">
-        <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-purple-900/20 to-cyan-900/20">
-          <div className="absolute inset-0 opacity-40">
-            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-purple-500/5 to-transparent animate-pulse"></div>
+        <div className="absolute inset-0">
+          <div className="absolute inset-0 opacity-20">
+            <div className="absolute inset-0" style={{ backgroundColor: 'rgba(124, 58, 237, 0.1)' }}></div>
           </div>
         </div>
         
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <div className="mb-12">
-            <h1 className="text-5xl md:text-6xl font-black mb-6">
-              <span className="bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+            <h1 className="text-5xl md:text-6xl font-black mb-6" style={{ fontFamily: 'Playfair Display, serif' }}>
+              <span style={{ color: '#7C3AED' }}>
                 Semua Game
               </span>
             </h1>
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-xl max-w-3xl mx-auto leading-relaxed" style={{ color: '#8B949E', fontFamily: 'Manrope, sans-serif' }}>
               Temukan semua game favoritmu dalam satu tempat. Dari MOBA hingga Battle Royale, 
               semua tersedia dengan harga terjangkau dan proses yang cepat.
             </p>
@@ -160,12 +160,12 @@ export default function GamesPageClient() {
 
           {filteredGames.length === 0 && (
             <div className="text-center py-12">
-              <div className="bg-gray-800/50 backdrop-blur-sm border border-gray-700 rounded-2xl p-12">
+              <div className="backdrop-blur-sm border rounded-2xl p-12" style={{ backgroundColor: '#161B22', borderColor: '#7C3AED' }}>
                 <div className="text-6xl mb-4">🎮</div>
-                <p className="text-gray-300 text-xl mb-4">
+                <p className="text-xl mb-4" style={{ color: '#F0F6FC', fontFamily: 'Manrope, sans-serif' }}>
                   Belum ada game yang tersedia saat ini.
                 </p>
-                <p className="text-gray-400">
+                <p style={{ color: '#8B949E', fontFamily: 'Manrope, sans-serif' }}>
                   Kami sedang menambahkan lebih banyak game untuk kamu!
                 </p>
               </div>

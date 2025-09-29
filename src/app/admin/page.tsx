@@ -48,59 +48,63 @@ export default async function AdminDashboard() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-900">
+    <div className="min-h-screen" style={{ backgroundColor: '#0D1117' }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-white">Admin Dashboard</h1>
-          <p className="text-gray-400 mt-2">Kelola game, denominasi, dan monitor transaksi</p>
+          <h1 className="text-3xl font-bold" style={{ color: '#F0F6FC', fontFamily: 'Playfair Display, serif' }}>Admin Dashboard</h1>
+          <p className="mt-2" style={{ color: '#8B949E', fontFamily: 'Manrope, sans-serif' }}>Kelola game, denominasi, dan monitor transaksi</p>
         </div>
 
         {/* Stats */}
         <AdminStats stats={stats} />
 
         {/* Quick Actions */}
-        <div className="bg-gray-800/50 backdrop-blur-sm border border-gray-700 rounded-xl p-6 mb-8">
-          <h2 className="text-xl font-bold text-white mb-4">Quick Actions</h2>
+        <div className="backdrop-blur-sm border rounded-xl p-6 mb-8" style={{ backgroundColor: '#161B22', borderColor: '#7C3AED' }}>
+          <h2 className="text-xl font-bold mb-4" style={{ color: '#F0F6FC', fontFamily: 'Playfair Display, serif' }}>Quick Actions</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             <Link
               href="/admin/games/new"
-              className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white p-6 rounded-xl text-center transition-all duration-200 shadow-lg hover:shadow-blue-500/25"
+              className="p-6 rounded-xl text-center transition-all duration-200 shadow-lg hover:scale-105"
+              style={{ backgroundColor: '#7C3AED', color: '#F0F6FC' }}
             >
               <div className="mb-3">
                 <PlusIcon className="w-8 h-8 mx-auto" />
               </div>
-              <div className="font-medium">Tambah Game Baru</div>
+              <div className="font-medium" style={{ fontFamily: 'Manrope, sans-serif' }}>Tambah Game Baru</div>
             </Link>
             
             <Link
               href="/admin/games"
-              className="bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white p-6 rounded-xl text-center transition-all duration-200 shadow-lg hover:shadow-green-500/25"
+              className="p-6 rounded-xl text-center transition-all duration-200 shadow-lg hover:scale-105"
+              style={{ backgroundColor: '#34D399', color: '#F0F6FC' }}
             >
               <div className="mb-3">
                 <ListBulletIcon className="w-8 h-8 mx-auto" />
               </div>
-              <div className="font-medium">Kelola Game</div>
+              <div className="font-medium" style={{ fontFamily: 'Manrope, sans-serif' }}>Kelola Game</div>
             </Link>
             
             <Link
               href="/admin/transactions"
-              className="bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white p-6 rounded-xl text-center transition-all duration-200 shadow-lg hover:shadow-purple-500/25"
+              className="p-6 rounded-xl text-center transition-all duration-200 shadow-lg hover:scale-105"
+              style={{ backgroundColor: '#7C3AED', color: '#F0F6FC' }}
             >
               <div className="mb-3">
                 <DocumentTextIcon className="w-8 h-8 mx-auto" />
               </div>
-              <div className="font-medium">Lihat Transaksi</div>
+              <div className="font-medium" style={{ fontFamily: 'Manrope, sans-serif' }}>Lihat Transaksi</div>
             </Link>
             
             <Link
               href="/admin/settings"
-              className="bg-gradient-to-r from-gray-600 to-gray-700 hover:from-gray-700 hover:to-gray-800 text-white p-6 rounded-xl text-center transition-all duration-200 shadow-lg hover:shadow-gray-500/25"
+              className="p-6 rounded-xl text-center transition-all duration-200 shadow-lg hover:scale-105"
+              style={{ backgroundColor: '#34D399', color: '#F0F6FC' }}
             >
               <div className="mb-3">
                 <CogIcon className="w-8 h-8 mx-auto" />
               </div>
-              <div className="font-medium">Pengaturan</div>
+              <div className="font-medium" style={{ fontFamily: 'Manrope, sans-serif' }}>Pengaturan</div>
             </Link>
           </div>
         </div>
