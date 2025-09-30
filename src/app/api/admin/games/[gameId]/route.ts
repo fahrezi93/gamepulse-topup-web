@@ -4,10 +4,10 @@ import { prisma } from '@/lib/prisma'
 // PATCH - Update game
 export async function PATCH(
   request: NextRequest,
-  { params }: { params: { gameId: string } }
+  { params }: { params: Promise<{ gameId: string }> }
 ) {
   try {
-    const { gameId } = params
+    const { gameId } = await params
     const body = await request.json()
 
     const updatedGame = await prisma.game.update({
@@ -32,10 +32,10 @@ export async function PATCH(
 // DELETE - Delete game
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { gameId: string } }
+  { params }: { params: Promise<{ gameId: string }> }
 ) {
   try {
-    const { gameId } = params
+    const { gameId } = await params
 
     // Cek apakah ada transaksi yang terkait
     const transactionCount = await prisma.transaction.count({

@@ -4,10 +4,10 @@ import { prisma } from '@/lib/prisma'
 // POST - Process payment (simulation)
 export async function POST(
   request: NextRequest,
-  { params }: { params: { transactionId: string } }
+  { params }: { params: Promise<{ transactionId: string }> }
 ) {
   try {
-    const { transactionId } = params
+    const { transactionId } = await params
 
     // Cek apakah transaksi ada
     const transaction = await prisma.transaction.findUnique({
@@ -64,10 +64,10 @@ export async function POST(
 // DELETE - Cancel transaction
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { transactionId: string } }
+  { params }: { params: Promise<{ transactionId: string }> }
 ) {
   try {
-    const { transactionId } = params
+    const { transactionId } = await params
 
     // Cek apakah transaksi ada dan masih bisa dibatalkan
     const transaction = await prisma.transaction.findUnique({

@@ -179,22 +179,12 @@ export default function HeroSection() {
               </div>
             </div>
 
-            <div className="absolute top-1/2 -left-10 rounded-xl p-3 animate-float-delayed z-10" style={{ backgroundColor: '#161B22', borderColor: '#7C3AED', border: '1px solid' }}>
+            <div className="absolute -bottom-8 right-0 rounded-xl p-3 animate-float-slow z-10" style={{ backgroundColor: '#161B22', borderColor: '#7C3AED', border: '1px solid' }}>
               <div className="flex items-center gap-2">
                 <DevicePhoneMobileIcon className="w-5 h-5" style={{ color: '#7C3AED' }} />
                 <div>
                   <div className="font-bold text-sm" style={{ color: '#F0F6FC', fontFamily: 'Manrope, sans-serif' }}>Instant</div>
                   <div className="text-xs" style={{ color: '#8B949E', fontFamily: 'Manrope, sans-serif' }}>Delivery</div>
-                </div>
-              </div>
-            </div>
-
-            <div className="absolute -bottom-8 right-0 rounded-xl p-3 animate-float-slow z-10" style={{ backgroundColor: '#161B22', borderColor: '#34D399', border: '1px solid' }}>
-              <div className="flex items-center gap-2">
-                <GlobeAltIcon className="w-5 h-5" style={{ color: '#34D399' }} />
-                <div>
-                  <div className="font-bold text-sm" style={{ color: '#F0F6FC', fontFamily: 'Manrope, sans-serif' }}>Global</div>
-                  <div className="text-xs" style={{ color: '#8B949E', fontFamily: 'Manrope, sans-serif' }}>Support</div>
                 </div>
               </div>
             </div>

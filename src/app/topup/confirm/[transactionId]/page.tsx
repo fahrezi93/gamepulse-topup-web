@@ -3,15 +3,16 @@ import { prisma } from '@/lib/prisma'
 import PaymentConfirmation from '@/components/payment/PaymentConfirmation'
 
 interface ConfirmPageProps {
-  params: {
+  params: Promise<{
     transactionId: string
-  }
+  }>
 }
 
 export default async function ConfirmPage({ params }: ConfirmPageProps) {
+  const { transactionId } = await params
   const transaction = await prisma.transaction.findUnique({
     where: {
-      id: params.transactionId
+      id: transactionId
     },
     include: {
       game: true,

@@ -45,3 +45,5 @@ game-pulse-web-firebase-adminsdk-fbsvc-889709e41a.json
 next-env.d.ts
 
 /src/generated/prisma
+
+.vercel

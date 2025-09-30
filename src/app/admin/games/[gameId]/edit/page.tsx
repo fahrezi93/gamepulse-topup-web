@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, use } from 'react'
 import { useRouter } from 'next/navigation'
 import { PlusIcon, TrashIcon } from '@heroicons/react/24/outline'
 
@@ -21,12 +21,13 @@ interface Game {
 }
 
 interface EditGamePageProps {
-  params: {
+  params: Promise<{
     gameId: string
-  }
+  }>
 }
 
 export default function EditGamePage({ params }: EditGamePageProps) {
+  const { gameId } = use(params)
   const router = useRouter()
   const [game, setGame] = useState<Game | null>(null)
   const [loading, setLoading] = useState(true)
@@ -47,7 +48,7 @@ export default function EditGamePage({ params }: EditGamePageProps) {
 
   const fetchGame = async () => {
     try {
-      const response = await fetch(`/api/admin/games/${params.gameId}/get`)
+      const response = await fetch(`/api/admin/games/${gameId}/get`)
       const data = await response.json()
       if (data.success) {
         setGame(data.game)
@@ -109,7 +110,7 @@ export default function EditGamePage({ params }: EditGamePageProps) {
     setIsLoading(true)
 
     try {
-      const response = await fetch(`/api/admin/games/${params.gameId}`, {
+      const response = await fetch(`/api/admin/games/${gameId}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
@@ -367,7 +368,3 @@ export default function EditGamePage({ params }: EditGamePageProps) {
   )
 }
 
-export const metadata = {
-  title: 'Edit Game - Admin GamePulse',
-  description: 'Edit game di platform GamePulse'
-}

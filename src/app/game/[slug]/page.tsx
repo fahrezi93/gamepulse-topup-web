@@ -4,15 +4,16 @@ import GameDetailHeader from '@/components/game/GameDetailHeader'
 import TopUpForm from '@/components/game/TopUpForm'
 
 interface GameDetailPageProps {
-  params: {
+  params: Promise<{
     slug: string
-  }
+  }>
 }
 
 export default async function GameDetailPage({ params }: GameDetailPageProps) {
+  const { slug } = await params
   const game = await prisma.game.findUnique({
     where: {
-      slug: params.slug,
+      slug: slug,
       isActive: true
     },
     include: {
@@ -52,9 +53,10 @@ export default async function GameDetailPage({ params }: GameDetailPageProps) {
 
 // Generate metadata untuk SEO
 export async function generateMetadata({ params }: GameDetailPageProps) {
+  const { slug } = await params
   const game = await prisma.game.findUnique({
     where: {
-      slug: params.slug
+      slug: slug
     }
   })
 
