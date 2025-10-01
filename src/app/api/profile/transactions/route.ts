@@ -4,6 +4,14 @@ import { prisma } from '@/lib/prisma'
 
 export async function GET(request: NextRequest) {
   try {
+    // Check if Firebase Admin is available
+    if (!adminAuth) {
+      return NextResponse.json(
+        { error: 'Firebase Admin not configured' },
+        { status: 500 }
+      )
+    }
+
     // Get Firebase token from Authorization header
     const authHeader = request.headers.get('Authorization')
     if (!authHeader?.startsWith('Bearer ')) {
