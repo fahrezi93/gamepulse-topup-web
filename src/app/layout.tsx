@@ -19,6 +19,14 @@ export const metadata: Metadata = {
   title: "GamePulse - Top Up Game Terpercaya",
   description: "Platform top up game terpercaya dengan harga terjangkau dan proses cepat. Dukung semua game populer seperti Mobile Legends, PUBG Mobile, Free Fire, dan lainnya.",
   keywords: "top up game, mobile legends, pubg mobile, free fire, genshin impact, valorant, diamond ml, uc pubg",
+  icons: {
+    icon: [
+      { url: '/favicon.svg', type: 'image/svg+xml' },
+      { url: '/game-icon.svg', type: 'image/svg+xml' }
+    ],
+    shortcut: '/favicon.svg',
+    apple: '/game-icon.svg',
+  },
 };
 
 export default function RootLayout({

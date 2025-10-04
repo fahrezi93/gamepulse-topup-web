@@ -94,17 +94,38 @@ export default function AboutPage() {
       </section>
 
       {/* Stats Section */}
-      <section className="py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-20 relative" style={{ backgroundColor: '#0D1117' }}>
+        {/* Background Elements */}
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute inset-0" style={{ backgroundColor: 'rgba(52, 211, 153, 0.1)' }}></div>
+        </div>
+        
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {stats.map((stat, index) => (
               <div key={index} className="text-center">
-                <div className="bg-gray-800/50 backdrop-blur-sm border border-gray-700 rounded-2xl p-8 hover:bg-gray-800/70 transition-all duration-300 hover:scale-105 transform">
-                  <stat.icon className="w-12 h-12 text-cyan-400 mx-auto mb-4" />
-                  <div className="text-4xl font-black mb-2 bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
-                    {stat.number}
+                <div 
+                  className="group relative backdrop-blur-sm border p-8 rounded-2xl transition-all duration-300 hover:scale-105 transform"
+                  style={{ 
+                    backgroundColor: '#161B22', 
+                    borderColor: index % 2 === 0 ? '#7C3AED' : '#34D399'
+                  }}
+                >
+                  {/* Background Hover Effect */}
+                  <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-10 transition-opacity duration-300" style={{ backgroundColor: index % 2 === 0 ? '#7C3AED' : '#34D399' }}></div>
+                  
+                  <div className="relative z-10">
+                    <div className="w-14 h-14 rounded-xl flex items-center justify-center mx-auto mb-6 shadow-lg group-hover:scale-110 transition-transform duration-300" style={{ backgroundColor: index % 2 === 0 ? '#7C3AED' : '#34D399' }}>
+                      <stat.icon className="w-7 h-7" style={{ color: '#F0F6FC' }} />
+                    </div>
+                    <div className="text-4xl font-black mb-2" style={{ color: '#F0F6FC', fontFamily: 'Playfair Display, serif' }}>
+                      {stat.number}
+                    </div>
+                    <div className="font-medium" style={{ color: '#8B949E', fontFamily: 'Manrope, sans-serif' }}>{stat.label}</div>
                   </div>
-                  <div className="text-gray-300 font-medium">{stat.label}</div>
+
+                  {/* Hover Effect Border */}
+                  <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-20 transition-opacity duration-300 -z-10 blur-xl" style={{ backgroundColor: index % 2 === 0 ? '#7C3AED' : '#34D399' }}></div>
                 </div>
               </div>
             ))}
@@ -113,16 +134,23 @@ export default function AboutPage() {
       </section>
 
       {/* Story Section */}
-      <section className="py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-20 relative" style={{ backgroundColor: '#0D1117' }}>
+        {/* Background Elements */}
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute inset-0" style={{ backgroundColor: 'rgba(124, 58, 237, 0.1)' }}></div>
+        </div>
+        
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div>
-              <h2 className="text-4xl font-black mb-6">
-                <span className="bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
-                  Cerita Kami
+              <h2 className="text-4xl md:text-5xl font-black mb-6" style={{ fontFamily: 'Playfair Display, serif' }}>
+                <span style={{ color: '#7C3AED' }}>
+                  Cerita
                 </span>
+                <br />
+                <span style={{ color: '#F0F6FC' }}>Kami</span>
               </h2>
-              <div className="space-y-6 text-gray-300 leading-relaxed">
+              <div className="space-y-6 leading-relaxed" style={{ color: '#8B949E', fontFamily: 'Manrope, sans-serif' }}>
                 <p>
                   GamePulse lahir dari passion para gamers yang frustasi dengan proses top up yang rumit, 
                   mahal, dan tidak terpercaya. Kami percaya bahwa setiap gamer berhak mendapatkan 
@@ -140,15 +168,29 @@ export default function AboutPage() {
             </div>
             
             <div className="relative">
-              <div className="bg-gray-800/50 backdrop-blur-sm border border-gray-700 rounded-2xl p-8">
-                <div className="text-center mb-6">
-                  <div className="text-6xl mb-4">🎮</div>
-                  <h3 className="text-2xl font-bold text-white mb-2">Misi Kami</h3>
+              <div 
+                className="group relative backdrop-blur-sm border p-8 rounded-2xl transition-all duration-300 hover:scale-105 transform"
+                style={{ 
+                  backgroundColor: '#161B22', 
+                  borderColor: '#34D399'
+                }}
+              >
+                {/* Background Hover Effect */}
+                <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-10 transition-opacity duration-300" style={{ backgroundColor: '#34D399' }}></div>
+                
+                <div className="relative z-10 text-center">
+                  <div className="w-20 h-20 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg group-hover:scale-110 transition-transform duration-300" style={{ backgroundColor: '#34D399' }}>
+                    <span className="text-4xl">🎮</span>
+                  </div>
+                  <h3 className="text-2xl font-bold mb-4" style={{ color: '#F0F6FC', fontFamily: 'Playfair Display, serif' }}>Misi Kami</h3>
+                  <p className="leading-relaxed" style={{ color: '#8B949E', fontFamily: 'Manrope, sans-serif' }}>
+                    "Membuat top up game menjadi pengalaman yang menyenangkan, 
+                    aman, dan terjangkau untuk semua gamers Indonesia."
+                  </p>
                 </div>
-                <p className="text-gray-300 text-center leading-relaxed">
-                  "Membuat top up game menjadi pengalaman yang menyenangkan, 
-                  aman, dan terjangkau untuk semua gamers Indonesia."
-                </p>
+
+                {/* Hover Effect Border */}
+                <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-20 transition-opacity duration-300 -z-10 blur-xl" style={{ backgroundColor: '#34D399' }}></div>
               </div>
             </div>
           </div>
@@ -156,15 +198,22 @@ export default function AboutPage() {
       </section>
 
       {/* Values Section */}
-      <section className="py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-20 relative" style={{ backgroundColor: '#0D1117' }}>
+        {/* Background Elements */}
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute inset-0" style={{ backgroundColor: 'rgba(52, 211, 153, 0.1)' }}></div>
+        </div>
+        
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-black mb-6">
-              <span className="bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
-                Nilai-Nilai Kami
+            <h2 className="text-4xl md:text-5xl font-black mb-6" style={{ fontFamily: 'Playfair Display, serif' }}>
+              <span style={{ color: '#34D399' }}>
+                Nilai-Nilai
               </span>
+              <br />
+              <span style={{ color: '#F0F6FC' }}>Kami</span>
             </h2>
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+            <p className="text-xl max-w-3xl mx-auto leading-relaxed" style={{ color: '#8B949E', fontFamily: 'Manrope, sans-serif' }}>
               Prinsip yang memandu setiap keputusan dan tindakan kami
             </p>
           </div>
@@ -172,12 +221,26 @@ export default function AboutPage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {values.map((value, index) => (
               <div key={index} className="group">
-                <div className="bg-gray-800/50 backdrop-blur-sm border border-gray-700 rounded-2xl p-8 hover:bg-gray-800/70 transition-all duration-300 hover:scale-105 transform text-center">
-                  <div className={`w-16 h-16 bg-gradient-to-br ${value.gradient} rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300`}>
-                    <value.icon className="w-8 h-8 text-white" />
+                <div 
+                  className="group relative backdrop-blur-sm border p-8 rounded-2xl transition-all duration-300 hover:scale-105 transform text-center"
+                  style={{ 
+                    backgroundColor: '#161B22', 
+                    borderColor: index === 0 ? '#34D399' : index === 1 ? '#F59E0B' : '#EC4899'
+                  }}
+                >
+                  {/* Background Hover Effect */}
+                  <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-10 transition-opacity duration-300" style={{ backgroundColor: index === 0 ? '#34D399' : index === 1 ? '#F59E0B' : '#EC4899' }}></div>
+                  
+                  <div className="relative z-10">
+                    <div className="w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg group-hover:scale-110 transition-transform duration-300" style={{ backgroundColor: index === 0 ? '#34D399' : index === 1 ? '#F59E0B' : '#EC4899' }}>
+                      <value.icon className="w-8 h-8" style={{ color: '#F0F6FC' }} />
+                    </div>
+                    <h3 className="text-2xl font-bold mb-4" style={{ color: '#F0F6FC', fontFamily: 'Playfair Display, serif' }}>{value.title}</h3>
+                    <p className="leading-relaxed" style={{ color: '#8B949E', fontFamily: 'Manrope, sans-serif' }}>{value.description}</p>
                   </div>
-                  <h3 className="text-2xl font-bold text-white mb-4">{value.title}</h3>
-                  <p className="text-gray-300 leading-relaxed">{value.description}</p>
+
+                  {/* Hover Effect Border */}
+                  <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-20 transition-opacity duration-300 -z-10 blur-xl" style={{ backgroundColor: index === 0 ? '#34D399' : index === 1 ? '#F59E0B' : '#EC4899' }}></div>
                 </div>
               </div>
             ))}
@@ -186,15 +249,22 @@ export default function AboutPage() {
       </section>
 
       {/* Team Section */}
-      <section className="py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-20 relative" style={{ backgroundColor: '#0D1117' }}>
+        {/* Background Elements */}
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute inset-0" style={{ backgroundColor: 'rgba(124, 58, 237, 0.1)' }}></div>
+        </div>
+        
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-black mb-6">
-              <span className="bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
-                Tim Kami
+            <h2 className="text-4xl md:text-5xl font-black mb-6" style={{ fontFamily: 'Playfair Display, serif' }}>
+              <span style={{ color: '#7C3AED' }}>
+                Tim
               </span>
+              <br />
+              <span style={{ color: '#F0F6FC' }}>Kami</span>
             </h2>
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+            <p className="text-xl max-w-3xl mx-auto leading-relaxed" style={{ color: '#8B949E', fontFamily: 'Manrope, sans-serif' }}>
               Orang-orang hebat di balik GamePulse
             </p>
           </div>
@@ -202,17 +272,31 @@ export default function AboutPage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {team.map((member, index) => (
               <div key={index} className="group">
-                <div className="bg-gray-800/50 backdrop-blur-sm border border-gray-700 rounded-2xl p-8 hover:bg-gray-800/70 transition-all duration-300 hover:scale-105 transform text-center">
-                  <div className={`w-20 h-20 bg-gradient-to-br ${member.gradient} rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300`}>
-                    <span className="text-white font-black text-2xl">
-                      {member.name.split(' ').map(n => n[0]).join('')}
-                    </span>
+                <div 
+                  className="group relative backdrop-blur-sm border p-8 rounded-2xl transition-all duration-300 hover:scale-105 transform text-center"
+                  style={{ 
+                    backgroundColor: '#161B22', 
+                    borderColor: index === 0 ? '#06B6D4' : index === 1 ? '#A855F7' : '#34D399'
+                  }}
+                >
+                  {/* Background Hover Effect */}
+                  <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-10 transition-opacity duration-300" style={{ backgroundColor: index === 0 ? '#06B6D4' : index === 1 ? '#A855F7' : '#34D399' }}></div>
+                  
+                  <div className="relative z-10">
+                    <div className="w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg group-hover:scale-110 transition-transform duration-300" style={{ backgroundColor: index === 0 ? '#06B6D4' : index === 1 ? '#A855F7' : '#34D399' }}>
+                      <span className="font-black text-2xl" style={{ color: '#F0F6FC' }}>
+                        {member.name.split(' ').map(n => n[0]).join('')}
+                      </span>
+                    </div>
+                    <h3 className="text-xl font-bold mb-2" style={{ color: '#F0F6FC', fontFamily: 'Playfair Display, serif' }}>{member.name}</h3>
+                    <p className="text-sm font-medium mb-4" style={{ color: index === 0 ? '#06B6D4' : index === 1 ? '#A855F7' : '#34D399', fontFamily: 'Manrope, sans-serif' }}>
+                      {member.role}
+                    </p>
+                    <p className="text-sm leading-relaxed" style={{ color: '#8B949E', fontFamily: 'Manrope, sans-serif' }}>{member.description}</p>
                   </div>
-                  <h3 className="text-xl font-bold text-white mb-2">{member.name}</h3>
-                  <p className={`text-sm font-medium mb-4 bg-gradient-to-r ${member.gradient} bg-clip-text text-transparent`}>
-                    {member.role}
-                  </p>
-                  <p className="text-gray-300 text-sm leading-relaxed">{member.description}</p>
+
+                  {/* Hover Effect Border */}
+                  <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-20 transition-opacity duration-300 -z-10 blur-xl" style={{ backgroundColor: index === 0 ? '#06B6D4' : index === 1 ? '#A855F7' : '#34D399' }}></div>
                 </div>
               </div>
             ))}

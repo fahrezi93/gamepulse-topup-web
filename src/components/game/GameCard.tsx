@@ -27,7 +27,7 @@ export default function GameCard({ game, minPrice }: GameCardProps) {
 
   return (
     <Link href={`/game/${game.slug}`} className="group">
-      <div className="relative backdrop-blur-sm border rounded-2xl overflow-hidden transition-all duration-300 hover:scale-105 transform shadow-xl" style={{ backgroundColor: '#161B22', borderColor: getCategoryColor(game.category) }}>
+      <div className="relative backdrop-blur-sm border rounded-2xl overflow-hidden transition-all duration-300 hover:scale-105 transform shadow-xl h-full flex flex-col" style={{ backgroundColor: '#161B22', borderColor: getCategoryColor(game.category) }}>
         {/* Game Image/Icon */}
         <div className="relative h-48 overflow-hidden" style={{ backgroundColor: '#0D1117' }}>
           {/* Background Pattern */}
@@ -70,27 +70,33 @@ export default function GameCard({ game, minPrice }: GameCardProps) {
         </div>
 
         {/* Game Info */}
-        <div className="p-6">
-          <h3 className="font-bold text-xl mb-3 transition-colors duration-300" style={{ color: '#F0F6FC', fontFamily: 'Playfair Display, serif' }}>
-            {game.name}
-          </h3>
-          
-          {game.description && (
-            <p className="text-sm mb-4 line-clamp-2 leading-relaxed" style={{ color: '#8B949E', fontFamily: 'Manrope, sans-serif' }}>
-              {game.description}
-            </p>
-          )}
+        <div className="p-6 flex-1 flex flex-col">
+          <div className="flex-1">
+            <h3 className="font-bold text-xl mb-2 transition-colors duration-300" style={{ color: '#F0F6FC', fontFamily: 'Playfair Display, serif' }}>
+              {game.name}
+            </h3>
+            
+            {game.description && (
+              <p className="text-sm line-clamp-2 leading-relaxed mb-4" style={{ color: '#8B949E', fontFamily: 'Manrope, sans-serif' }}>
+                {game.description}
+              </p>
+            )}
+          </div>
 
-          <div className="flex items-center justify-between">
-            <div>
+          <div className="space-y-4 mt-auto">
+            {/* Price Section */}
+            <div className="text-center">
               <p className="text-xs mb-1" style={{ color: '#8B949E', fontFamily: 'Manrope, sans-serif' }}>Mulai dari</p>
-              <p className="font-bold text-lg" style={{ color: getCategoryColor(game.category), fontFamily: 'Manrope, sans-serif' }}>
+              <p className="font-bold text-xl" style={{ color: getCategoryColor(game.category), fontFamily: 'Manrope, sans-serif' }}>
                 {minPrice > 0 ? formatPrice(minPrice) : 'Hubungi CS'}
               </p>
             </div>
             
-            <div className="px-4 py-2 rounded-xl text-sm font-bold transition-all duration-300 shadow-lg" style={{ backgroundColor: getCategoryColor(game.category), color: '#F0F6FC', fontFamily: 'Manrope, sans-serif' }}>
-              Top Up
+            {/* Action Button */}
+            <div className="w-full">
+              <div className="w-full text-center px-4 py-3 rounded-xl text-sm font-bold transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105" style={{ backgroundColor: getCategoryColor(game.category), color: '#F0F6FC', fontFamily: 'Manrope, sans-serif' }}>
+                Top Up Sekarang
+              </div>
             </div>
           </div>
         </div>
