@@ -9,7 +9,8 @@ import {
   ClockIcon,
   CheckCircleIcon,
   XCircleIcon,
-  ExclamationTriangleIcon
+  ExclamationTriangleIcon,
+  CreditCardIcon
 } from '@heroicons/react/24/outline'
 
 interface Transaction {
@@ -145,134 +146,212 @@ export default function TransactionsPage() {
   })
 
   return (
-    <div className="min-h-screen py-12">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <div className="mb-8">
-          <h1 className="text-4xl font-black mb-4">
-            <span className="bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
-              Riwayat Transaksi
-            </span>
-          </h1>
-          <p className="text-gray-400">
-            Lihat semua transaksi top up yang pernah kamu lakukan
-          </p>
+    <div className="min-h-screen" style={{ backgroundColor: '#0D1117' }}>
+      {/* Hero Section */}
+      <section className="relative py-20 overflow-hidden">
+        <div className="absolute inset-0 opacity-20">
+          <div className="absolute inset-0" style={{ backgroundColor: 'rgba(52, 211, 153, 0.1)' }}></div>
         </div>
+        
+        {/* Floating Elements */}
+        <div className="absolute top-20 left-10 w-20 h-20 rounded-full blur-xl animate-pulse" style={{ backgroundColor: 'rgba(52, 211, 153, 0.3)' }}></div>
+        <div className="absolute bottom-20 right-20 w-32 h-32 rounded-full blur-xl animate-pulse delay-1000" style={{ backgroundColor: 'rgba(124, 58, 237, 0.25)' }}></div>
 
-        {/* Filters */}
-        <div className="bg-gray-800/50 backdrop-blur-sm border border-gray-700 rounded-2xl p-6 mb-8">
-          <div className="flex flex-col lg:flex-row gap-4">
-            {/* Search */}
-            <div className="flex-1">
-              <div className="relative">
-                <MagnifyingGlassIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
-                <input
-                  type="text"
-                  placeholder="Cari berdasarkan game atau User ID..."
-                  className="w-full pl-10 pr-4 py-3 bg-gray-700/50 border border-gray-600 rounded-xl text-white placeholder-gray-400 focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500"
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                />
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Header */}
+          <div className="text-center mb-12">
+            <div className="flex justify-center mb-8">
+              <div className="w-24 h-24 rounded-2xl flex items-center justify-center shadow-2xl" style={{ backgroundColor: '#34D399' }}>
+                <CreditCardIcon className="w-12 h-12" style={{ color: '#F0F6FC' }} />
               </div>
             </div>
 
-            {/* Status Filter */}
-            <div className="lg:w-48">
-              <select
-                className="w-full px-4 py-3 bg-gray-700/50 border border-gray-600 rounded-xl text-white focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500"
-                value={statusFilter}
-                onChange={(e) => setStatusFilter(e.target.value)}
-              >
-                <option value="all">Semua Status</option>
-                <option value="PENDING">Pending</option>
-                <option value="PROCESSING">Processing</option>
-                <option value="COMPLETED">Berhasil</option>
-                <option value="FAILED">Gagal</option>
-                <option value="CANCELLED">Dibatalkan</option>
-              </select>
-            </div>
+            <h1 className="text-5xl md:text-6xl font-black mb-6" style={{ fontFamily: 'Playfair Display, serif' }}>
+              <span style={{ color: '#34D399' }}>
+                Riwayat
+              </span>
+              <br />
+              <span style={{ color: '#F0F6FC' }}>Transaksi</span>
+            </h1>
+            
+            <p className="text-xl md:text-2xl max-w-4xl mx-auto leading-relaxed" style={{ color: '#8B949E', fontFamily: 'Manrope, sans-serif' }}>
+              Lihat semua transaksi top up yang pernah kamu lakukan
+            </p>
           </div>
-        </div>
 
-        {/* Transactions List */}
-        {isLoading ? (
-          <div className="flex justify-center py-12">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-cyan-500"></div>
-          </div>
-        ) : filteredTransactions.length > 0 ? (
-          <div className="space-y-4">
-            {filteredTransactions.map((transaction) => (
-              <div key={transaction.id} className="bg-gray-800/50 backdrop-blur-sm border border-gray-700 rounded-2xl p-6 hover:bg-gray-800/70 transition-all duration-300">
-                <div className="flex flex-col lg:flex-row lg:items-center justify-between space-y-4 lg:space-y-0">
-                  <div className="flex items-start space-x-4">
-                    <div className="w-12 h-12 bg-gradient-to-br from-cyan-400 to-purple-500 rounded-xl flex items-center justify-center flex-shrink-0">
-                      <span className="text-white font-bold">
-                        {transaction.game.name.charAt(0)}
-                      </span>
-                    </div>
-                    
-                    <div className="flex-1">
-                      <div className="flex items-center space-x-2 mb-1">
-                        <h3 className="text-lg font-bold text-white">{transaction.game.name}</h3>
-                        <span className="bg-gray-700 text-gray-300 px-2 py-1 rounded-md text-xs">
-                          {transaction.game.category}
-                        </span>
-                      </div>
-                      <p className="text-gray-400 text-sm mb-2">
-                        {transaction.denomination.name} • User ID: {transaction.gameUserId}
-                      </p>
-                      <div className="flex items-center space-x-4 text-sm text-gray-500">
-                        <span>{formatDate(transaction.createdAt)}</span>
-                        <span>•</span>
-                        <span className="uppercase">{transaction.paymentMethod}</span>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="flex items-center justify-between lg:justify-end space-x-4">
-                    <div className="text-right">
-                      <p className="text-2xl font-bold text-white">
-                        {formatPrice(transaction.totalPrice)}
-                      </p>
-                      <p className="text-xs text-gray-500">
-                        ID: {transaction.id.slice(0, 8)}...
-                      </p>
-                    </div>
-                    
-                    <div className="flex items-center space-x-2">
-                      {getStatusIcon(transaction.status)}
-                      {getStatusBadge(transaction.status)}
-                    </div>
+          {/* Filters */}
+          <div 
+            className="group relative backdrop-blur-sm border p-6 rounded-2xl transition-all duration-300 mb-8"
+            style={{ 
+              backgroundColor: '#161B22', 
+              borderColor: '#34D399'
+            }}
+          >
+            {/* Background Hover Effect */}
+            <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-10 transition-opacity duration-300" style={{ backgroundColor: '#34D399' }}></div>
+            
+            <div className="relative z-10">
+              <div className="flex flex-col lg:flex-row gap-4">
+                {/* Search */}
+                <div className="flex-1">
+                  <div className="relative">
+                    <MagnifyingGlassIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5" style={{ color: '#8B949E' }} />
+                    <input
+                      type="text"
+                      placeholder="Cari berdasarkan game atau User ID..."
+                      className="w-full pl-10 pr-4 py-3 border rounded-xl placeholder-gray-400 focus:ring-2 focus:border-transparent transition-all duration-300"
+                      style={{ 
+                        backgroundColor: '#0D1117', 
+                        borderColor: '#34D399',
+                        color: '#F0F6FC',
+                        fontFamily: 'Manrope, sans-serif'
+                      }}
+                      value={searchTerm}
+                      onChange={(e) => setSearchTerm(e.target.value)}
+                    />
                   </div>
                 </div>
+
+                {/* Status Filter */}
+                <div className="lg:w-48">
+                  <select
+                    className="w-full px-4 py-3 border rounded-xl focus:ring-2 focus:border-transparent transition-all duration-300"
+                    style={{ 
+                      backgroundColor: '#0D1117', 
+                      borderColor: '#7C3AED',
+                      color: '#F0F6FC',
+                      fontFamily: 'Manrope, sans-serif'
+                    }}
+                    value={statusFilter}
+                    onChange={(e) => setStatusFilter(e.target.value)}
+                  >
+                    <option value="all">Semua Status</option>
+                    <option value="PENDING">Pending</option>
+                    <option value="PROCESSING">Processing</option>
+                    <option value="COMPLETED">Berhasil</option>
+                    <option value="FAILED">Gagal</option>
+                    <option value="CANCELLED">Dibatalkan</option>
+                  </select>
+                </div>
               </div>
-            ))}
+            </div>
+
+            {/* Hover Effect Border */}
+            <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-20 transition-opacity duration-300 -z-10 blur-xl" style={{ backgroundColor: '#34D399' }}></div>
           </div>
+
+          {/* Transactions List */}
+          {isLoading ? (
+            <div className="flex justify-center py-12">
+              <div className="animate-spin rounded-full h-12 w-12 border-b-2" style={{ borderColor: '#34D399' }}></div>
+            </div>
+          ) : filteredTransactions.length > 0 ? (
+            <div className="space-y-4">
+              {filteredTransactions.map((transaction) => (
+                <div 
+                  key={transaction.id} 
+                  className="group relative backdrop-blur-sm border p-6 rounded-2xl transition-all duration-300 hover:scale-105 transform"
+                  style={{ 
+                    backgroundColor: '#161B22', 
+                    borderColor: '#7C3AED'
+                  }}
+                >
+                  {/* Background Hover Effect */}
+                  <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-10 transition-opacity duration-300" style={{ backgroundColor: '#7C3AED' }}></div>
+                  
+                  <div className="relative z-10">
+                    <div className="flex flex-col lg:flex-row lg:items-center justify-between space-y-4 lg:space-y-0">
+                      <div className="flex items-start space-x-4">
+                        <div className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0" style={{ backgroundColor: '#34D399' }}>
+                          <span className="font-bold" style={{ color: '#F0F6FC' }}>
+                            {transaction.game.name.charAt(0)}
+                          </span>
+                        </div>
+                        
+                        <div className="flex-1">
+                          <div className="flex items-center space-x-2 mb-1">
+                            <h3 className="text-lg font-bold" style={{ color: '#F0F6FC', fontFamily: 'Playfair Display, serif' }}>{transaction.game.name}</h3>
+                            <span className="px-2 py-1 rounded-md text-xs" style={{ backgroundColor: '#7C3AED', color: '#F0F6FC' }}>
+                              {transaction.game.category}
+                            </span>
+                          </div>
+                          <p className="text-sm mb-2" style={{ color: '#8B949E', fontFamily: 'Manrope, sans-serif' }}>
+                            {transaction.denomination.name} • User ID: {transaction.gameUserId}
+                          </p>
+                          <div className="flex items-center space-x-4 text-sm" style={{ color: '#8B949E', fontFamily: 'Manrope, sans-serif' }}>
+                            <span>{formatDate(transaction.createdAt)}</span>
+                            <span>•</span>
+                            <span className="uppercase">{transaction.paymentMethod}</span>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="flex items-center justify-between lg:justify-end space-x-4">
+                        <div className="text-right">
+                          <p className="text-2xl font-bold" style={{ color: '#F0F6FC', fontFamily: 'Manrope, sans-serif' }}>
+                            {formatPrice(transaction.totalPrice)}
+                          </p>
+                          <p className="text-xs" style={{ color: '#8B949E', fontFamily: 'Manrope, sans-serif' }}>
+                            ID: {transaction.id.slice(0, 8)}...
+                          </p>
+                        </div>
+                        
+                        <div className="flex items-center space-x-2">
+                          {getStatusIcon(transaction.status)}
+                          {getStatusBadge(transaction.status)}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Hover Effect Border */}
+                  <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-20 transition-opacity duration-300 -z-10 blur-xl" style={{ backgroundColor: '#7C3AED' }}></div>
+                </div>
+              ))}
+            </div>
         ) : (
           <div className="text-center py-12">
-            <div className="bg-gray-800/50 backdrop-blur-sm border border-gray-700 rounded-2xl p-12">
-              <div className="text-6xl mb-4">💳</div>
-              <h3 className="text-xl font-bold text-white mb-2">
-                {searchTerm || statusFilter !== 'all' ? 'Tidak ada transaksi yang sesuai' : 'Belum ada transaksi'}
-              </h3>
-              <p className="text-gray-400 mb-6">
-                {searchTerm || statusFilter !== 'all' 
-                  ? 'Coba ubah filter pencarian kamu'
-                  : 'Mulai top up game favoritmu sekarang!'
-                }
-              </p>
-              {!searchTerm && statusFilter === 'all' && (
-                <a
-                  href="/games"
-                  className="inline-block bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-cyan-600 hover:to-purple-700 text-white px-6 py-3 rounded-xl font-medium transition-all duration-300"
-                >
-                  Mulai Top Up
-                </a>
-              )}
+            <div 
+              className="group relative backdrop-blur-sm border p-12 rounded-2xl transition-all duration-300"
+              style={{ 
+                backgroundColor: '#161B22', 
+                borderColor: '#7C3AED'
+              }}
+            >
+              {/* Background Hover Effect */}
+              <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-10 transition-opacity duration-300" style={{ backgroundColor: '#7C3AED' }}></div>
+              
+              <div className="relative z-10">
+                <div className="w-20 h-20 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-2xl" style={{ backgroundColor: '#7C3AED' }}>
+                  <CreditCardIcon className="w-10 h-10" style={{ color: '#F0F6FC' }} />
+                </div>
+                <h3 className="text-xl font-bold mb-2" style={{ color: '#F0F6FC', fontFamily: 'Playfair Display, serif' }}>
+                  {searchTerm || statusFilter !== 'all' ? 'Tidak ada transaksi yang sesuai' : 'Belum ada transaksi'}
+                </h3>
+                <p className="mb-6" style={{ color: '#8B949E', fontFamily: 'Manrope, sans-serif' }}>
+                  {searchTerm || statusFilter !== 'all' 
+                    ? 'Coba ubah filter pencarian kamu'
+                    : 'Mulai top up game favoritmu sekarang!'
+                  }
+                </p>
+                {!searchTerm && statusFilter === 'all' && (
+                  <a
+                    href="/games"
+                    className="inline-block px-6 py-3 rounded-xl font-medium transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl"
+                    style={{ backgroundColor: '#34D399', color: '#F0F6FC', fontFamily: 'Manrope, sans-serif' }}
+                  >
+                    Mulai Top Up
+                  </a>
+                )}
+              </div>
+
+              {/* Hover Effect Border */}
+              <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-20 transition-opacity duration-300 -z-10 blur-xl" style={{ backgroundColor: '#7C3AED' }}></div>
             </div>
           </div>
         )}
-      </div>
+        </div>
+      </section>
     </div>
   )
 }

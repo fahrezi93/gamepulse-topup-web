@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { useState, useEffect, useRef } from 'react'
 import { useAuth } from '@/contexts/AuthContext'
 import { useAdminRole } from '@/hooks/useAdminRole'
-import { Bars3Icon, XMarkIcon, UserCircleIcon, ArrowRightOnRectangleIcon, SparklesIcon } from '@heroicons/react/24/outline'
+import { Bars3Icon, XMarkIcon, UserCircleIcon, ArrowRightOnRectangleIcon, SparklesIcon, CreditCardIcon } from '@heroicons/react/24/outline'
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -155,7 +155,7 @@ export default function Navbar() {
                         e.currentTarget.style.backgroundColor = 'transparent'
                       }}
                     >
-                      <span className="w-4 h-4 mr-2">💳</span>
+                      <CreditCardIcon className="w-4 h-4 mr-2" />
                       Riwayat Transaksi
                     </Link>
                     <hr className="my-2" style={{ borderColor: '#7C3AED' }} />

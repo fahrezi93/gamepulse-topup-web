@@ -9,7 +9,10 @@ import {
   PencilIcon, 
   ShieldCheckIcon,
   CalendarIcon,
-  EnvelopeIcon
+  EnvelopeIcon,
+  CreditCardIcon,
+  ChartBarIcon,
+  ClockIcon
 } from '@heroicons/react/24/outline'
 
 export default function ProfilePage() {
@@ -85,169 +88,263 @@ export default function ProfilePage() {
   }
 
   return (
-    <div className="min-h-screen py-12">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <div className="text-center mb-12">
-          <div className="flex justify-center mb-6">
-            <div className="w-24 h-24 bg-gradient-to-br from-cyan-400 to-purple-500 rounded-full flex items-center justify-center shadow-2xl">
-              <span className="text-white text-3xl font-bold">
-                {user?.displayName?.charAt(0) || user?.email?.charAt(0)}
-              </span>
-            </div>
-          </div>
-          <h1 className="text-4xl font-black mb-4">
-            <span className="bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
-              Profile Saya
-            </span>
-          </h1>
-          <p className="text-gray-400">
-            Kelola informasi akun dan preferensi kamu
-          </p>
+    <div className="min-h-screen" style={{ backgroundColor: '#0D1117' }}>
+      {/* Header Section */}
+      <section className="relative py-12 overflow-hidden">
+        <div className="absolute inset-0 opacity-20">
+          <div className="absolute inset-0" style={{ backgroundColor: 'rgba(124, 58, 237, 0.1)' }}></div>
         </div>
+        
+        {/* Floating Elements */}
+        <div className="absolute top-10 left-10 w-16 h-16 rounded-full blur-xl animate-pulse" style={{ backgroundColor: 'rgba(124, 58, 237, 0.3)' }}></div>
+        <div className="absolute bottom-10 right-20 w-20 h-20 rounded-full blur-xl animate-pulse delay-1000" style={{ backgroundColor: 'rgba(52, 211, 153, 0.25)' }}></div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Profile Info */}
-          <div className="lg:col-span-2">
-            <div className="bg-gray-800/50 backdrop-blur-sm border border-gray-700 rounded-2xl p-8">
-              <div className="flex items-center justify-between mb-6">
-                <h2 className="text-2xl font-bold text-white">Informasi Personal</h2>
-                <button
-                  onClick={() => setIsEditing(!isEditing)}
-                  className="flex items-center space-x-2 bg-cyan-600 hover:bg-cyan-700 text-white px-4 py-2 rounded-lg transition-colors"
-                >
-                  <PencilIcon className="w-4 h-4" />
-                  <span>{isEditing ? 'Batal' : 'Edit'}</span>
-                </button>
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Header */}
+          <div className="text-center mb-8">
+            <div className="flex justify-center mb-6">
+              <div className="w-20 h-20 rounded-2xl flex items-center justify-center shadow-2xl" style={{ backgroundColor: '#7C3AED' }}>
+                <span className="text-3xl font-black" style={{ color: '#F0F6FC' }}>
+                  {user?.displayName?.charAt(0) || user?.email?.charAt(0)}
+                </span>
               </div>
+            </div>
 
-              {message && (
-                <div className={`mb-6 p-4 rounded-xl ${
-                  message.includes('berhasil') 
-                    ? 'bg-green-500/10 border border-green-500/20 text-green-400' 
-                    : 'bg-red-500/10 border border-red-500/20 text-red-400'
-                }`}>
-                  {message}
-                </div>
-              )}
+            <h1 className="text-4xl md:text-5xl font-black mb-4" style={{ fontFamily: 'Playfair Display, serif' }}>
+              <span style={{ color: '#7C3AED' }}>
+                Profile
+              </span>
+              <span style={{ color: '#F0F6FC' }}> Saya</span>
+            </h1>
+            
+            <p className="text-lg max-w-3xl mx-auto leading-relaxed" style={{ color: '#8B949E', fontFamily: 'Manrope, sans-serif' }}>
+              Kelola informasi akun dan preferensi kamu
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Content Section */}
+      <section className="py-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            {/* Profile Info */}
+            <div className="lg:col-span-2">
+              <div 
+                className="group relative backdrop-blur-sm border p-8 rounded-2xl transition-all duration-300"
+                style={{ 
+                  backgroundColor: '#161B22', 
+                  borderColor: '#7C3AED'
+                }}
+              >
+                {/* Background Hover Effect */}
+                <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-10 transition-opacity duration-300" style={{ backgroundColor: '#7C3AED' }}></div>
+                
+                <div className="relative z-10">
+                  <div className="flex items-center justify-between mb-6">
+                    <h2 className="text-2xl font-bold" style={{ color: '#F0F6FC', fontFamily: 'Playfair Display, serif' }}>Informasi Personal</h2>
+                    <button
+                      onClick={() => setIsEditing(!isEditing)}
+                      className="flex items-center space-x-2 px-4 py-2 rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105"
+                      style={{ backgroundColor: '#7C3AED', color: '#F0F6FC', fontFamily: 'Manrope, sans-serif' }}
+                    >
+                      <PencilIcon className="w-4 h-4" />
+                      <span>{isEditing ? 'Batal' : 'Edit'}</span>
+                    </button>
+                  </div>
+
+                  {message && (
+                    <div className={`mb-6 p-4 rounded-xl ${
+                      message.includes('berhasil') 
+                        ? 'bg-green-500/10 border border-green-500/20 text-green-400' 
+                        : 'bg-red-500/10 border border-red-500/20 text-red-400'
+                    }`} style={{ fontFamily: 'Manrope, sans-serif' }}>
+                      {message}
+                    </div>
+                  )}
 
               {isEditing ? (
                 <form onSubmit={handleUpdateProfile} className="space-y-6">
-                  <div>
-                    <label className="block text-sm font-medium text-gray-300 mb-2">
-                      Nama Lengkap
-                    </label>
-                    <input
-                      type="text"
-                      value={formData.name}
-                      onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
-                      className="w-full px-4 py-3 bg-gray-700/50 border border-gray-600 rounded-xl text-white placeholder-gray-400 focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500"
-                      placeholder="Masukkan nama lengkap"
-                    />
-                  </div>
+                    <div>
+                      <label className="block text-sm font-medium mb-2" style={{ color: '#8B949E', fontFamily: 'Manrope, sans-serif' }}>
+                        Nama Lengkap
+                      </label>
+                      <input
+                        type="text"
+                        value={formData.name}
+                        onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
+                        className="w-full px-4 py-3 border rounded-xl placeholder-gray-400 focus:ring-2 focus:border-transparent transition-all duration-300"
+                        style={{ 
+                          backgroundColor: '#0D1117', 
+                          borderColor: '#7C3AED',
+                          color: '#F0F6FC',
+                          fontFamily: 'Manrope, sans-serif'
+                        }}
+                        placeholder="Masukkan nama lengkap"
+                      />
+                    </div>
 
-                  <div>
-                    <label className="block text-sm font-medium text-gray-300 mb-2">
-                      Email
-                    </label>
-                    <input
-                      type="email"
-                      value={formData.email}
-                      disabled
-                      className="w-full px-4 py-3 bg-gray-700/30 border border-gray-600 rounded-xl text-gray-400 cursor-not-allowed"
-                    />
-                    <p className="text-xs text-gray-500 mt-1">Email tidak dapat diubah</p>
-                  </div>
+                    <div>
+                      <label className="block text-sm font-medium mb-2" style={{ color: '#8B949E', fontFamily: 'Manrope, sans-serif' }}>
+                        Email
+                      </label>
+                      <input
+                        type="email"
+                        value={formData.email}
+                        disabled
+                        className="w-full px-4 py-3 border rounded-xl cursor-not-allowed"
+                        style={{ 
+                          backgroundColor: '#161B22', 
+                          borderColor: '#34D399',
+                          color: '#8B949E',
+                          fontFamily: 'Manrope, sans-serif'
+                        }}
+                      />
+                      <p className="text-xs mt-1" style={{ color: '#8B949E', fontFamily: 'Manrope, sans-serif' }}>Email tidak dapat diubah</p>
+                    </div>
 
-                  <div className="flex space-x-4">
-                    <button
-                      type="submit"
-                      disabled={isLoading}
-                      className="flex-1 bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-cyan-600 hover:to-purple-700 text-white py-3 px-4 rounded-xl font-medium transition-all duration-300 disabled:opacity-50"
-                    >
-                      {isLoading ? 'Menyimpan...' : 'Simpan Perubahan'}
-                    </button>
-                  </div>
+                    <div className="flex space-x-4">
+                      <button
+                        type="submit"
+                        disabled={isLoading}
+                        className="flex-1 py-3 px-4 rounded-xl font-medium transition-all duration-300 disabled:opacity-50 hover:scale-105 shadow-lg hover:shadow-xl"
+                        style={{ backgroundColor: '#7C3AED', color: '#F0F6FC', fontFamily: 'Manrope, sans-serif' }}
+                      >
+                        {isLoading ? 'Menyimpan...' : 'Simpan Perubahan'}
+                      </button>
+                    </div>
                 </form>
               ) : (
-                <div className="space-y-6">
-                  <div className="flex items-center space-x-4 p-4 bg-gray-700/30 rounded-xl">
-                    <UserCircleIcon className="w-8 h-8 text-cyan-400" />
-                    <div>
-                      <p className="text-sm text-gray-400">Nama Lengkap</p>
-                      <p className="text-white font-medium">
-                        {user?.displayName || 'Belum diatur'}
-                      </p>
+                  <div className="space-y-6">
+                    <div className="flex items-center space-x-4 p-4 rounded-xl" style={{ backgroundColor: '#0D1117' }}>
+                      <div className="w-12 h-12 rounded-xl flex items-center justify-center" style={{ backgroundColor: '#7C3AED' }}>
+                        <UserCircleIcon className="w-6 h-6" style={{ color: '#F0F6FC' }} />
+                      </div>
+                      <div>
+                        <p className="text-sm mb-1" style={{ color: '#8B949E', fontFamily: 'Manrope, sans-serif' }}>Nama Lengkap</p>
+                        <p className="font-medium" style={{ color: '#F0F6FC', fontFamily: 'Manrope, sans-serif' }}>
+                          {user?.displayName || 'admin'}
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="flex items-center space-x-4 p-4 rounded-xl" style={{ backgroundColor: '#0D1117' }}>
+                      <div className="w-12 h-12 rounded-xl flex items-center justify-center" style={{ backgroundColor: '#34D399' }}>
+                        <EnvelopeIcon className="w-6 h-6" style={{ color: '#F0F6FC' }} />
+                      </div>
+                      <div>
+                        <p className="text-sm mb-1" style={{ color: '#8B949E', fontFamily: 'Manrope, sans-serif' }}>Email</p>
+                        <p className="font-medium" style={{ color: '#F0F6FC', fontFamily: 'Manrope, sans-serif' }}>{user?.email}</p>
+                      </div>
+                    </div>
+
+                    <div className="flex items-center space-x-4 p-4 rounded-xl" style={{ backgroundColor: '#0D1117' }}>
+                      <div className="w-12 h-12 rounded-xl flex items-center justify-center" style={{ backgroundColor: '#F59E0B' }}>
+                        <ShieldCheckIcon className="w-6 h-6" style={{ color: '#F0F6FC' }} />
+                      </div>
+                      <div>
+                        <p className="text-sm mb-1" style={{ color: '#8B949E', fontFamily: 'Manrope, sans-serif' }}>Role</p>
+                        <p className="font-medium capitalize" style={{ color: '#F0F6FC', fontFamily: 'Manrope, sans-serif' }}>Admin</p>
+                      </div>
                     </div>
                   </div>
-
-                  <div className="flex items-center space-x-4 p-4 bg-gray-700/30 rounded-xl">
-                    <EnvelopeIcon className="w-8 h-8 text-cyan-400" />
-                    <div>
-                      <p className="text-sm text-gray-400">Email</p>
-                      <p className="text-white font-medium">{user?.email}</p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-center space-x-4 p-4 bg-gray-700/30 rounded-xl">
-                    <ShieldCheckIcon className="w-8 h-8 text-cyan-400" />
-                    <div>
-                      <p className="text-sm text-gray-400">Role</p>
-                      <p className="text-white font-medium capitalize">User</p>
-                    </div>
-                  </div>
-                </div>
-              )}
-            </div>
-          </div>
-
-          {/* Stats & Quick Actions */}
-          <div className="space-y-6">
-            {/* Account Stats */}
-            <div className="bg-gray-800/50 backdrop-blur-sm border border-gray-700 rounded-2xl p-6">
-              <h3 className="text-xl font-bold text-white mb-4">Statistik Akun</h3>
-              <div className="space-y-4">
-                <div className="flex items-center justify-between">
-                  <span className="text-gray-400">Total Transaksi</span>
-                  <span className="text-white font-bold">0</span>
-                </div>
-                <div className="flex items-center justify-between">
-                  <span className="text-gray-400">Total Pengeluaran</span>
-                  <span className="text-white font-bold">Rp 0</span>
-                </div>
-                <div className="flex items-center justify-between">
-                  <span className="text-gray-400">Member Sejak</span>
-                  <span className="text-white font-bold">
-                    {new Date().toLocaleDateString('id-ID', { 
-                      month: 'short', 
-                      year: 'numeric' 
-                    })}
-                  </span>
+                )}
                 </div>
               </div>
             </div>
 
-            {/* Quick Actions */}
-            <div className="bg-gray-800/50 backdrop-blur-sm border border-gray-700 rounded-2xl p-6">
-              <h3 className="text-xl font-bold text-white mb-4">Quick Actions</h3>
-              <div className="space-y-3">
-                <a
-                  href="/profile/transactions"
-                  className="block w-full bg-gradient-to-r from-cyan-500/20 to-purple-500/20 border border-cyan-500/30 text-cyan-300 py-3 px-4 rounded-xl text-center font-medium hover:bg-gradient-to-r hover:from-cyan-500/30 hover:to-purple-500/30 transition-all"
-                >
-                  Lihat Riwayat Transaksi
-                </a>
-                <a
-                  href="/games"
-                  className="block w-full bg-gradient-to-r from-purple-500/20 to-pink-500/20 border border-purple-500/30 text-purple-300 py-3 px-4 rounded-xl text-center font-medium hover:bg-gradient-to-r hover:from-purple-500/30 hover:to-pink-500/30 transition-all"
-                >
-                  Mulai Top Up
-                </a>
+            {/* Stats & Quick Actions */}
+            <div className="space-y-6">
+              {/* Account Stats */}
+              <div 
+                className="group relative backdrop-blur-sm border p-6 rounded-2xl transition-all duration-300 hover:scale-105 transform"
+                style={{ 
+                  backgroundColor: '#161B22', 
+                  borderColor: '#34D399'
+                }}
+              >
+                {/* Background Hover Effect */}
+                <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-10 transition-opacity duration-300" style={{ backgroundColor: '#34D399' }}></div>
+                
+                <div className="relative z-10">
+                  <h3 className="text-xl font-bold mb-4" style={{ color: '#F0F6FC', fontFamily: 'Playfair Display, serif' }}>Statistik Akun</h3>
+                  <div className="space-y-4">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center space-x-3">
+                        <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ backgroundColor: '#34D399' }}>
+                          <ChartBarIcon className="w-4 h-4" style={{ color: '#F0F6FC' }} />
+                        </div>
+                        <span style={{ color: '#8B949E', fontFamily: 'Manrope, sans-serif' }}>Total Transaksi</span>
+                      </div>
+                      <span className="font-bold" style={{ color: '#F0F6FC', fontFamily: 'Manrope, sans-serif' }}>0</span>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center space-x-3">
+                        <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ backgroundColor: '#7C3AED' }}>
+                          <CreditCardIcon className="w-4 h-4" style={{ color: '#F0F6FC' }} />
+                        </div>
+                        <span style={{ color: '#8B949E', fontFamily: 'Manrope, sans-serif' }}>Total Pengeluaran</span>
+                      </div>
+                      <span className="font-bold" style={{ color: '#F0F6FC', fontFamily: 'Manrope, sans-serif' }}>Rp 0</span>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center space-x-3">
+                        <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ backgroundColor: '#F59E0B' }}>
+                          <ClockIcon className="w-4 h-4" style={{ color: '#F0F6FC' }} />
+                        </div>
+                        <span style={{ color: '#8B949E', fontFamily: 'Manrope, sans-serif' }}>Member Sejak</span>
+                      </div>
+                      <span className="font-bold" style={{ color: '#F0F6FC', fontFamily: 'Manrope, sans-serif' }}>
+                        Okt 2025
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Hover Effect Border */}
+                <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-20 transition-opacity duration-300 -z-10 blur-xl" style={{ backgroundColor: '#34D399' }}></div>
+              </div>
+
+              {/* Quick Actions */}
+              <div 
+                className="group relative backdrop-blur-sm border p-6 rounded-2xl transition-all duration-300 hover:scale-105 transform"
+                style={{ 
+                  backgroundColor: '#161B22', 
+                  borderColor: '#7C3AED'
+                }}
+              >
+                {/* Background Hover Effect */}
+                <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-10 transition-opacity duration-300" style={{ backgroundColor: '#7C3AED' }}></div>
+                
+                <div className="relative z-10">
+                  <h3 className="text-xl font-bold mb-4" style={{ color: '#F0F6FC', fontFamily: 'Playfair Display, serif' }}>Quick Actions</h3>
+                  <div className="space-y-3">
+                    <a
+                      href="/profile/transactions"
+                      className="flex items-center justify-center space-x-2 w-full py-3 px-4 rounded-xl text-center font-medium transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl"
+                      style={{ backgroundColor: '#34D399', color: '#F0F6FC', fontFamily: 'Manrope, sans-serif' }}
+                    >
+                      <CreditCardIcon className="w-5 h-5" />
+                      <span>Lihat Riwayat Transaksi</span>
+                    </a>
+                    <a
+                      href="/games"
+                      className="flex items-center justify-center space-x-2 w-full py-3 px-4 rounded-xl text-center font-medium transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl"
+                      style={{ backgroundColor: '#7C3AED', color: '#F0F6FC', fontFamily: 'Manrope, sans-serif' }}
+                    >
+                      <span>🎮</span>
+                      <span>Mulai Top Up</span>
+                    </a>
+                  </div>
+                </div>
+
+                {/* Hover Effect Border */}
+                <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-20 transition-opacity duration-300 -z-10 blur-xl" style={{ backgroundColor: '#7C3AED' }}></div>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      </section>
     </div>
   )
 }
