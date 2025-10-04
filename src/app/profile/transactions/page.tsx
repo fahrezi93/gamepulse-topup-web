@@ -3,6 +3,8 @@
 import { useAuth } from '@/contexts/AuthContext'
 import { useState, useEffect, useCallback } from 'react'
 import { redirect } from 'next/navigation'
+import PageTransition from '@/components/ui/PageTransition'
+import FadeIn from '@/components/ui/FadeIn'
 import { 
   MagnifyingGlassIcon,
   FunnelIcon,
@@ -146,47 +148,51 @@ export default function TransactionsPage() {
   })
 
   return (
-    <div className="min-h-screen" style={{ backgroundColor: '#0D1117' }}>
-      {/* Hero Section */}
-      <section className="relative py-20 overflow-hidden">
-        <div className="absolute inset-0 opacity-20">
-          <div className="absolute inset-0" style={{ backgroundColor: 'rgba(52, 211, 153, 0.1)' }}></div>
-        </div>
-        
-        {/* Floating Elements */}
-        <div className="absolute top-20 left-10 w-20 h-20 rounded-full blur-xl animate-pulse" style={{ backgroundColor: 'rgba(52, 211, 153, 0.3)' }}></div>
-        <div className="absolute bottom-20 right-20 w-32 h-32 rounded-full blur-xl animate-pulse delay-1000" style={{ backgroundColor: 'rgba(124, 58, 237, 0.25)' }}></div>
-
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Header */}
-          <div className="text-center mb-12">
-            <div className="flex justify-center mb-8">
-              <div className="w-24 h-24 rounded-2xl flex items-center justify-center shadow-2xl" style={{ backgroundColor: '#34D399' }}>
-                <CreditCardIcon className="w-12 h-12" style={{ color: '#F0F6FC' }} />
-              </div>
-            </div>
-
-            <h1 className="text-5xl md:text-6xl font-black mb-6" style={{ fontFamily: 'Playfair Display, serif' }}>
-              <span style={{ color: '#34D399' }}>
-                Riwayat
-              </span>
-              <br />
-              <span style={{ color: '#F0F6FC' }}>Transaksi</span>
-            </h1>
-            
-            <p className="text-xl md:text-2xl max-w-4xl mx-auto leading-relaxed" style={{ color: '#8B949E', fontFamily: 'Manrope, sans-serif' }}>
-              Lihat semua transaksi top up yang pernah kamu lakukan
-            </p>
+    <PageTransition>
+      <div className="min-h-screen" style={{ backgroundColor: '#0D1117' }}>
+        {/* Hero Section */}
+        <section className="relative py-20 overflow-hidden">
+          <div className="absolute inset-0 opacity-20">
+            <div className="absolute inset-0" style={{ backgroundColor: 'rgba(52, 211, 153, 0.1)' }}></div>
           </div>
+          
+          {/* Floating Elements */}
+          <div className="absolute top-20 left-10 w-20 h-20 rounded-full blur-xl animate-pulse" style={{ backgroundColor: 'rgba(52, 211, 153, 0.3)' }}></div>
+          <div className="absolute bottom-20 right-20 w-32 h-32 rounded-full blur-xl animate-pulse delay-1000" style={{ backgroundColor: 'rgba(124, 58, 237, 0.25)' }}></div>
 
-          {/* Filters */}
-          <div 
-            className="group relative backdrop-blur-sm border p-6 rounded-2xl transition-all duration-300 mb-8"
-            style={{ 
-              backgroundColor: '#161B22', 
-              borderColor: '#34D399'
-            }}
-          >
+          <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            {/* Header */}
+            <FadeIn delay={100}>
+              <div className="text-center mb-12">
+                <div className="flex justify-center mb-8">
+                  <div className="w-24 h-24 rounded-2xl flex items-center justify-center shadow-2xl" style={{ backgroundColor: '#34D399' }}>
+                    <CreditCardIcon className="w-12 h-12" style={{ color: '#F0F6FC' }} />
+                  </div>
+                </div>
+
+                <h1 className="text-5xl md:text-6xl font-black mb-6" style={{ fontFamily: 'Playfair Display, serif' }}>
+                  <span style={{ color: '#34D399' }}>
+                    Riwayat
+                  </span>
+                  <br />
+                  <span style={{ color: '#F0F6FC' }}>Transaksi</span>
+                </h1>
+                
+                <p className="text-xl md:text-2xl max-w-4xl mx-auto leading-relaxed" style={{ color: '#8B949E', fontFamily: 'Manrope, sans-serif' }}>
+                  Lihat semua transaksi top up yang pernah kamu lakukan
+                </p>
+              </div>
+            </FadeIn>
+
+            {/* Filters */}
+            <FadeIn delay={200}>
+              <div 
+                className="group relative backdrop-blur-sm border p-6 rounded-2xl transition-all duration-300 mb-8"
+                style={{ 
+                  backgroundColor: '#161B22', 
+                  borderColor: '#34D399'
+                }}
+              >
             {/* Background Hover Effect */}
             <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-10 transition-opacity duration-300" style={{ backgroundColor: '#34D399' }}></div>
             
@@ -236,18 +242,20 @@ export default function TransactionsPage() {
               </div>
             </div>
 
-            {/* Hover Effect Border */}
-            <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-20 transition-opacity duration-300 -z-10 blur-xl" style={{ backgroundColor: '#34D399' }}></div>
-          </div>
+                {/* Hover Effect Border */}
+                <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-20 transition-opacity duration-300 -z-10 blur-xl" style={{ backgroundColor: '#34D399' }}></div>
+              </div>
+            </FadeIn>
 
-          {/* Transactions List */}
-          {isLoading ? (
-            <div className="flex justify-center py-12">
-              <div className="animate-spin rounded-full h-12 w-12 border-b-2" style={{ borderColor: '#34D399' }}></div>
-            </div>
-          ) : filteredTransactions.length > 0 ? (
-            <div className="space-y-4">
-              {filteredTransactions.map((transaction) => (
+            {/* Transactions List */}
+            {isLoading ? (
+              <div className="flex justify-center py-12">
+                <div className="animate-spin rounded-full h-12 w-12 border-b-2" style={{ borderColor: '#34D399' }}></div>
+              </div>
+            ) : filteredTransactions.length > 0 ? (
+              <div className="space-y-4">
+                {filteredTransactions.map((transaction, index) => (
+                  <FadeIn key={transaction.id} delay={300 + (index * 100)}>
                 <div 
                   key={transaction.id} 
                   className="group relative backdrop-blur-sm border p-6 rounded-2xl transition-all duration-300 hover:scale-105 transform"
@@ -304,54 +312,58 @@ export default function TransactionsPage() {
                     </div>
                   </div>
 
-                  {/* Hover Effect Border */}
-                  <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-20 transition-opacity duration-300 -z-10 blur-xl" style={{ backgroundColor: '#7C3AED' }}></div>
-                </div>
-              ))}
-            </div>
-        ) : (
-          <div className="text-center py-12">
-            <div 
-              className="group relative backdrop-blur-sm border p-12 rounded-2xl transition-all duration-300"
-              style={{ 
-                backgroundColor: '#161B22', 
-                borderColor: '#7C3AED'
-              }}
-            >
-              {/* Background Hover Effect */}
-              <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-10 transition-opacity duration-300" style={{ backgroundColor: '#7C3AED' }}></div>
-              
-              <div className="relative z-10">
-                <div className="w-20 h-20 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-2xl" style={{ backgroundColor: '#7C3AED' }}>
-                  <CreditCardIcon className="w-10 h-10" style={{ color: '#F0F6FC' }} />
-                </div>
-                <h3 className="text-xl font-bold mb-2" style={{ color: '#F0F6FC', fontFamily: 'Playfair Display, serif' }}>
-                  {searchTerm || statusFilter !== 'all' ? 'Tidak ada transaksi yang sesuai' : 'Belum ada transaksi'}
-                </h3>
-                <p className="mb-6" style={{ color: '#8B949E', fontFamily: 'Manrope, sans-serif' }}>
-                  {searchTerm || statusFilter !== 'all' 
-                    ? 'Coba ubah filter pencarian kamu'
-                    : 'Mulai top up game favoritmu sekarang!'
-                  }
-                </p>
-                {!searchTerm && statusFilter === 'all' && (
-                  <a
-                    href="/games"
-                    className="inline-block px-6 py-3 rounded-xl font-medium transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl"
-                    style={{ backgroundColor: '#34D399', color: '#F0F6FC', fontFamily: 'Manrope, sans-serif' }}
-                  >
-                    Mulai Top Up
-                  </a>
-                )}
+                    {/* Hover Effect Border */}
+                    <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-20 transition-opacity duration-300 -z-10 blur-xl" style={{ backgroundColor: '#7C3AED' }}></div>
+                  </div>
+                  </FadeIn>
+                ))}
               </div>
+            ) : (
+              <FadeIn delay={300}>
+                <div className="text-center py-12">
+                  <div 
+                    className="group relative backdrop-blur-sm border p-12 rounded-2xl transition-all duration-300"
+                    style={{ 
+                      backgroundColor: '#161B22', 
+                      borderColor: '#7C3AED'
+                    }}
+                  >
+                    {/* Background Hover Effect */}
+                    <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-10 transition-opacity duration-300" style={{ backgroundColor: '#7C3AED' }}></div>
+                    
+                    <div className="relative z-10">
+                      <div className="w-20 h-20 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-2xl" style={{ backgroundColor: '#7C3AED' }}>
+                        <CreditCardIcon className="w-10 h-10" style={{ color: '#F0F6FC' }} />
+                      </div>
+                      <h3 className="text-xl font-bold mb-2" style={{ color: '#F0F6FC', fontFamily: 'Playfair Display, serif' }}>
+                        {searchTerm || statusFilter !== 'all' ? 'Tidak ada transaksi yang sesuai' : 'Belum ada transaksi'}
+                      </h3>
+                      <p className="mb-6" style={{ color: '#8B949E', fontFamily: 'Manrope, sans-serif' }}>
+                        {searchTerm || statusFilter !== 'all' 
+                          ? 'Coba ubah filter pencarian kamu'
+                          : 'Mulai top up game favoritmu sekarang!'
+                        }
+                      </p>
+                      {!searchTerm && statusFilter === 'all' && (
+                        <a
+                          href="/games"
+                          className="inline-block px-6 py-3 rounded-xl font-medium transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl"
+                          style={{ backgroundColor: '#34D399', color: '#F0F6FC', fontFamily: 'Manrope, sans-serif' }}
+                        >
+                          Mulai Top Up
+                        </a>
+                      )}
+                    </div>
 
-              {/* Hover Effect Border */}
-              <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-20 transition-opacity duration-300 -z-10 blur-xl" style={{ backgroundColor: '#7C3AED' }}></div>
-            </div>
+                    {/* Hover Effect Border */}
+                    <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-20 transition-opacity duration-300 -z-10 blur-xl" style={{ backgroundColor: '#7C3AED' }}></div>
+                  </div>
+                </div>
+              </FadeIn>
+            )}
           </div>
-        )}
-        </div>
-      </section>
-    </div>
+        </section>
+      </div>
+    </PageTransition>
   )
 }

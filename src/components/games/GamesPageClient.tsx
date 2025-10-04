@@ -3,6 +3,8 @@
 import { useState, useEffect } from 'react'
 import GameCard from '@/components/game/GameCard'
 import GameFilter from '@/components/game/GameFilter'
+import PageTransition from '@/components/ui/PageTransition'
+import FadeIn from '@/components/ui/FadeIn'
 
 interface Game {
   id: string
@@ -109,70 +111,79 @@ export default function GamesPageClient() {
   }
 
   return (
-    <div className="min-h-screen" style={{ backgroundColor: '#0D1117' }}>
-      {/* Header */}
-      <section className="relative py-20">
-        <div className="absolute inset-0">
-          <div className="absolute inset-0 opacity-20">
-            <div className="absolute inset-0" style={{ backgroundColor: 'rgba(124, 58, 237, 0.1)' }}></div>
+    <PageTransition>
+      <div className="min-h-screen" style={{ backgroundColor: '#0D1117' }}>
+        {/* Header */}
+        <section className="relative py-20">
+          <div className="absolute inset-0">
+            <div className="absolute inset-0 opacity-20">
+              <div className="absolute inset-0" style={{ backgroundColor: 'rgba(124, 58, 237, 0.1)' }}></div>
+            </div>
           </div>
-        </div>
-        
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="mb-12">
-            <h1 className="text-5xl md:text-6xl font-black mb-6" style={{ fontFamily: 'Playfair Display, serif' }}>
-              <span style={{ color: '#7C3AED' }}>
-                Semua Game
-              </span>
-            </h1>
-            <p className="text-xl max-w-3xl mx-auto leading-relaxed" style={{ color: '#8B949E', fontFamily: 'Manrope, sans-serif' }}>
-              Temukan semua game favoritmu dalam satu tempat. Dari MOBA hingga Battle Royale, 
-              semua tersedia dengan harga terjangkau dan proses yang cepat.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Games Section */}
-      <section className="py-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Filter */}
-          <GameFilter 
-            categories={categories}
-            searchTerm={searchTerm}
-            selectedCategory={selectedCategory}
-            sortBy={sortBy}
-            onSearchChange={setSearchTerm}
-            onCategoryChange={setSelectedCategory}
-            onSortChange={setSortBy}
-          />
           
-          {/* Games Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 mt-12">
-            {filteredGames.map((game) => (
-              <GameCard 
-                key={game.id} 
-                game={game}
-                minPrice={game.denominations[0]?.price || 0}
-              />
-            ))}
-          </div>
-
-          {filteredGames.length === 0 && (
-            <div className="text-center py-12">
-              <div className="backdrop-blur-sm border rounded-2xl p-12" style={{ backgroundColor: '#161B22', borderColor: '#7C3AED' }}>
-                <div className="text-6xl mb-4">🎮</div>
-                <p className="text-xl mb-4" style={{ color: '#F0F6FC', fontFamily: 'Manrope, sans-serif' }}>
-                  Belum ada game yang tersedia saat ini.
-                </p>
-                <p style={{ color: '#8B949E', fontFamily: 'Manrope, sans-serif' }}>
-                  Kami sedang menambahkan lebih banyak game untuk kamu!
+          <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <FadeIn delay={100}>
+              <div className="mb-12">
+                <h1 className="text-5xl md:text-6xl font-black mb-6" style={{ fontFamily: 'Playfair Display, serif' }}>
+                  <span style={{ color: '#7C3AED' }}>
+                    Semua Game
+                  </span>
+                </h1>
+                <p className="text-xl max-w-3xl mx-auto leading-relaxed" style={{ color: '#8B949E', fontFamily: 'Manrope, sans-serif' }}>
+                  Temukan semua game favoritmu dalam satu tempat. Dari MOBA hingga Battle Royale, 
+                  semua tersedia dengan harga terjangkau dan proses yang cepat.
                 </p>
               </div>
+            </FadeIn>
+          </div>
+        </section>
+
+        {/* Games Section */}
+        <section className="py-12">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            {/* Filter */}
+            <FadeIn delay={200}>
+              <GameFilter 
+                categories={categories}
+                searchTerm={searchTerm}
+                selectedCategory={selectedCategory}
+                sortBy={sortBy}
+                onSearchChange={setSearchTerm}
+                onCategoryChange={setSelectedCategory}
+                onSortChange={setSortBy}
+              />
+            </FadeIn>
+            
+            {/* Games Grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 mt-12">
+              {filteredGames.map((game, index) => (
+                <FadeIn key={game.id} delay={300 + (index * 50)}>
+                  <GameCard 
+                    game={game}
+                    minPrice={game.denominations[0]?.price || 0}
+                  />
+                </FadeIn>
+              ))}
             </div>
-          )}
-        </div>
-      </section>
-    </div>
+
+            {filteredGames.length === 0 && (
+              <FadeIn delay={300}>
+                <div className="text-center py-12">
+                  <div className="backdrop-blur-sm border rounded-2xl p-12" style={{ backgroundColor: '#161B22', borderColor: '#7C3AED' }}>
+                    <div className="text-6xl mb-4">🎮</div>
+                    <p className="text-xl mb-4" style={{ color: '#F0F6FC', fontFamily: 'Manrope, sans-serif' }}>
+                      Belum ada game yang tersedia saat ini.
+                    </p>
+                    <p style={{ color: '#8B949E', fontFamily: 'Manrope, sans-serif' }}>
+                      Kami sedang menambahkan lebih banyak game untuk kamu!
+                    </p>
+                  </div>
+                </div>
+              </FadeIn>
+            )}
+          </div>
+        </section>
+      </div>
+    </PageTransition>
   )
 }

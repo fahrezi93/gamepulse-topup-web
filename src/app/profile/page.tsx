@@ -4,6 +4,8 @@ import { useAuth } from '@/contexts/AuthContext'
 import { useState, useEffect } from 'react'
 import { redirect } from 'next/navigation'
 import { updateProfile } from 'firebase/auth'
+import PageTransition from '@/components/ui/PageTransition'
+import FadeIn from '@/components/ui/FadeIn'
 import { 
   UserCircleIcon, 
   PencilIcon, 
@@ -88,20 +90,22 @@ export default function ProfilePage() {
   }
 
   return (
-    <div className="min-h-screen" style={{ backgroundColor: '#0D1117' }}>
-      {/* Header Section */}
-      <section className="relative py-12 overflow-hidden">
-        <div className="absolute inset-0 opacity-20">
-          <div className="absolute inset-0" style={{ backgroundColor: 'rgba(124, 58, 237, 0.1)' }}></div>
-        </div>
-        
-        {/* Floating Elements */}
-        <div className="absolute top-10 left-10 w-16 h-16 rounded-full blur-xl animate-pulse" style={{ backgroundColor: 'rgba(124, 58, 237, 0.3)' }}></div>
-        <div className="absolute bottom-10 right-20 w-20 h-20 rounded-full blur-xl animate-pulse delay-1000" style={{ backgroundColor: 'rgba(52, 211, 153, 0.25)' }}></div>
+    <PageTransition>
+      <div className="min-h-screen" style={{ backgroundColor: '#0D1117' }}>
+        {/* Header Section */}
+        <section className="relative py-12 overflow-hidden">
+          <div className="absolute inset-0 opacity-20">
+            <div className="absolute inset-0" style={{ backgroundColor: 'rgba(124, 58, 237, 0.1)' }}></div>
+          </div>
+          
+          {/* Floating Elements */}
+          <div className="absolute top-10 left-10 w-16 h-16 rounded-full blur-xl animate-pulse" style={{ backgroundColor: 'rgba(124, 58, 237, 0.3)' }}></div>
+          <div className="absolute bottom-10 right-20 w-20 h-20 rounded-full blur-xl animate-pulse delay-1000" style={{ backgroundColor: 'rgba(52, 211, 153, 0.25)' }}></div>
 
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Header */}
-          <div className="text-center mb-8">
+          <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            {/* Header */}
+            <FadeIn delay={100}>
+              <div className="text-center mb-8">
             <div className="flex justify-center mb-6">
               <div className="w-20 h-20 rounded-2xl flex items-center justify-center shadow-2xl" style={{ backgroundColor: '#7C3AED' }}>
                 <span className="text-3xl font-black" style={{ color: '#F0F6FC' }}>
@@ -117,19 +121,21 @@ export default function ProfilePage() {
               <span style={{ color: '#F0F6FC' }}> Saya</span>
             </h1>
             
-            <p className="text-lg max-w-3xl mx-auto leading-relaxed" style={{ color: '#8B949E', fontFamily: 'Manrope, sans-serif' }}>
-              Kelola informasi akun dan preferensi kamu
-            </p>
+                <p className="text-lg max-w-3xl mx-auto leading-relaxed" style={{ color: '#8B949E', fontFamily: 'Manrope, sans-serif' }}>
+                  Kelola informasi akun dan preferensi kamu
+                </p>
+              </div>
+            </FadeIn>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Content Section */}
-      <section className="py-8">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {/* Profile Info */}
-            <div className="lg:col-span-2">
+        {/* Content Section */}
+        <section className="py-8">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+              {/* Profile Info */}
+              <FadeIn delay={200}>
+                <div className="lg:col-span-2">
               <div 
                 className="group relative backdrop-blur-sm border p-8 rounded-2xl transition-all duration-300"
                 style={{ 
@@ -249,12 +255,14 @@ export default function ProfilePage() {
                     </div>
                   </div>
                 )}
+                  </div>
                 </div>
               </div>
-            </div>
+              </FadeIn>
 
-            {/* Stats & Quick Actions */}
-            <div className="space-y-6">
+              {/* Stats & Quick Actions */}
+              <FadeIn delay={300}>
+                <div className="space-y-6">
               {/* Account Stats */}
               <div 
                 className="group relative backdrop-blur-sm border p-6 rounded-2xl transition-all duration-300 hover:scale-105 transform"
@@ -338,13 +346,15 @@ export default function ProfilePage() {
                   </div>
                 </div>
 
-                {/* Hover Effect Border */}
-                <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-20 transition-opacity duration-300 -z-10 blur-xl" style={{ backgroundColor: '#7C3AED' }}></div>
+                  {/* Hover Effect Border */}
+                  <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-20 transition-opacity duration-300 -z-10 blur-xl" style={{ backgroundColor: '#7C3AED' }}></div>
+                </div>
               </div>
+              </FadeIn>
             </div>
           </div>
-        </div>
-      </section>
-    </div>
+        </section>
+      </div>
+    </PageTransition>
   )
 }
