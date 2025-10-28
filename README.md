@@ -1,87 +1,118 @@
-# 🎮 GamePulse - Platform Top Up Game Terpercaya
+# 🎮 GamePulse - Platform Top Up Game Modern
 
-GamePulse adalah platform web top-up game modern yang dibangun dengan Next.js, TypeScript, Tailwind CSS, dan SQLite. Platform ini menyediakan pengalaman top-up yang cepat, aman, dan mudah digunakan untuk berbagai game populer.
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Next.js](https://img.shields.io/badge/Next.js-15.5-black)](https://nextjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue)](https://www.typescriptlang.org/)
+[![Prisma](https://img.shields.io/badge/Prisma-6.16-2D3748)](https://www.prisma.io/)
+
+GamePulse adalah platform web top-up game modern yang dibangun dengan Next.js 15, TypeScript, Tailwind CSS, dan PostgreSQL/SQLite. Platform ini menyediakan pengalaman top-up yang cepat, aman, dan mudah digunakan untuk berbagai game populer.
+
+---
+
+## 📋 Daftar Isi
+
+- [Fitur Utama](#-fitur-utama)
+- [Tech Stack](#️-tech-stack)
+- [Quick Start](#-quick-start)
+- [Dokumentasi Lengkap](#-dokumentasi-lengkap)
+- [Database Schema](#-database-schema)
+- [Kustomisasi](#-kustomisasi)
+- [Roadmap](#️-roadmap)
+- [Support](#-support)
+- [License](#-license)
+
+---
 
 ## ✨ Fitur Utama
 
-### 🏠 **Halaman Beranda**
-- Hero section yang menarik dengan statistik platform
-- Daftar game populer dengan kategori
-- Fitur pencarian dan filter game
-- Responsive design untuk semua perangkat
+### � **User Features**
+- ✅ Pencarian & filter game berdasarkan kategori
+- ✅ Detail game lengkap dengan berbagai denominasi
+- ✅ Multiple payment methods (DANA, OVO, GoPay, QRIS, Bank Transfer)
+- ✅ Real-time transaction tracking
+- ✅ Transaction history & profile management
+- ✅ Responsive design untuk mobile, tablet, dan desktop
+- ✅ Firebase Authentication (Google OAuth & Email/Password)
 
-### 🎯 **Halaman Detail Game & Top-Up**
-- Form top-up yang user-friendly
-- Pilihan denominasi dengan harga yang jelas
-- Multiple metode pembayaran (DANA, OVO, GoPay, QRIS)
-- Validasi input dan preview pesanan
+### 👨‍💼 **Admin Panel**
+- ✅ Dashboard dengan statistik real-time
+- ✅ CRUD management untuk games & denominations
+- ✅ Transaction monitoring & management
+- ✅ User role management
+- ✅ Analytics & reporting
 
-### 💳 **Sistem Pembayaran & Konfirmasi**
-- Halaman konfirmasi dengan detail lengkap
-- Simulasi proses pembayaran real-time
-- Status tracking transaksi
-- Notifikasi hasil pembayaran
+### 🔒 **Security Features**
+- ✅ NextAuth.js authentication
+- ✅ Firebase Admin SDK integration
+- ✅ Input validation & sanitization
+- ✅ SQL injection protection (Prisma ORM)
+- ✅ XSS & CSRF protection
+- ✅ Secure environment variables handling
 
-### 👨‍💼 **Panel Admin**
-- Dashboard dengan statistik lengkap
-- CRUD management untuk game dan denominasi
-- Monitor transaksi real-time
-- User management system
+---
 
 ## 🛠️ Tech Stack
 
-- **Frontend**: Next.js 15, React 19, TypeScript
-- **Styling**: Tailwind CSS, Heroicons
-- **Database**: SQLite dengan Prisma ORM
-- **Authentication**: Simple admin auth (dapat diupgrade ke NextAuth.js)
-- **Deployment**: Vercel-ready
+| Category | Technology |
+|----------|-----------|
+| **Frontend** | Next.js 15, React 19, TypeScript |
+| **Styling** | Tailwind CSS 4, Heroicons |
+| **Database** | PostgreSQL (Production), SQLite (Development) |
+| **ORM** | Prisma 6.16 |
+| **Authentication** | NextAuth.js 4, Firebase Auth |
+| **Deployment** | Vercel, Neon (PostgreSQL) |
+| **Package Manager** | npm |
 
-## 📦 Instalasi & Setup
+---
 
-### 1. Clone Repository
+## � Quick Start
+
+### Prerequisites
+- Node.js 18+ dan npm
+- PostgreSQL (untuk production) atau SQLite (untuk development)
+- Firebase Project (untuk authentication)
+- Git
+
+### Installation
+
 ```bash
-git clone <repository-url>
+# 1. Clone repository
+git clone https://github.com/yourusername/gamepulse.git
 cd gamepulse
-```
 
-### 2. Install Dependencies
-```bash
+# 2. Install dependencies
 npm install
-```
 
-### 3. Setup Environment Variables
-Buat file `.env.local` di root project:
-```env
-# Database (SQLite - tidak perlu konfigurasi tambahan)
-DATABASE_URL="file:./prisma/dev.db"
+# 3. Setup environment variables
+cp env.example .env.local
+# Edit .env.local dengan kredensial Anda
 
-# Next.js
-NEXTAUTH_SECRET="your-secret-key-here"
-NEXTAUTH_URL="http://localhost:3000"
-
-# Admin Default
-ADMIN_DEFAULT_USERNAME="admin"
-ADMIN_DEFAULT_PASSWORD="admin123"
-```
-
-### 4. Setup Database
-```bash
-# Generate Prisma client
+# 4. Setup database
 npm run db:generate
-
-# Run database migration
 npm run db:migrate
-
-# Seed database dengan data contoh
 npm run db:seed
-```
 
-### 5. Jalankan Development Server
-```bash
+# 5. Run development server
 npm run dev
 ```
 
-Buka [http://localhost:3000](http://localhost:3000) untuk melihat aplikasi.
+Aplikasi akan berjalan di `http://localhost:3000`
+
+> **💡 Untuk dokumentasi instalasi lengkap, lihat [INSTALLATION.md](./INSTALLATION.md)**
+
+---
+
+## 📚 Dokumentasi Lengkap
+
+| Dokumentasi | Deskripsi |
+|-------------|-----------|
+| [📖 Installation Guide](./INSTALLATION.md) | Panduan instalasi step-by-step |
+| [💳 Payment Gateway Setup](./PAYMENT_GATEWAY.md) | Integrasi Midtrans, Xendit, dll |
+| [🔒 Security Best Practices](./SECURITY.md) | Keamanan & deployment best practices |
+| [🚀 Deployment Guide](./VERCEL_DEPLOYMENT.md) | Deploy ke Vercel dengan Neon DB |
+| [📝 Changelog](./CHANGELOG.md) | Version history & updates |
+
+---
 
 ## 📊 Database Schema
 
@@ -118,134 +149,149 @@ Buka [http://localhost:3000](http://localhost:3000) untuk melihat aplikasi.
 - `password`: Password (hashed)
 - `role`: Role admin
 
-## 🎮 Game yang Didukung (Default Seed Data)
+## 🎮 Game yang Didukung (Seed Data)
 
-1. **Mobile Legends** - Diamond packages
-2. **PUBG Mobile** - UC packages  
-3. **Free Fire** - Diamond packages
-4. **Genshin Impact** - Genesis Crystal packages
-5. **Valorant** - VP packages
-6. **Honkai Star Rail** - Oneiric Shard packages
+1. **Mobile Legends** - Diamond packages (75 - 12,000 diamonds)
+2. **PUBG Mobile** - UC packages (60 - 8,100 UC)
+3. **Free Fire** - Diamond packages (50 - 5,600 diamonds)
+4. **Genshin Impact** - Genesis Crystal packages (60 - 6,480 crystals)
+5. **Valorant** - VP packages (125 - 11,000 VP)
+6. **Honkai Star Rail** - Oneiric Shard packages (60 - 6,480 shards)
+
+---
 
 ## 🚀 Scripts yang Tersedia
 
 ```bash
 # Development
-npm run dev          # Jalankan development server
+npm run dev          # Run development server dengan Turbopack
 npm run build        # Build untuk production
-npm run start        # Jalankan production server
+npm run start        # Run production server
 npm run lint         # Linting code
 
 # Database
-npm run db:migrate   # Jalankan database migration
+npm run db:migrate   # Run database migration
 npm run db:generate  # Generate Prisma client
 npm run db:seed      # Seed database dengan data contoh
 npm run db:reset     # Reset database (hati-hati!)
+npm run db:setup     # Full setup: generate + migrate + seed
 ```
 
-## 📱 Fitur Responsive
-
-- ✅ Mobile-first design
-- ✅ Tablet optimization
-- ✅ Desktop layout
-- ✅ Touch-friendly interface
-- ✅ Fast loading performance
-
-## 🔐 Keamanan
-
-- Input validation pada semua form
-- SQL injection protection dengan Prisma
-- XSS protection
-- CSRF protection (built-in Next.js)
-- Environment variables untuk sensitive data
-
-## 🎨 UI/UX Features
-
-- Modern gradient design
-- Smooth animations dan transitions
-- Loading states dan feedback
-- Error handling yang user-friendly
-- Consistent color scheme
-- Accessible design patterns
-
-## 📈 Performance
-
-- Server-side rendering (SSR)
-- Static generation untuk halaman statis
-- Image optimization
-- Code splitting otomatis
-- Lazy loading components
+---
 
 ## 🔧 Kustomisasi
 
 ### Menambah Game Baru
-1. Gunakan panel admin di `/admin`
-2. Atau tambahkan langsung via database seed
-3. Upload gambar game ke folder `public/images/games/`
+1. Login ke admin panel (`/admin`)
+2. Navigasi ke "Games Management"
+3. Klik "Add New Game"
+4. Upload gambar game ke `/public/images/games/`
 
 ### Mengubah Tema
-- Edit file `tailwind.config.js` untuk color scheme
-- Modifikasi komponen di `src/components/`
-- Update CSS global di `src/app/globals.css`
-
-### Menambah Metode Pembayaran
-- Edit array `paymentMethods` di `TopUpForm.tsx`
-- Tambahkan logic pembayaran di API routes
-- Update database schema jika diperlukan
-
-## 🚀 Deployment
-
-### Vercel (Recommended)
-```bash
-# Install Vercel CLI
-npm i -g vercel
-
-# Deploy
-vercel
-
-# Set environment variables di Vercel dashboard
+```javascript
+// tailwind.config.js
+module.exports = {
+  theme: {
+    extend: {
+      colors: {
+        primary: '#your-color',
+        secondary: '#your-color',
+      }
+    }
+  }
+}
 ```
 
-### Manual Deployment
-```bash
-# Build aplikasi
-npm run build
+### Menambah Payment Gateway
+Lihat [PAYMENT_GATEWAY.md](./PAYMENT_GATEWAY.md) untuk integrasi:
+- Midtrans
+- Xendit
+- Doku
+- iPaymu
+- Dan lainnya
 
-# Upload folder .next, public, dan package.json ke server
-# Set environment variables
-# Jalankan npm start
-```
+---
+
+## �️ Roadmap
+
+### Version 1.1 (Q1 2026)
+- [ ] Integrasi payment gateway real (Midtrans)
+- [ ] Email notifications
+- [ ] Webhooks untuk status transaksi
+- [ ] Improved admin analytics
+
+### Version 1.2 (Q2 2026)
+- [ ] Mobile app (React Native)
+- [ ] Multi-language support (ID, EN)
+- [ ] Loyalty program & rewards
+- [ ] Referral system
+
+### Version 2.0 (Q3 2026)
+- [ ] API untuk third-party integration
+- [ ] Advanced reporting & analytics
+- [ ] Marketplace untuk seller
+- [ ] Live chat support
+
+---
 
 ## 🤝 Contributing
 
-1. Fork repository
+Kontribusi selalu diterima! Jika Anda ingin berkontribusi:
+
+1. Fork repository ini
 2. Buat feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit changes (`git commit -m 'Add some AmazingFeature'`)
+3. Commit changes Anda (`git commit -m 'Add some AmazingFeature'`)
 4. Push ke branch (`git push origin feature/AmazingFeature`)
 5. Buat Pull Request
 
-## 📝 License
-
-Distributed under the MIT License. See `LICENSE` for more information.
+---
 
 ## 📞 Support
 
-Jika ada pertanyaan atau butuh bantuan:
-- Buat issue di GitHub repository
-- Email: support@gamepulse.com
-- Documentation: [Link ke docs]
+Jika Anda membutuhkan bantuan atau menemukan bug:
 
-## 🎯 Roadmap
+- 🐛 **Bug Reports**: [Create an issue](https://github.com/yourusername/gamepulse/issues)
+- 💬 **Discussions**: [GitHub Discussions](https://github.com/yourusername/gamepulse/discussions)
+- 📧 **Email**: Buat issue di GitHub untuk pertanyaan umum
+- 📖 **Documentation**: Lihat folder dokumentasi atau wiki
 
-- [ ] Integrasi payment gateway real (Midtrans, Xendit)
-- [ ] Push notifications
-- [ ] Mobile app (React Native)
-- [ ] Multi-language support
-- [ ] Advanced analytics dashboard
-- [ ] API untuk third-party integration
-- [ ] Loyalty program
-- [ ] Referral system
+---
+
+## 📝 License
+
+Distributed under the MIT License. See [LICENSE](./LICENSE) for more information.
+
+```
+MIT License - Anda bebas untuk:
+✅ Menggunakan untuk proyek komersial
+✅ Memodifikasi source code
+✅ Distribusi dan publikasi
+✅ Penggunaan pribadi
+
+Dengan syarat:
+⚠️ Menyertakan copyright notice
+⚠️ Menyertakan license notice
+```
+
+---
+
+## 🙏 Credits
+
+Built with modern technologies:
+- [Next.js](https://nextjs.org/) - React Framework
+- [Prisma](https://www.prisma.io/) - Next-generation ORM
+- [Tailwind CSS](https://tailwindcss.com/) - Utility-first CSS
+- [Firebase](https://firebase.google.com/) - Authentication
+- [Heroicons](https://heroicons.com/) - Beautiful icons
+
+---
+
+## ⭐ Show Your Support
+
+Jika project ini membantu Anda, berikan ⭐️ di GitHub!
 
 ---
 
 **Dibuat dengan ❤️ menggunakan Next.js dan TypeScript**
+
+© 2025 GamePulse. All rights reserved.
