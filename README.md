@@ -107,7 +107,9 @@ Aplikasi akan berjalan di `http://localhost:3000`
 | Dokumentasi | Deskripsi |
 |-------------|-----------|
 | [📖 Installation Guide](./INSTALLATION.md) | Panduan instalasi step-by-step |
-| [💳 Payment Gateway Setup](./PAYMENT_GATEWAY.md) | Integrasi Midtrans, Xendit, dll |
+| [� Digiflazz Integration](./DIGIFLAZZ_INTEGRATION.md) | Validasi User ID & auto top-up (SANDBOX GRATIS!) |
+| [⚡ Digiflazz Quick Start](./DIGIFLAZZ_QUICKSTART.md) | Quick start guide untuk testing |
+| [�💳 Payment Gateway Setup](./PAYMENT_GATEWAY.md) | Integrasi Midtrans, Xendit, dll |
 | [🔒 Security Best Practices](./SECURITY.md) | Keamanan & deployment best practices |
 | [🚀 Deployment Guide](./VERCEL_DEPLOYMENT.md) | Deploy ke Vercel dengan Neon DB |
 | [📝 Changelog](./CHANGELOG.md) | Version history & updates |
