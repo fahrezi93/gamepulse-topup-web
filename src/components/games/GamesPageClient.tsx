@@ -24,6 +24,7 @@ interface Game {
     price: number
     isActive: boolean
     gameId: string
+    skuCode: string | null
     createdAt: Date
     updatedAt: Date
   }[]
