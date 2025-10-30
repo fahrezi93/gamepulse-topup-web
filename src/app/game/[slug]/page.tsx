@@ -2,6 +2,8 @@ import { notFound } from 'next/navigation'
 import { prisma } from '@/lib/prisma'
 import GameDetailHeader from '@/components/game/GameDetailHeader'
 import TopUpForm from '@/components/game/TopUpForm'
+// Import form dengan validasi Digiflazz (uncomment untuk mengaktifkan)
+// import TopUpFormWithValidation from '@/components/game/TopUpFormWithValidation'
 
 interface GameDetailPageProps {
   params: Promise<{

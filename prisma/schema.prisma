@@ -36,6 +36,7 @@ model Denomination {
   price       Float         // Harga dalam Rupiah
   isActive    Boolean       @default(true)
   gameId      String
+  skuCode     String?       // Digiflazz SKU Code (ml75, ff50, etc)
   createdAt   DateTime      @default(now())
   updatedAt   DateTime      @updatedAt
   
@@ -48,14 +49,18 @@ model Denomination {
 
 // Model untuk Transaksi
 model Transaction {
-  id             String            @id @default(cuid())
-  gameUserId     String            // ID user di game (contoh: Player ID, UID)
-  playerName     String?           // Nama player (opsional)
-  status         TransactionStatus @default(PENDING)
-  totalPrice     Float
-  paymentMethod  String?           // Metode pembayaran yang dipilih
-  createdAt      DateTime          @default(now())
-  updatedAt      DateTime          @updatedAt
+  id                 String            @id @default(cuid())
+  gameUserId         String            // ID user di game (contoh: Player ID, UID)
+  playerName         String?           // Nama player (opsional)
+  status             TransactionStatus @default(PENDING)
+  totalPrice         Float
+  paymentMethod      String?           // Metode pembayaran yang dipilih
+  digiflazzResponse  String?           @db.Text // Response dari Digiflazz API
+  serialNumber       String?           // Serial Number dari Digiflazz
+  paymentToken       String?           // Token pembayaran (Midtrans, etc)
+  paymentResponse    String?           @db.Text // Response dari payment gateway
+  createdAt          DateTime          @default(now())
+  updatedAt          DateTime          @updatedAt
   
   // Relasi
   gameId         String
