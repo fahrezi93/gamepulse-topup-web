@@ -14,8 +14,7 @@ export default function TopUpForm({ game, denominations }: TopUpFormProps) {
   const [formData, setFormData] = useState({
     gameUserId: '',
     playerName: '',
-    denominationId: '',
-    paymentMethod: ''
+    denominationId: ''
   })
   const [isLoading, setIsLoading] = useState(false)
   const [selectedDenomination, setSelectedDenomination] = useState<Denomination | null>(null)
@@ -40,7 +39,7 @@ export default function TopUpForm({ game, denominations }: TopUpFormProps) {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     
-    if (!formData.gameUserId || !formData.denominationId || !formData.paymentMethod) {
+    if (!formData.gameUserId || !formData.denominationId) {
       alert('Mohon lengkapi semua field yang diperlukan')
       return
     }
@@ -57,16 +56,15 @@ export default function TopUpForm({ game, denominations }: TopUpFormProps) {
           gameId: game.id,
           gameUserId: formData.gameUserId,
           playerName: formData.playerName,
-          denominationId: formData.denominationId,
-          paymentMethod: formData.paymentMethod
+          denominationId: formData.denominationId
         }),
       })
 
       const result = await response.json()
 
       if (response.ok) {
-        // Redirect ke halaman konfirmasi
-        router.push(`/topup/confirm/${result.transactionId}`)
+        // Redirect ke halaman pilih metode pembayaran
+        router.push(`/payment/${result.transactionId}`)
       } else {
         alert(result.error || 'Terjadi kesalahan saat memproses transaksi')
       }
@@ -78,12 +76,6 @@ export default function TopUpForm({ game, denominations }: TopUpFormProps) {
     }
   }
 
-  const paymentMethods = [
-    { id: 'dana', name: 'DANA', icon: '💳' },
-    { id: 'ovo', name: 'OVO', icon: '💙' },
-    { id: 'gopay', name: 'GoPay', icon: '💚' },
-    { id: 'qris', name: 'QRIS', icon: '📱' },
-  ]
 
   return (
     <div className="backdrop-blur-sm rounded-2xl shadow-lg p-8 border" style={{ backgroundColor: '#161B22', borderColor: '#7C3AED' }}>
@@ -159,29 +151,6 @@ export default function TopUpForm({ game, denominations }: TopUpFormProps) {
           </div>
         </div>
 
-        {/* Payment Method Selection */}
-        <div>
-          <label className="block text-sm font-medium mb-3" style={{ color: '#8B949E', fontFamily: 'Manrope, sans-serif' }}>
-            Metode Pembayaran *
-          </label>
-          <div className="grid grid-cols-2 gap-4">
-            {paymentMethods.map((method) => (
-              <button
-                key={method.id}
-                type="button"
-                onClick={() => setFormData(prev => ({ ...prev, paymentMethod: method.id }))}
-                className="p-4 border rounded-xl text-center transition-all duration-200"
-                style={{
-                  backgroundColor: formData.paymentMethod === method.id ? 'rgba(52, 211, 153, 0.1)' : '#0D1117',
-                  borderColor: formData.paymentMethod === method.id ? '#34D399' : '#8B949E'
-                }}
-              >
-                <div className="text-2xl mb-2">{method.icon}</div>
-                <div className="font-medium text-sm" style={{ color: '#F0F6FC', fontFamily: 'Manrope, sans-serif' }}>{method.name}</div>
-              </button>
-            ))}
-          </div>
-        </div>
 
         {/* Order Summary */}
         {selectedDenomination && (
@@ -214,7 +183,7 @@ export default function TopUpForm({ game, denominations }: TopUpFormProps) {
         {/* Submit Button */}
         <button
           type="submit"
-          disabled={isLoading || !formData.gameUserId || !formData.denominationId || !formData.paymentMethod}
+          disabled={isLoading || !formData.gameUserId || !formData.denominationId}
           className="w-full py-4 px-6 rounded-xl font-bold text-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg"
           style={{ 
             backgroundColor: '#7C3AED', 

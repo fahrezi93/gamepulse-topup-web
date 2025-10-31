@@ -4,10 +4,10 @@ import { prisma } from '@/lib/prisma'
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json()
-    const { gameId, gameUserId, playerName, denominationId, paymentMethod } = body
+    const { gameId, gameUserId, playerName, denominationId } = body
 
     // Validasi input
-    if (!gameId || !gameUserId || !denominationId || !paymentMethod) {
+    if (!gameId || !gameUserId || !denominationId) {
       return NextResponse.json(
         { error: 'Data tidak lengkap' },
         { status: 400 }
@@ -41,13 +41,13 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // Buat transaksi baru
+    // Buat transaksi baru (paymentMethod akan diisi di halaman berikutnya)
     const transaction = await prisma.transaction.create({
       data: {
         gameUserId,
         playerName: playerName || null,
         totalPrice: denomination.price,
-        paymentMethod,
+        paymentMethod: null, // Will be set when user selects payment method
         status: 'PENDING',
         gameId,
         denominationId

@@ -71,40 +71,40 @@ export default function SignUpPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8" style={{ backgroundColor: '#0D1117' }}>
       <div className="max-w-md w-full space-y-8">
         {/* Header */}
         <div className="text-center">
           <div className="flex justify-center mb-6">
             <div className="relative">
-              <div className="w-16 h-16 bg-gradient-to-br from-cyan-400 via-purple-500 to-pink-500 rounded-2xl flex items-center justify-center shadow-2xl">
-                <SparklesIcon className="w-8 h-8 text-white" />
+              <div className="w-16 h-16 rounded-2xl flex items-center justify-center shadow-2xl" style={{ backgroundColor: '#161B22' }}>
+                <span className="text-4xl">🎮</span>
               </div>
-              <div className="absolute -top-1 -right-1 w-5 h-5 bg-green-400 rounded-full animate-pulse"></div>
+              <div className="absolute -top-1 -right-1 w-5 h-5 rounded-full animate-pulse" style={{ backgroundColor: '#34D399' }}></div>
             </div>
           </div>
           
-          <h2 className="text-4xl font-black">
-            <span className="bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
+          <h2 className="text-4xl font-black" style={{ fontFamily: 'Playfair Display, serif' }}>
+            <span style={{ color: '#7C3AED' }}>
               Daftar
             </span>
           </h2>
-          <p className="mt-2 text-gray-400">
+          <p className="mt-2" style={{ color: '#8B949E', fontFamily: 'Manrope, sans-serif' }}>
             Buat akun GamePulse baru
           </p>
         </div>
 
         {/* Form */}
-        <div className="bg-gray-800/50 backdrop-blur-sm border border-gray-700 rounded-2xl p-8">
+        <div className="backdrop-blur-sm border rounded-2xl p-8" style={{ backgroundColor: '#161B22', borderColor: '#7C3AED' }}>
           <form className="space-y-6" onSubmit={handleSubmit}>
             {error && (
-              <div className="bg-red-500/10 border border-red-500/20 text-red-400 px-4 py-3 rounded-xl text-sm">
+              <div className="border px-4 py-3 rounded-xl text-sm" style={{ backgroundColor: 'rgba(239, 68, 68, 0.1)', borderColor: 'rgba(239, 68, 68, 0.2)', color: '#F87171' }}>
                 {error}
               </div>
             )}
 
             <div>
-              <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-2">
+              <label htmlFor="name" className="block text-sm font-medium mb-2" style={{ color: '#F0F6FC', fontFamily: 'Manrope, sans-serif' }}>
                 Nama Lengkap
               </label>
               <input
@@ -112,7 +112,8 @@ export default function SignUpPage() {
                 name="name"
                 type="text"
                 required
-                className="w-full px-4 py-3 bg-gray-700/50 border border-gray-600 rounded-xl text-white placeholder-gray-400 focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 transition-all duration-200"
+                className="w-full px-4 py-3 border rounded-xl transition-all duration-200 focus:ring-2 focus:outline-none"
+                style={{ backgroundColor: '#0D1117', borderColor: '#7C3AED', color: '#F0F6FC' }}
                 placeholder="Nama lengkap kamu"
                 value={formData.name}
                 onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
@@ -120,7 +121,7 @@ export default function SignUpPage() {
             </div>
 
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2">
+              <label htmlFor="email" className="block text-sm font-medium mb-2" style={{ color: '#F0F6FC', fontFamily: 'Manrope, sans-serif' }}>
                 Email
               </label>
               <input
@@ -128,7 +129,8 @@ export default function SignUpPage() {
                 name="email"
                 type="email"
                 required
-                className="w-full px-4 py-3 bg-gray-700/50 border border-gray-600 rounded-xl text-white placeholder-gray-400 focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 transition-all duration-200"
+                className="w-full px-4 py-3 border rounded-xl transition-all duration-200 focus:ring-2 focus:outline-none"
+                style={{ backgroundColor: '#0D1117', borderColor: '#7C3AED', color: '#F0F6FC' }}
                 placeholder="nama@email.com"
                 value={formData.email}
                 onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))}
@@ -136,7 +138,7 @@ export default function SignUpPage() {
             </div>
 
             <div>
-              <label htmlFor="password" className="block text-sm font-medium text-gray-300 mb-2">
+              <label htmlFor="password" className="block text-sm font-medium mb-2" style={{ color: '#F0F6FC', fontFamily: 'Manrope, sans-serif' }}>
                 Password
               </label>
               <div className="relative">
@@ -145,14 +147,18 @@ export default function SignUpPage() {
                   name="password"
                   type={showPassword ? 'text' : 'password'}
                   required
-                  className="w-full px-4 py-3 pr-12 bg-gray-700/50 border border-gray-600 rounded-xl text-white placeholder-gray-400 focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 transition-all duration-200"
+                  className="w-full px-4 py-3 pr-12 border rounded-xl transition-all duration-200 focus:ring-2 focus:outline-none"
+                  style={{ backgroundColor: '#0D1117', borderColor: '#7C3AED', color: '#F0F6FC' }}
                   placeholder="Buat password yang kuat"
                   value={formData.password}
                   onChange={(e) => setFormData(prev => ({ ...prev, password: e.target.value }))}
                 />
                 <button
                   type="button"
-                  className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-white transition-colors"
+                  className="absolute inset-y-0 right-0 pr-3 flex items-center transition-colors"
+                  style={{ color: '#8B949E' }}
+                  onMouseEnter={(e) => e.currentTarget.style.color = '#F0F6FC'}
+                  onMouseLeave={(e) => e.currentTarget.style.color = '#8B949E'}
                   onClick={() => setShowPassword(!showPassword)}
                 >
                   {showPassword ? (
@@ -169,9 +175,10 @@ export default function SignUpPage() {
                   {passwordRequirements.map((req, index) => (
                     <div key={index} className="flex items-center space-x-2 text-sm">
                       <CheckCircleIcon 
-                        className={`w-4 h-4 ${req.met ? 'text-green-400' : 'text-gray-500'}`} 
+                        className="w-4 h-4"
+                        style={{ color: req.met ? '#34D399' : '#8B949E' }}
                       />
-                      <span className={req.met ? 'text-green-400' : 'text-gray-400'}>
+                      <span style={{ color: req.met ? '#34D399' : '#8B949E', fontFamily: 'Manrope, sans-serif' }}>
                         {req.text}
                       </span>
                     </div>
@@ -181,7 +188,7 @@ export default function SignUpPage() {
             </div>
 
             <div>
-              <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-300 mb-2">
+              <label htmlFor="confirmPassword" className="block text-sm font-medium mb-2" style={{ color: '#F0F6FC', fontFamily: 'Manrope, sans-serif' }}>
                 Konfirmasi Password
               </label>
               <div className="relative">
@@ -190,14 +197,18 @@ export default function SignUpPage() {
                   name="confirmPassword"
                   type={showConfirmPassword ? 'text' : 'password'}
                   required
-                  className="w-full px-4 py-3 pr-12 bg-gray-700/50 border border-gray-600 rounded-xl text-white placeholder-gray-400 focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 transition-all duration-200"
+                  className="w-full px-4 py-3 pr-12 border rounded-xl transition-all duration-200 focus:ring-2 focus:outline-none"
+                  style={{ backgroundColor: '#0D1117', borderColor: '#7C3AED', color: '#F0F6FC' }}
                   placeholder="Ulangi password"
                   value={formData.confirmPassword}
                   onChange={(e) => setFormData(prev => ({ ...prev, confirmPassword: e.target.value }))}
                 />
                 <button
                   type="button"
-                  className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-white transition-colors"
+                  className="absolute inset-y-0 right-0 pr-3 flex items-center transition-colors"
+                  style={{ color: '#8B949E' }}
+                  onMouseEnter={(e) => e.currentTarget.style.color = '#F0F6FC'}
+                  onMouseLeave={(e) => e.currentTarget.style.color = '#8B949E'}
                   onClick={() => setShowConfirmPassword(!showConfirmPassword)}
                 >
                   {showConfirmPassword ? (
@@ -208,7 +219,7 @@ export default function SignUpPage() {
                 </button>
               </div>
               {formData.confirmPassword && formData.password !== formData.confirmPassword && (
-                <p className="mt-2 text-sm text-red-400">Password tidak cocok</p>
+                <p className="mt-2 text-sm" style={{ color: '#F87171', fontFamily: 'Manrope, sans-serif' }}>Password tidak cocok</p>
               )}
             </div>
 
@@ -218,15 +229,16 @@ export default function SignUpPage() {
                 name="terms"
                 type="checkbox"
                 required
-                className="h-4 w-4 text-cyan-600 focus:ring-cyan-500 border-gray-600 rounded bg-gray-700"
+                className="h-4 w-4 rounded"
+                style={{ accentColor: '#7C3AED' }}
               />
-              <label htmlFor="terms" className="ml-2 block text-sm text-gray-300">
+              <label htmlFor="terms" className="ml-2 block text-sm" style={{ color: '#8B949E', fontFamily: 'Manrope, sans-serif' }}>
                 Saya setuju dengan{' '}
-                <Link href="/terms" className="text-cyan-400 hover:text-cyan-300 transition-colors">
+                <Link href="/terms" className="transition-colors" style={{ color: '#7C3AED' }}>
                   Syarat & Ketentuan
                 </Link>{' '}
                 dan{' '}
-                <Link href="/privacy" className="text-cyan-400 hover:text-cyan-300 transition-colors">
+                <Link href="/privacy" className="transition-colors" style={{ color: '#7C3AED' }}>
                   Kebijakan Privasi
                 </Link>
               </label>
@@ -235,7 +247,8 @@ export default function SignUpPage() {
             <button
               type="submit"
               disabled={isLoading || !passwordRequirements.every(req => req.met)}
-              className="w-full bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-cyan-600 hover:to-purple-700 text-white py-3 px-4 rounded-xl font-medium transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-cyan-500/25"
+              className="w-full py-3 px-4 rounded-xl font-medium transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg"
+              style={{ backgroundColor: '#7C3AED', color: '#F0F6FC', fontFamily: 'Manrope, sans-serif' }}
             >
               {isLoading ? 'Mendaftar...' : 'Daftar Sekarang'}
             </button>
@@ -243,17 +256,18 @@ export default function SignUpPage() {
 
             <div className="relative mt-6">
               <div className="absolute inset-0 flex items-center">
-                <div className="w-full border-t border-gray-600" />
+                <div className="w-full border-t" style={{ borderColor: '#7C3AED' }} />
               </div>
               <div className="relative flex justify-center text-sm">
-                <span className="px-2 bg-gray-800 text-gray-400">Atau</span>
+                <span className="px-2" style={{ backgroundColor: '#161B22', color: '#8B949E', fontFamily: 'Manrope, sans-serif' }}>Atau</span>
               </div>
             </div>
 
             <div className="mt-6">
               <button
                 onClick={() => signIn('google')}
-                className="w-full flex items-center justify-center px-4 py-3 border border-gray-600 rounded-xl bg-gray-700/50 hover:bg-gray-700 text-white font-medium transition-all duration-200"
+                className="w-full flex items-center justify-center px-4 py-3 border rounded-xl font-medium transition-all duration-200"
+                style={{ borderColor: '#7C3AED', backgroundColor: '#0D1117', color: '#F0F6FC', fontFamily: 'Manrope, sans-serif' }}
               >
                 <svg className="w-5 h-5 mr-3" viewBox="0 0 24 24">
                   <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
@@ -266,9 +280,9 @@ export default function SignUpPage() {
             </div>
 
             <div className="mt-6 text-center">
-              <p className="text-gray-400">
+              <p style={{ color: '#8B949E', fontFamily: 'Manrope, sans-serif' }}>
                 Sudah punya akun?{' '}
-                <Link href="/auth/signin" className="text-cyan-400 hover:text-cyan-300 font-medium transition-colors">
+                <Link href="/auth/signin" className="font-medium transition-colors" style={{ color: '#7C3AED' }}>
                   Masuk di sini
                 </Link>
               </p>
