@@ -25,7 +25,26 @@ export default function SignInPage() {
     try {
       await loginWithEmail(formData.email, formData.password)
     } catch (error: any) {
-      setError(error.message || 'Email atau password salah')
+      console.error('Login error:', error)
+      
+      // Handle specific Firebase error codes
+      let errorMessage = 'Terjadi kesalahan saat login'
+      
+      if (error.code === 'auth/wrong-password') {
+        errorMessage = 'Password salah. Silakan coba lagi atau reset password.'
+      } else if (error.code === 'auth/user-not-found') {
+        errorMessage = 'Email tidak terdaftar. Silakan daftar terlebih dahulu.'
+      } else if (error.code === 'auth/invalid-email') {
+        errorMessage = 'Format email tidak valid.'
+      } else if (error.code === 'auth/user-disabled') {
+        errorMessage = 'Akun Anda telah dinonaktifkan.'
+      } else if (error.code === 'auth/too-many-requests') {
+        errorMessage = 'Terlalu banyak percobaan login. Silakan coba lagi nanti.'
+      } else if (error.message) {
+        errorMessage = error.message
+      }
+      
+      setError(errorMessage)
     } finally {
       setIsLoading(false)
     }
