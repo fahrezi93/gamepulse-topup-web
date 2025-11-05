@@ -1,10 +1,10 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { Suspense, useEffect, useState } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { CheckCircleIcon, ClockIcon, XCircleIcon } from '@heroicons/react/24/outline'
 
-export default function PaymentCallbackPage() {
+function PaymentCallbackContent() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const [status, setStatus] = useState<'checking' | 'success' | 'failed'>('checking')
@@ -140,5 +140,29 @@ export default function PaymentCallbackPage() {
         </div>
       </div>
     </div>
+  )
+}
+
+export default function PaymentCallbackPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen flex items-center justify-center" style={{ backgroundColor: '#0D1117' }}>
+        <div className="max-w-md w-full mx-4">
+          <div className="rounded-xl shadow-sm p-8 text-center border" style={{ backgroundColor: '#161B22', borderColor: '#7C3AED' }}>
+            <div className="flex justify-center mb-6">
+              <ClockIcon className="w-20 h-20 animate-spin" style={{ color: '#7C3AED' }} />
+            </div>
+            <h1 className="text-3xl font-bold mb-4" style={{ color: '#7C3AED', fontFamily: 'Playfair Display, serif' }}>
+              Memuat...
+            </h1>
+            <p className="mb-8" style={{ color: '#8B949E', fontFamily: 'Manrope, sans-serif' }}>
+              Mohon tunggu sebentar
+            </p>
+          </div>
+        </div>
+      </div>
+    }>
+      <PaymentCallbackContent />
+    </Suspense>
   )
 }
